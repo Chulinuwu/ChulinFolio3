@@ -291,7 +291,7 @@
             <!-- Hero Title with reveal animation -->
             <div class="text-center mb-6 sm:mb-8">
                 <h1 class="text-3xl sm:text-5xl md:text-7xl font-bold text-white mb-4 text-reveal">
-                    <span class="text-pink-400">I'm {heroData.name},</span>
+                    <span class="text-white">I'm {heroData.name},</span>
                     <br>
                     <span class="gradient-text">{heroData.title}</span>
                 </h1>
