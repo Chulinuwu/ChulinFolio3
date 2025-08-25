@@ -1,9 +1,14 @@
 <script lang="ts">
+	import Aboutme from './../components/aboutme.svelte';
+	import Herosection from './../components/herosection.svelte';
 	import { onMount } from 'svelte';
 	import Navbar from '../components/navbar.svelte';
 	import Chulinpic_bg from '../public/Chulinpicwithbg.png';
 	import InfiniteScrollTech from '../components/InfiniteScrollTech.svelte';
 	import anan from '../public/anan.jpg';
+	import { experiences } from '$lib/data';
+	import { skills } from '$lib/data';
+	import { contacts } from '$lib/data';
 
 	// Scroll to top function for button
 	function scrollToTop() {
@@ -18,219 +23,6 @@
 	let mounted = false;
 	let windowWidth = 0;
 	let windowHeight = 0;
-
-	// Badge data
-	const badges = [
-		'Consultant',
-		'Web Design',
-		'UX & UI design',
-		'Data Analysis',
-		'Data Science',
-		'System Design',
-		'Illustration'
-	];
-
-	// Hero section data
-	const heroData = {
-		name: 'An-An',
-		title: 'Developer / Designer',
-		subtitle:
-			'3rd Year Computer Engineering and Digital Technology (CEDT), Chulalongkorn University',
-		buttons: {
-			primary: { text: 'My projects', href: './work' },
-			secondary: { text: 'Contact me', href: './contact' }
-		}
-	};
-
-	// Projects data from old code
-	const projects = [
-		{
-			name: 'Real-time AI Leaf Disease Detection',
-			description: 'A real-time system for detecting plant leaf diseases using deep learning.',
-			explanation:
-				'This project uses ESP32 for communication, Svelte for the frontend, and Python Flask for the backend. It integrates with Blynk Cloud, Google Sheets, and sends alerts through WhatsApp via Twilio and Gmail.',
-			role: 'Full-stack Developer',
-			link: 'https://github.com/Chulinuwu/Smart_Farm_Plant_Monitoring_System',
-			image: '/img/project1.jpg'
-		},
-		{
-			name: 'QR Code Generator',
-			description: 'A web app that generates QR codes from entered links.',
-			explanation:
-				'Developed using Svelte, this app allows users to input a URL and generate a corresponding QR code.',
-			role: 'Full-stack Developer',
-			link: 'https://q-rcode-gen.vercel.app/',
-			image: '/img/project2.jpg'
-		},
-		{
-			name: 'UniClub',
-			description: 'A platform for university students to search and manage their favorite clubs.',
-			explanation:
-				'This project allows students to find and manage clubs at their university. The platform also provides a back-office management system for clubs.',
-			role: 'Full-stack Developer',
-			link: 'https://uni-club-frontend-pey5.vercel.app/',
-			image: '/img/project3.jpg'
-		},
-		{
-			name: 'ChulaMacaron',
-			description: 'A system for Chula students to report broken buildings.',
-			explanation:
-				'Developed using React Native, this system allows students to submit pictures and details about broken buildings on campus, enabling the relevant departments to take action.',
-			role: 'UX/UI and Frontend Developer',
-			link: 'https://github.com/xXpeira12/ChulaMacaron',
-			image: '/img/project4.jpg'
-		},
-		{
-			name: 'Dog vs Monkey Game',
-			description: 'A space shooter game where you control a dog throwing bananas at monkeys.',
-			explanation:
-				'Developed using JavaFX, this game allows the player to control a dog and throw bananas at monkeys in a space-themed environment.',
-			role: 'Developer',
-			link: 'https://github.com/amphikapha/Dog-VS-Monkey',
-			image: '/img/project5.jpg'
-		},
-		{
-			name: 'ChatwithGPT',
-			description: 'A web app for real-time communication with generative models.',
-			explanation:
-				'Built with FastAPI and Svelte, this app allows users to communicate with generative models in real time, with a base model acting as a Pekora VTuber.',
-			role: 'Full-stack Developer',
-			link: 'https://github.com/Chulinuwu/ChatwithGPT',
-			image: '/img/project6.jpg'
-		}
-	];
-
-	// Experience data
-	const experiences = [
-		{
-			year: 'Apr 2021',
-			role: 'POSN 1-2 Computer Student',
-			company: 'Burapha University',
-			description: 'Begin to learn competitive programming, data structure and algorithm'
-		},
-		{
-			year: 'Aug 2023 - now',
-			role: 'CEDT Student',
-			company: 'Computer Engineering and Digital Technology, Chulalongkorn University',
-			description: 'Begin academic life'
-		},
-		{
-			year: 'May 2024 - July 2024',
-			role: 'UX/UI Designer and Developer Intern',
-			company: 'Bangkok Bank Public Company Limited (BBL)',
-			description: 'iFunds project developed by Next.js + Java Quarkus + PostgreSQL'
-		},
-		{
-			year: 'May 2025 - July 2025',
-			role: 'Data Scientist & Data Analyst Intern',
-			company: 'Aiful Corp, Aira & Aiful Public Company Limited',
-			description:
-				'Developed credit scoring models and performed data analysis to extract insights for business decision making'
-		},
-		{
-			year: 'Aug 2025 - now',
-			role: 'Data Scientist Intern (Capstone Project)',
-			company: 'Siam Commercial Bank (SCB)',
-			description:
-				'Working on computer vision models for SCB graphics and conversion rate optimization through advanced ML techniques'
-		},
-		{
-			year: 'Sep 2024 - now',
-			role: 'Information System Development (ISD) Frontend Developer',
-			company: 'Computer Engineering and Digital Technology, Chulalongkorn University',
-			description: 'SUCU Project development and system implementation'
-		},
-		{
-			year: 'Sep 2024 - now',
-			role: 'Google Developer Student Clubs (GDSC) Core Team (Graphic)',
-			company: 'Computer Engineering and Digital Technology, Chulalongkorn University',
-			description: 'Designing and creating graphics for GDSC events and campaigns'
-		},
-		{
-			year: 'Aug 2025 - now',
-			role: 'Freelance Multi-disciplinary Consultant',
-			company: 'Self-employed',
-			description:
-				'Providing consultancy services in graphic design, illustration, web development, UX/UI design, and data science solutions'
-		}
-	];
-	// Skills data
-	const skills = [
-		{
-			name: 'Data Science & ML',
-			icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/></svg>',
-			description:
-				'Developing credit scoring models, data analysis, and machine learning solutions for financial institutions using Python and various ML frameworks.'
-		},
-		{
-			name: 'Full-Stack Development',
-			icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>',
-			description:
-				'End-to-end web development using TypeScript, React, Svelte, Next.js for frontend and Node.js, FastAPI, Java Quarkus for backend systems.'
-		},
-		{
-			name: 'UX/UI Design',
-			icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1v-2z" clip-rule="evenodd"/></svg>',
-			description:
-				'Designing user-centered interfaces and experiences using Figma. From wireframes to high-fidelity prototypes for web and mobile applications.'
-		},
-		{
-			name: 'Cybersecurity & CTF',
-			icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>',
-			description:
-				'Security analysis and penetration testing skills developed through CTF competitions. Passed ISC2 in Cybersecurity (CC) exam with knowledge in security fundamentals. ( No membership )'
-		},
-		{
-			name: 'System Architecture',
-			icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>',
-			description:
-				'Designing scalable system architectures and integrating ML models into production environments. Experience with Docker, cloud services, and microservices.'
-		},
-		{
-			name: 'Digital Illustration',
-			icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>',
-			description:
-				'Creating digital artwork and illustrations using Procreate and other digital tools. Available for commission work and graphic design projects.'
-		}
-	];
-
-	// Programming languages for infinite scroll
-	const programmingLanguages = [
-		{ name: 'TypeScript', icon: '⚡' },
-		{ name: 'Python', icon: '🐍' },
-		{ name: 'JavaScript', icon: '🟨' },
-		{ name: 'Java', icon: '☕' },
-		{ name: 'C++', icon: '🔧' },
-		{ name: 'React', icon: '⚛️' },
-		{ name: 'Svelte', icon: '🧡' },
-		{ name: 'Node.js', icon: '🟢' },
-		{ name: 'Go', icon: '🚀' },
-		{ name: 'Dart', icon: '🎯' },
-		{ name: 'Flutter', icon: '💙' },
-		{ name: 'FastAPI', icon: '🏃‍♂️' }
-	];
-
-	// Tools data
-	const tools = [
-		{
-			name: 'Figma',
-			description: 'Web-based design tool for UI/UX design and collaboration',
-			icon: '🎨'
-		},
-		{ name: 'VS Code', description: 'Popular source code editor by Microsoft', icon: '💻' },
-		{
-			name: 'IntelliJ',
-			description: 'Integrated development environment for Java and other languages',
-			icon: '🧠'
-		},
-		{
-			name: 'Notion',
-			description: 'Productivity tool for note-taking and project management',
-			icon: '📝'
-		},
-		{ name: 'Linear', description: 'Tool for tracking issues and project management', icon: '📈' },
-		{ name: 'Procreate', description: 'Powerful digital painting app for iPad', icon: '🎨' }
-	];
 
 	// Interactive features data
 	const floatingElements = [
@@ -347,72 +139,7 @@
 
 		<Navbar />
 
-		<!-- Hero Content Container -->
-		<div
-			class="relative flex flex-1 flex-col items-center justify-center px-4 py-16 sm:px-8 sm:py-28"
-		>
-			<!-- Infinite Scrolling Badges -->
-			<div class="fade-mask mb-8 w-full max-w-6xl overflow-hidden sm:mb-12">
-				<div class="scroll-animation flex gap-2">
-					{#each badges as badge}
-						<div
-							class="magnetic flex-shrink-0 cursor-pointer whitespace-nowrap rounded-full border border-pink-400/20 bg-gray-900/80 px-3 py-2 text-xs text-white backdrop-blur-sm transition-all duration-300 hover:border-pink-400/50 hover:bg-pink-400/20 hover:text-pink-300 sm:px-4 sm:text-sm"
-						>
-							{badge}
-						</div>
-					{/each}
-
-					{#each badges as badge}
-						<div
-							class="magnetic flex-shrink-0 cursor-pointer whitespace-nowrap rounded-full border border-pink-400/20 bg-gray-900/80 px-3 py-2 text-xs text-white backdrop-blur-sm transition-all duration-300 hover:border-pink-400/50 hover:bg-pink-400/20 hover:text-pink-300 sm:px-4 sm:text-sm"
-						>
-							{badge}
-						</div>
-					{/each}
-				</div>
-			</div>
-
-			<!-- Hero Title with reveal animation -->
-			<div class="mb-6 text-center sm:mb-8">
-				<h1 class="text-reveal mb-4 text-3xl font-bold text-white sm:text-5xl md:text-7xl">
-					<span class="text-white">I'm {heroData.name},</span>
-					<br />
-					<span class="gradient-text">{heroData.title}</span>
-				</h1>
-				<p
-					class="text-reveal max-w-2xl px-4 text-sm text-gray-300 sm:text-lg md:text-xl"
-					style="animation-delay: 0.3s;"
-				>
-					{heroData.subtitle}
-				</p>
-			</div>
-
-			<!-- Hero Buttons -->
-			<div
-				class="text-reveal mb-8 flex flex-col gap-4 sm:mb-16 sm:flex-row"
-				style="animation-delay: 0.6s;"
-			>
-				<a
-					href={heroData.buttons.primary.href}
-					class="pulse-glow magnetic group relative transform overflow-hidden rounded-2xl bg-pink-500 px-6 py-3 text-center font-medium text-black transition-all duration-300 hover:scale-105 hover:bg-pink-400 sm:px-8 sm:py-4"
-				>
-					<span class="relative z-10">{heroData.buttons.primary.text}</span>
-					<div
-						class="absolute inset-0 bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-					></div>
-				</a>
-
-				<a
-					href={heroData.buttons.secondary.href}
-					class="magnetic group relative transform rounded-2xl border border-white/30 bg-white/10 px-6 py-3 text-center font-medium text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/20 sm:px-8 sm:py-4"
-				>
-					<span class="relative z-10">{heroData.buttons.secondary.text}</span>
-					<div
-						class="absolute inset-0 rounded-2xl bg-gradient-to-r from-pink-400/20 to-pink-300/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-					></div>
-				</a>
-			</div>
-		</div>
+		<Herosection />
 
 		<!-- Profile Image with parallax effect -->
 		<div class="flex w-full min-w-full justify-center px-4">
@@ -443,70 +170,7 @@
 			></div>
 		</div>
 
-		<div class="container mx-auto px-4 py-12 sm:px-6 sm:py-20 lg:px-8">
-			<div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
-				<!-- Profile Image -->
-				<div class="reveal-left order-2 flex justify-center lg:order-1">
-					<div class="relative">
-						<div
-							class="h-80 w-64 rotate-3 transform overflow-hidden rounded-3xl border-2 border-pink-400/30 shadow-2xl transition-all duration-500 hover:rotate-1 sm:h-96 sm:w-80"
-						>
-							<!-- Placeholder for profile image -->
-							<div
-								class="flex h-full w-full items-center justify-center bg-gradient-to-br from-pink-400 to-pink-600 text-lg font-medium text-black"
-							>
-								<img src={anan} alt="Profile" class="h-full w-full object-cover" />
-							</div>
-						</div>
-						<!-- Decorative elements -->
-						<div
-							class="absolute -right-4 -top-4 h-8 w-8 animate-bounce rounded-full bg-pink-400"
-							style="animation-delay: 0.5s;"
-						></div>
-						<div
-							class="absolute -bottom-4 -left-4 h-6 w-6 animate-pulse rounded-full bg-pink-300"
-						></div>
-					</div>
-				</div>
-
-				<!-- About Content -->
-				<div class="reveal-right order-1 lg:order-2">
-					<div
-						class="rounded-2xl border border-pink-400/20 bg-gray-900/20 p-6 backdrop-blur-md sm:p-8"
-					>
-						<h2 class="mb-6 text-3xl font-bold text-white sm:text-4xl">
-							<span class="border-l-4 border-pink-400 pl-4">About Me</span>
-						</h2>
-
-						<p class="mb-8 text-base leading-relaxed text-gray-300 sm:text-lg">
-							An-An is a Computer Engineering student at Chulalongkorn University with a passion for
-							merging creativity and technology. As a versatile developer transitioning into data
-							science, I specialize in creating innovative solutions that bridge the gap between
-							design, development, and data-driven insights. From building user-centered interfaces
-							to developing credit scoring models and ML systems for financial institutions, I bring
-							a unique multi-disciplinary approach to every project. My experience spans from
-							competitive programming foundations to real-world applications in fintech and system
-							architecture, always driven by curiosity and the desire to solve complex problems
-							through elegant, impactful solutions.
-						</p>
-						<div class="grid grid-cols-2 gap-4">
-							<div
-								class="rounded-lg border border-pink-400/30 bg-gradient-to-br from-pink-500/20 to-pink-400/20 p-4 text-center"
-							>
-								<div class="text-2xl font-bold text-pink-400">40+</div>
-								<div class="text-sm text-gray-400">Projects</div>
-							</div>
-							<div
-								class="rounded-lg border border-pink-400/30 bg-gradient-to-br from-pink-500/20 to-pink-400/20 p-4 text-center"
-							>
-								<div class="text-2xl font-bold text-pink-400">6+</div>
-								<div class="text-sm text-gray-400">Years Experience</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<Aboutme />
 	</div>
 
 	<!-- Experience Section -->
@@ -983,8 +647,8 @@
 				<div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
 					<!-- Instagram - Tall Card -->
 					<a
-						href="https://www.instagram.com/vyovyo___"
-						target="_blank"
+						href={contacts.instagram.href}
+						target={contacts.instagram.target}
 						class="reveal-up group relative overflow-hidden rounded-3xl border border-pink-400/20 bg-gradient-to-br from-pink-900/20 to-orange-900/20 backdrop-blur-md transition-all duration-500 hover:scale-105 hover:border-pink-400/50 md:row-span-2"
 					>
 						<div
@@ -1005,11 +669,10 @@
 							<h3
 								class="mb-2 text-xl font-bold text-white transition-colors group-hover:text-pink-300"
 							>
-								Instagram
+								{contacts.instagram.title}
 							</h3>
-							<p class="font-medium text-pink-300">@vyovyo___</p>
-
-							<div class="mt-4 text-sm text-gray-400">Visual Stories & Behind the Scenes</div>
+							<p class="font-medium text-pink-300">{contacts.instagram.handle}</p>
+							<div class="mt-4 text-sm text-gray-400">{contacts.instagram.description}</div>
 						</div>
 					</a>
 
@@ -1017,8 +680,8 @@
 					<div class="space-y-6">
 						<!-- GitHub -->
 						<a
-							href="https://github.com/Chulinuwu/"
-							target="_blank"
+							href={contacts.github.href}
+							target={contacts.github.target}
 							class="reveal-up group block overflow-hidden rounded-2xl border border-gray-400/20 bg-gradient-to-br from-gray-900/40 to-gray-800/60 backdrop-blur-md transition-all duration-500 hover:scale-105 hover:border-gray-300/50"
 							style="animation-delay: 0.1s;"
 						>
@@ -1039,17 +702,17 @@
 									<h3
 										class="text-lg font-bold text-white transition-colors group-hover:text-gray-300"
 									>
-										GitHub
+										{contacts.github.title}
 									</h3>
-									<p class="text-sm text-gray-300">@Chulinuwu</p>
+									<p class="text-sm text-gray-300">{contacts.github.handle}</p>
 								</div>
 							</div>
 						</a>
 
 						<!-- LinkedIn -->
 						<a
-							href="https://www.linkedin.com/in/jiramethwa/"
-							target="_blank"
+							href={contacts.linkedin.href}
+							target={contacts.linkedin.target}
 							class="reveal-up group block overflow-hidden rounded-2xl border border-blue-400/20 bg-gradient-to-br from-blue-900/40 to-blue-800/60 backdrop-blur-md transition-all duration-500 hover:scale-105 hover:border-blue-400/50"
 							style="animation-delay: 0.2s;"
 						>
@@ -1070,9 +733,9 @@
 									<h3
 										class="text-lg font-bold text-white transition-colors group-hover:text-blue-300"
 									>
-										LinkedIn
+										{contacts.linkedin.title}
 									</h3>
-									<p class="text-sm text-blue-300">Professional Network</p>
+									<p class="text-sm text-blue-300">{contacts.linkedin.description}</p>
 								</div>
 							</div>
 						</a>
@@ -1082,7 +745,7 @@
 					<div class="space-y-6">
 						<!-- Gmail -->
 						<a
-							href="mailto:jirameth.wa@gmail.com"
+							href={contacts.email.href}
 							class="reveal-up group block overflow-hidden rounded-2xl border border-red-400/20 bg-gradient-to-br from-red-900/40 to-orange-900/40 backdrop-blur-md transition-all duration-500 hover:scale-105 hover:border-red-400/50"
 							style="animation-delay: 0.3s;"
 						>
@@ -1103,17 +766,17 @@
 									<h3
 										class="text-lg font-bold text-white transition-colors group-hover:text-red-300"
 									>
-										Email
+										{contacts.email.title}
 									</h3>
-									<p class="text-sm text-red-300">jirameth.wa@gmail.com</p>
+									<p class="text-sm text-red-300">{contacts.email.handle}</p>
 								</div>
 							</div>
 						</a>
 
 						<!-- Fastwork -->
 						<a
-							href="https://fastwork.co/user/chulinxz"
-							target="_blank"
+							href={contacts.fastwork.href}
+							target={contacts.fastwork.target}
 							class="reveal-up group block overflow-hidden rounded-2xl border border-green-400/20 bg-gradient-to-br from-green-900/40 to-emerald-900/40 backdrop-blur-md transition-all duration-500 hover:scale-105 hover:border-green-400/50"
 							style="animation-delay: 0.4s;"
 						>
@@ -1134,9 +797,9 @@
 									<h3
 										class="text-lg font-bold text-white transition-colors group-hover:text-green-300"
 									>
-										Fastwork
+										{contacts.fastwork.title}
 									</h3>
-									<p class="text-sm text-green-300">Freelance Services</p>
+									<p class="text-sm text-green-300">{contacts.fastwork.description}</p>
 								</div>
 							</div>
 						</a>
@@ -1145,8 +808,8 @@
 
 				<!-- Discord - Full Width Bottom -->
 				<a
-					href="https://discord.com/users/chulinx"
-					target="_blank"
+					href={contacts.discord.href}
+					target={contacts.discord.target}
 					class="reveal-up group block overflow-hidden rounded-3xl border border-indigo-400/20 bg-gradient-to-br from-indigo-900/40 to-purple-900/40 backdrop-blur-md transition-all duration-500 hover:scale-[1.02] hover:border-indigo-400/50"
 					style="animation-delay: 0.5s;"
 				>
@@ -1167,9 +830,9 @@
 							<h3
 								class="mb-2 text-2xl font-bold text-white transition-colors group-hover:text-indigo-300"
 							>
-								Discord
+								{contacts.discord.title}
 							</h3>
-							<p class="text-indigo-300">@chulinx</p>
+							<p class="text-indigo-300">{contacts.discord.handle}</p>
 						</div>
 					</div>
 				</a>
@@ -1234,188 +897,246 @@
 		</div>
 	</div>
 
-<!-- Creative Footer -->
-<div class="relative bg-black border-t border-pink-400/20 overflow-hidden">
-    <!-- Animated Background -->
-    <div class="absolute inset-0 overflow-hidden">
-        <!-- Moving particles -->
-        {#each Array(12) as _, i}
-            <div 
-                class="absolute w-1 h-1 bg-pink-400/20 rounded-full animate-float-particle"
-                style="
+	<!-- Creative Footer -->
+	<div class="relative overflow-hidden border-t border-pink-400/20 bg-black">
+		<!-- Animated Background -->
+		<div class="absolute inset-0 overflow-hidden">
+			<!-- Moving particles -->
+			{#each Array(12) as _, i}
+				<div
+					class="animate-float-particle absolute h-1 w-1 rounded-full bg-pink-400/20"
+					style="
                     left: {Math.random() * 100}%;
                     top: {Math.random() * 100}%;
                     animation-delay: {i * 0.5}s;
                     animation-duration: {3 + Math.random() * 2}s;
                 "
-            ></div>
-        {/each}
-        
-        <!-- Subtle grid pattern -->
-        <div class="absolute inset-0 opacity-5">
-            <div 
-                class="w-full h-full"
-                style="background-image: radial-gradient(circle at 2px 2px, rgba(244, 114, 182, 0.15) 1px, transparent 0); background-size: 30px 30px;"
-            ></div>
-        </div>
-    </div>
+				></div>
+			{/each}
 
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-        <!-- Main Footer Content -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            
-            <!-- Left: Branding -->
-            <div class="text-center md:text-left">
-                <div class="inline-block relative group mb-4">
-                    <h3 class="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-                        Chulinxz
-                    </h3>
-                    <div class="absolute -inset-2 bg-gradient-to-r from-pink-400/20 to-purple-400/20 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <p class="text-gray-400 text-sm leading-relaxed">
-                    Multi-disciplinary developer & designer<br/>
-                    turning ideas into reality through<br/>
-                    <span class="text-pink-300">code, design & data</span>
-                </p>
-            </div>
-
-            <!-- Right: Status & Fun -->
-            <div class="text-center md:text-right">
-                <div class="inline-block p-4 bg-gray-800/30 rounded-2xl backdrop-blur-sm border border-pink-400/10 mb-4">
-                    <div class="flex items-center justify-center md:justify-end space-x-2 mb-2">
-                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                        <span class="text-green-300 text-sm font-medium">Currently Available</span>
-                    </div>
-                    <p class="text-gray-400 text-xs">
-                        Open for freelance projects & collaborations
-                    </p>
-                </div>
-                
-                <!-- Coffee Counter (Fun Element) -->
-                <div class="text-gray-400 text-xs">
-                    ☕ Powered by <span class="text-pink-300 font-mono" id="coffee-counter">∞</span> cups of coffee
-                </div>
-            </div>
-        </div>
-
-        <!-- Divider with Animation -->
-        <div class="relative my-8">
-            <div class="absolute inset-0 flex items-center">
-                <div class="w-full border-t border-gradient-to-r from-transparent via-pink-400/30 to-transparent"></div>
-            </div>
-            <div class="relative flex justify-center">
-                <div class="bg-black px-4">
-                    <div class="flex space-x-2">
-                        <div class="w-2 h-2 bg-pink-400 rounded-full animate-bounce"></div>
-                        <div class="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
-                        <div class="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.4s;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bottom Section -->
-        <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            
-            <!-- Left: Copyright -->
-            <div class="text-center md:text-left">
-                <p class="text-gray-400 text-sm">
-                    © {new Date().getFullYear()} Chulinxz • Made with 
-                    <span class="text-pink-400 animate-pulse">❤️</span> 
-                    in Bangkok, Thailand
-                </p>
-                <p class="text-gray-500 text-xs mt-1">
-                    Always learning, always creating, always evolving
-                </p>
-            </div>
-
-            <!-- Right: Social Icons Mini -->
-            <div class="flex space-x-4">
-                <!-- svelte-ignore a11y_consider_explicit_label -->
-                <a href="https://github.com/Chulinuwu/" target="_blank" 
-                   class="w-8 h-8 bg-gray-800/50 rounded-full flex items-center justify-center hover:bg-gray-700/50 transition-colors group">
-                    <svg class="w-4 h-4 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                </a>
-                
-                <!-- svelte-ignore a11y_consider_explicit_label -->
-                <a href="https://www.linkedin.com/in/jiramethwa/" target="_blank"
-                   class="w-8 h-8 bg-gray-800/50 rounded-full flex items-center justify-center hover:bg-blue-600/50 transition-colors group">
-                    <svg class="w-4 h-4 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                </a>
-
-				<!-- svelte-ignore a11y_consider_explicit_label -->
-				<a href="mailto:jirameth.wa@gmail.com"
-				   class="w-8 h-8 bg-gray-800/50 rounded-full flex items-center justify-center hover:bg-red-600/50 transition-colors group">
-					<svg class="w-4 h-4 text-gray-400 group-hover:text-white" fill="currentColor" viewBox="0 0 24 24">
-						<path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h.715l9.649 7.285 9.649-7.285h.715A1.636 1.636 0 0 1 24 5.457z"/>
-					</svg>
-				</a>
-				<!-- svelte-ignore a11y_consider_explicit_label -->
-				<button on:click={scrollToTop}
-						class="w-8 h-8 bg-pink-600/50 rounded-full flex items-center justify-center hover:bg-pink-600/70 transition-colors group ml-2">
-					<svg class="w-4 h-4 text-white group-hover:transform group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
-					</svg>
-				</button>
+			<!-- Subtle grid pattern -->
+			<div class="absolute inset-0 opacity-5">
+				<div
+					class="h-full w-full"
+					style="background-image: radial-gradient(circle at 2px 2px, rgba(244, 114, 182, 0.15) 1px, transparent 0); background-size: 30px 30px;"
+				></div>
 			</div>
 		</div>
 
-        <!-- Easter Egg: Konami Code -->
-        <div class="absolute bottom-2 left-2 text-xs text-gray-600 opacity-50 hover:opacity-100 transition-opacity">
-            <span title="Try: ↑↑↓↓←→←→BA">🎮</span>
-        </div>
-    </div>
-</div>
+		<div class="container relative z-10 mx-auto px-4 py-12 sm:px-6 lg:px-8">
+			<!-- Main Footer Content -->
+			<div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+				<!-- Left: Branding -->
+				<div class="text-center md:text-left">
+					<div class="group relative mb-4 inline-block">
+						<h3
+							class="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-2xl font-bold text-transparent"
+						>
+							Chulinxz
+						</h3>
+						<div
+							class="absolute -inset-2 rounded-lg bg-gradient-to-r from-pink-400/20 to-purple-400/20 opacity-0 blur transition-opacity duration-300 group-hover:opacity-100"
+						></div>
+					</div>
+					<p class="text-sm leading-relaxed text-gray-400">
+						Multi-disciplinary developer & designer<br />
+						turning ideas into reality through<br />
+						<span class="text-pink-300">code, design & data</span>
+					</p>
+				</div>
 
-<!-- JavaScript for Interactive Elements -->
-<script>
-    // Coffee counter animation
-    let coffeeCount = 0;
-    const coffeeElement = document.getElementById('coffee-counter');
-    
-    if (coffeeElement) {
-        setInterval(() => {
-            coffeeCount = (coffeeCount + 1) % 999;
-            if (coffeeElement) {
-                coffeeElement.textContent = coffeeCount.toString().padStart(3, '0');
-            }
-        }, 2000);
-    }
+				<!-- Right: Status & Fun -->
+				<div class="text-center md:text-right">
+					<div
+						class="mb-4 inline-block rounded-2xl border border-pink-400/10 bg-gray-800/30 p-4 backdrop-blur-sm"
+					>
+						<div class="mb-2 flex items-center justify-center space-x-2 md:justify-end">
+							<div class="h-2 w-2 animate-pulse rounded-full bg-green-400"></div>
+							<span class="text-sm font-medium text-green-300">Currently Available</span>
+						</div>
+						<p class="text-xs text-gray-400">Open for freelance projects & collaborations</p>
+					</div>
 
-    // Konami Code Easter Egg
-    let konamiCode = [];
-    const konamiSequence = [
-        'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-        'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-        'KeyB', 'KeyA'
-    ];
+					<!-- Coffee Counter (Fun Element) -->
+					<div class="text-xs text-gray-400">
+						☕ Powered by <span class="font-mono text-pink-300" id="coffee-counter">∞</span> cups of
+						coffee
+					</div>
+				</div>
+			</div>
 
-    document.addEventListener('keydown', (e) => {
-        konamiCode.push(e.code);
-        if (konamiCode.length > konamiSequence.length) {
-            konamiCode.shift();
-        }
-        
-        if (konamiCode.length === konamiSequence.length && 
-            konamiCode.every((key, index) => key === konamiSequence[index])) {
-            // Easter egg activated!
-            document.body.style.transform = 'rotate(360deg)';
-            document.body.style.transition = 'transform 2s ease-in-out';
-            setTimeout(() => {
-                document.body.style.transform = '';
-                document.body.style.transition = '';
-                alert('🎉 You found the secret! Thanks for being curious!');
-            }, 2000);
-            konamiCode = [];
-        }
-    });
-</script>
+			<!-- Divider with Animation -->
+			<div class="relative my-8">
+				<div class="absolute inset-0 flex items-center">
+					<div
+						class="border-gradient-to-r w-full border-t from-transparent via-pink-400/30 to-transparent"
+					></div>
+				</div>
+				<div class="relative flex justify-center">
+					<div class="bg-black px-4">
+						<div class="flex space-x-2">
+							<div class="h-2 w-2 animate-bounce rounded-full bg-pink-400"></div>
+							<div
+								class="h-2 w-2 animate-bounce rounded-full bg-purple-400"
+								style="animation-delay: 0.2s;"
+							></div>
+							<div
+								class="h-2 w-2 animate-bounce rounded-full bg-blue-400"
+								style="animation-delay: 0.4s;"
+							></div>
+						</div>
+					</div>
+				</div>
+			</div>
 
+			<!-- Bottom Section -->
+			<div class="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
+				<!-- Left: Copyright -->
+				<div class="text-center md:text-left">
+					<p class="text-sm text-gray-400">
+						© {new Date().getFullYear()} Chulinxz • Made with
+						<span class="animate-pulse text-pink-400">❤️</span>
+						in Bangkok, Thailand
+					</p>
+					<p class="mt-1 text-xs text-gray-500">
+						Always learning, always creating, always evolving
+					</p>
+				</div>
 
+				<!-- Right: Social Icons Mini -->
+				<div class="flex space-x-4">
+					<!-- svelte-ignore a11y_consider_explicit_label -->
+					<a
+						href="https://github.com/Chulinuwu/"
+						target="_blank"
+						class="group flex h-8 w-8 items-center justify-center rounded-full bg-gray-800/50 transition-colors hover:bg-gray-700/50"
+					>
+						<svg
+							class="h-4 w-4 text-gray-400 group-hover:text-white"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+							/>
+						</svg>
+					</a>
+
+					<!-- svelte-ignore a11y_consider_explicit_label -->
+					<a
+						href="https://www.linkedin.com/in/jiramethwa/"
+						target="_blank"
+						class="group flex h-8 w-8 items-center justify-center rounded-full bg-gray-800/50 transition-colors hover:bg-blue-600/50"
+					>
+						<svg
+							class="h-4 w-4 text-gray-400 group-hover:text-white"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+							/>
+						</svg>
+					</a>
+
+					<!-- svelte-ignore a11y_consider_explicit_label -->
+					<a
+						href="mailto:jirameth.wa@gmail.com"
+						class="group flex h-8 w-8 items-center justify-center rounded-full bg-gray-800/50 transition-colors hover:bg-red-600/50"
+					>
+						<svg
+							class="h-4 w-4 text-gray-400 group-hover:text-white"
+							fill="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h.715l9.649 7.285 9.649-7.285h.715A1.636 1.636 0 0 1 24 5.457z"
+							/>
+						</svg>
+					</a>
+					<!-- svelte-ignore a11y_consider_explicit_label -->
+					<button
+						on:click={scrollToTop}
+						class="group ml-2 flex h-8 w-8 items-center justify-center rounded-full bg-pink-600/50 transition-colors hover:bg-pink-600/70"
+					>
+						<svg
+							class="h-4 w-4 text-white transition-transform group-hover:-translate-y-1 group-hover:transform"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M5 10l7-7m0 0l7 7m-7-7v18"
+							/>
+						</svg>
+					</button>
+				</div>
+			</div>
+
+			<!-- Easter Egg: Konami Code -->
+			<div
+				class="absolute bottom-2 left-2 text-xs text-gray-600 opacity-50 transition-opacity hover:opacity-100"
+			>
+				<span title="Try: ↑↑↓↓←→←→BA">🎮</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- JavaScript for Interactive Elements -->
+	<script>
+		// Coffee counter animation
+		let coffeeCount = 0;
+		const coffeeElement = document.getElementById('coffee-counter');
+
+		if (coffeeElement) {
+			setInterval(() => {
+				coffeeCount = (coffeeCount + 1) % 999;
+				if (coffeeElement) {
+					coffeeElement.textContent = coffeeCount.toString().padStart(3, '0');
+				}
+			}, 2000);
+		}
+
+		// Konami Code Easter Egg
+		let konamiCode = [];
+		const konamiSequence = [
+			'ArrowUp',
+			'ArrowUp',
+			'ArrowDown',
+			'ArrowDown',
+			'ArrowLeft',
+			'ArrowRight',
+			'ArrowLeft',
+			'ArrowRight',
+			'KeyB',
+			'KeyA'
+		];
+
+		document.addEventListener('keydown', (e) => {
+			konamiCode.push(e.code);
+			if (konamiCode.length > konamiSequence.length) {
+				konamiCode.shift();
+			}
+
+			if (
+				konamiCode.length === konamiSequence.length &&
+				konamiCode.every((key, index) => key === konamiSequence[index])
+			) {
+				// Easter egg activated!
+				document.body.style.transform = 'rotate(360deg)';
+				document.body.style.transition = 'transform 2s ease-in-out';
+				setTimeout(() => {
+					document.body.style.transform = '';
+					document.body.style.transition = '';
+					alert('🎉 You found the secret! Thanks for being curious!');
+				}, 2000);
+				konamiCode = [];
+			}
+		});
+	</script>
 </div>
 
 <style>

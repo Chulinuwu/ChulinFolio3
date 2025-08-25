@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { error } from '@sveltejs/kit';
 	import '../app.css';
 	let { children } = $props();
 	import Navbar from "../components/navbar.svelte";
 </script>
 
-<Navbar />
+{#if !error} 
+	<Navbar />
+{/if}
 {@render children()}
