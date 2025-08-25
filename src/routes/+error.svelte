@@ -124,7 +124,9 @@
     <!-- Glass card with error details -->
     <div class="glass-card">
       <!-- Icon based on error type -->
+      <div class="error-icon">
 
+      </div>
 
       <!-- Error title and description -->
       <div class="error-content">
@@ -344,29 +346,8 @@
     margin-bottom: 2rem;
   }
 
-  .error-details {
-    margin: 1.5rem 0;
-    text-align: left;
-  }
 
-  .error-details summary {
-    cursor: pointer;
-    color: rgba(236, 72, 153, 0.9);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
 
-  .error-message {
-    display: block;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 1rem;
-    border-radius: 8px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-top: 0.5rem;
-    overflow-x: auto;
-  }
 
   /* Action buttons */
   .action-buttons {
