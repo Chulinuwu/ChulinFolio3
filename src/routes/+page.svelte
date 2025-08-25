@@ -455,7 +455,7 @@
 							<div
 								class="flex h-full w-full items-center justify-center bg-gradient-to-br from-pink-400 to-pink-600 text-lg font-medium text-black"
 							>
-								<img src={anan} alt="Profile Image" class="h-full w-full object-cover" />
+								<img src={anan} alt="Profile" class="h-full w-full object-cover" />
 							</div>
 						</div>
 						<!-- Decorative elements -->
@@ -1145,7 +1145,8 @@
 
 				<!-- Discord - Full Width Bottom -->
 				<a
-					href="#"
+					href="https://discord.com/users/chulinx"
+					target="_blank"
 					class="reveal-up group block overflow-hidden rounded-3xl border border-indigo-400/20 bg-gradient-to-br from-indigo-900/40 to-purple-900/40 backdrop-blur-md transition-all duration-500 hover:scale-[1.02] hover:border-indigo-400/50"
 					style="animation-delay: 0.5s;"
 				>
@@ -1166,9 +1167,9 @@
 							<h3
 								class="mb-2 text-2xl font-bold text-white transition-colors group-hover:text-indigo-300"
 							>
-								Discord Community
+								Discord
 							</h3>
-							<p class="text-indigo-300">Let's chat about tech, projects, and collaboration!</p>
+							<p class="text-indigo-300">@chulinx</p>
 						</div>
 					</div>
 				</a>
@@ -1650,6 +1651,7 @@
 	.line-clamp-2 {
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
+		line-clamp: 2;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 	}
