@@ -1,6 +1,4 @@
 <script lang="ts">
-
-
 	import Aboutme from './../components/aboutme.svelte';
 	import Herosection from './../components/herosection.svelte';
 	import { onMount } from 'svelte';
@@ -63,29 +61,39 @@
 			scrollY = window.scrollY;
 		};
 
-		// รอ script โหลดแล้วส่ง pageview
-        const trackPageView = () => {
-            // @ts-ignore - Tinybird script จะ inject global variable
-            if (window.Tinybird) {
-                // @ts-ignore
-                window.Tinybird.trackEvent('page_view', {
-                    page_title: document.title,
-                    page_path: '/',
-                    timestamp: new Date().toISOString()
-                });
-                console.log('Pageview tracked!');
-            } else {
-                // ถ้า script ยังไม่โหลด รอ 100ms แล้วลองใหม่
-                setTimeout(trackPageView, 100);
-            }
-        };
-		// เริ่ม track หลังจาก component mount
-		setTimeout(trackPageView, 500);
+		// 🚀 Nuclear Option - track แค่ครั้งเดียวต่อ session
+		const SESSION_KEY = 'tinybird_tracked_homepage';
 
+		if (!sessionStorage.getItem(SESSION_KEY)) {
+			console.log('🎯 First visit this session, will track pageview...');
+
+			setTimeout(() => {
+				// @ts-ignore
+				if (window.Tinybird) {
+					sessionStorage.setItem(SESSION_KEY, 'true');
+					// @ts-ignore
+					window.Tinybird.trackEvent('page_view', {
+						page_title: document.title,
+						page_path: '/',
+						timestamp: new Date().toISOString(),
+						window_width: windowWidth,
+						window_height: windowHeight
+					});
+					console.log('✅ Pageview tracked ONCE per session!');
+				} else {
+					console.log('❌ Tinybird not ready after 2 seconds');
+				}
+			}, 2000);
+		} else {
+			console.log('🛑 Already tracked this session, skipping');
+		}
+
+		// Event listeners
 		window.addEventListener('mousemove', handleMouseMove);
 		window.addEventListener('scroll', handleScroll);
 		window.addEventListener('resize', updateWindowSize);
 
+		// Cleanup function
 		return () => {
 			window.removeEventListener('mousemove', handleMouseMove);
 			window.removeEventListener('scroll', handleScroll);
@@ -93,7 +101,6 @@
 			clearTimeout(mouseTimeout);
 		};
 	});
-
 	// Utility function for intersection observer animation
 	function revealOnScroll(node: HTMLElement) {
 		const observer = new IntersectionObserver(
