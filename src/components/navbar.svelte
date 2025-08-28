@@ -88,6 +88,7 @@
   }
 </script>
 
+{#if !$page.status || $page.status < 400}
 <nav 
   bind:this={navEl}
   class="liquid-glass-nav fixed left-1/2 transform -translate-x-1/2 z-50 mt-4"
@@ -135,6 +136,8 @@
     </div>
   </div>
 </nav>
+
+{/if}
 
 <style>
   .liquid-glass-nav {

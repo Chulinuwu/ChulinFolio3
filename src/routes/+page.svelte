@@ -1,4 +1,6 @@
 <script lang="ts">
+
+
 	import Aboutme from './../components/aboutme.svelte';
 	import Herosection from './../components/herosection.svelte';
 	import { onMount } from 'svelte';
@@ -60,6 +62,25 @@
 		const handleScroll = () => {
 			scrollY = window.scrollY;
 		};
+
+		// รอ script โหลดแล้วส่ง pageview
+        const trackPageView = () => {
+            // @ts-ignore - Tinybird script จะ inject global variable
+            if (window.Tinybird) {
+                // @ts-ignore
+                window.Tinybird.trackEvent('page_view', {
+                    page_title: document.title,
+                    page_path: '/',
+                    timestamp: new Date().toISOString()
+                });
+                console.log('Pageview tracked!');
+            } else {
+                // ถ้า script ยังไม่โหลด รอ 100ms แล้วลองใหม่
+                setTimeout(trackPageView, 100);
+            }
+        };
+		// เริ่ม track หลังจาก component mount
+		setTimeout(trackPageView, 500);
 
 		window.addEventListener('mousemove', handleMouseMove);
 		window.addEventListener('scroll', handleScroll);
