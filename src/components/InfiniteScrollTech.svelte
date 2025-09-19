@@ -156,7 +156,8 @@
         max-height: 100%;
         place-items: flex-start;
         margin: 0;
-        padding: 0;
+        padding-top: 20px;
+        padding-bottom: 20px;
         list-style-type: none;
         position: relative;
         flex-direction: row;

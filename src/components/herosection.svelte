@@ -5,7 +5,7 @@
 <!-- Hero Content Container -->
 <div class="relative flex flex-1 flex-col items-center justify-center px-4 py-16 sm:px-8 sm:py-28">
 	<!-- Infinite Scrolling Badges -->
-	<div class="fade-mask mb-8 w-full max-w-6xl overflow-hidden sm:mb-12">
+	<div class="fade-mask mb-8 w-full py-5 max-w-6xl overflow-hidden sm:mb-12">
 		<div class="scroll-animation flex gap-2">
 			{#each badges as badge}
 				<div
