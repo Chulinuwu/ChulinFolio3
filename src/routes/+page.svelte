@@ -61,32 +61,31 @@
 			scrollY = window.scrollY;
 		};
 
-		// 🚀 Nuclear Option - track แค่ครั้งเดียวต่อ session
-		const SESSION_KEY = 'tinybird_tracked_homepage';
+		// const SESSION_KEY = 'tinybird_tracked_homepage';
 
-		if (!sessionStorage.getItem(SESSION_KEY)) {
-			console.log('🎯 First visit this session, will track pageview...');
+		// if (!sessionStorage.getItem(SESSION_KEY)) {
+		// 	console.log('🎯 First visit this session, will track pageview...');
 
-			setTimeout(() => {
-				// @ts-ignore
-				if (window.Tinybird) {
-					sessionStorage.setItem(SESSION_KEY, 'true');
-					// @ts-ignore
-					window.Tinybird.trackEvent('page_view', {
-						page_title: document.title,
-						page_path: '/',
-						timestamp: new Date().toISOString(),
-						window_width: windowWidth,
-						window_height: windowHeight
-					});
-					console.log('✅ Pageview tracked ONCE per session!');
-				} else {
-					console.log('❌ Tinybird not ready after 2 seconds');
-				}
-			}, 2000);
-		} else {
-			console.log('🛑 Already tracked this session, skipping');
-		}
+		// 	setTimeout(() => {
+		// 		// @ts-ignore
+		// 		if (window.Tinybird) {
+		// 			sessionStorage.setItem(SESSION_KEY, 'true');
+		// 			// @ts-ignore
+		// 			window.Tinybird.trackEvent('page_view', {
+		// 				page_title: document.title,
+		// 				page_path: '/',
+		// 				timestamp: new Date().toISOString(),
+		// 				window_width: windowWidth,
+		// 				window_height: windowHeight
+		// 			});
+		// 			console.log('✅ Pageview tracked ONCE per session!');
+		// 		} else {
+		// 			console.log('❌ Tinybird not ready after 2 seconds');
+		// 		}
+		// 	}, 2000);
+		// } else {
+		// 	console.log('🛑 Already tracked this session, skipping');
+		// }
 
 		// Event listeners
 		window.addEventListener('mousemove', handleMouseMove);
@@ -102,6 +101,7 @@
 		};
 	});
 	// Utility function for intersection observer animation
+	
 	function revealOnScroll(node: HTMLElement) {
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -114,14 +114,14 @@
 			{ threshold: 0.1 }
 		);
 
-		observer.observe(node);
+	// 	observer.observe(node);
 
-		return {
-			destroy() {
-				observer.disconnect();
-			}
-		};
-	}
+	// 	return {
+	// 		destroy() {
+	// 			observer.disconnect();
+	// 		}
+	// 	};
+	// }
 </script>
 
 <svelte:window bind:scrollY />
