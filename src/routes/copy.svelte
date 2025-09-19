@@ -197,11 +197,6 @@
 		class="relative flex min-h-screen w-full items-center overflow-hidden bg-black"
 		use:revealOnScroll
 	>
-		<!-- Fade overlay top -->
-		<div class="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none"></div>
-		<!-- Fade overlay bottom -->
-		<div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none"></div>
-		
 		<!-- Background grid -->
 		<div class="absolute inset-0 opacity-5">
 			<div
@@ -215,11 +210,6 @@
 
 	<!-- Experience Section -->
 	<div class="relative w-full overflow-hidden bg-black py-12 sm:py-20" use:revealOnScroll>
-		<!-- Fade overlay top -->
-		<div class="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black to-transparent z-30 pointer-events-none"></div>
-		<!-- Fade overlay bottom -->
-		<div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent z-30 pointer-events-none"></div>
-		
 		<!-- Animated Background Particles -->
 		<div class="pointer-events-none absolute inset-0">
 			{#each Array(20) as _, i}
@@ -400,11 +390,6 @@
 	</div>
 
 	<div class="w-full bg-black py-12 sm:py-20" use:revealOnScroll>
-		<!-- Fade overlay top -->
-		<div class="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none"></div>
-		<!-- Fade overlay bottom -->
-		<div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none"></div>
-		
 		<div class="container mx-auto px-4 sm:px-6 lg:px-8">
 			<h2 class="reveal-up mb-12 text-center text-3xl font-bold text-pink-400 sm:text-4xl">
 				Technologies I Use
@@ -418,11 +403,6 @@
 
 	<!-- Skills Section -->
 	<div class="relative w-full overflow-hidden bg-black py-12 sm:py-20" use:revealOnScroll>
-		<!-- Fade overlay top -->
-		<div class="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black to-transparent z-30 pointer-events-none"></div>
-		<!-- Fade overlay bottom -->
-		<div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent z-30 pointer-events-none"></div>
-		
 		<!-- Dynamic Background with Moving Orbs -->
 		<div class="absolute inset-0 overflow-hidden">
 			{#each Array(6) as _, i}
@@ -630,11 +610,6 @@
 
 	<!-- Contact Section -->
 	<div class="relative w-full overflow-hidden bg-black py-12 sm:py-20" use:revealOnScroll>
-		<!-- Fade overlay top -->
-		<div class="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black to-transparent z-30 pointer-events-none"></div>
-		<!-- Fade overlay bottom -->
-		<div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent z-30 pointer-events-none"></div>
-		
 		<!-- Background Effects -->
 		<div class="absolute inset-0">
 			<!-- Radial Gradients -->

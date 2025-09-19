@@ -106,7 +106,7 @@ export const experiences = [
 	},
 	{
 		year: 'Aug 2025 - now',
-		role: 'Data Scientist Intern (Capstone Project)',
+		role: 'Data Scientist Intern',
 		company: 'Siam Commercial Bank (SCB)',
 		description:
 			'Working on computer vision models for SCB graphics and conversion rate optimization through advanced ML techniques'
