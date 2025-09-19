@@ -255,7 +255,7 @@
 		}
 		
 		:global(.toast-card) {
-			height: 160px;
+			height: 70%;
 		}
 		
 		:global(.card-content) {
