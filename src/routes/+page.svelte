@@ -101,7 +101,7 @@
 		};
 	});
 	// Utility function for intersection observer animation
-	
+
 	function revealOnScroll(node: HTMLElement) {
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -114,14 +114,14 @@
 			{ threshold: 0.1 }
 		);
 
-	// 	observer.observe(node);
+		observer.observe(node);
 
-	// 	return {
-	// 		destroy() {
-	// 			observer.disconnect();
-	// 		}
-	// 	};
-	// }
+		return {
+			destroy() {
+				observer.disconnect();
+			}
+		};
+	}
 </script>
 
 <svelte:window bind:scrollY />
