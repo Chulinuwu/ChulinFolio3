@@ -1,10 +1,12 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
+  import { trackNavigation, trackInteraction } from '$lib/analytics';
   
   let mounted = false;
   let activeIndicatorEl: HTMLElement;
   let navEl: HTMLElement;
+  let currentPath = '';
   
   const items = [
     {
@@ -64,6 +66,8 @@
   onMount(() => {
     mounted = true;
     updateActiveIndicator();
+    
+    currentPath = $page.url.pathname;
   });
 
   function updateActiveIndicator() {
@@ -84,7 +88,27 @@
 
   // Watch for route changes
   $: if (mounted && $page.url.pathname) {
+    const newPath = $page.url.pathname;
+    
+    if (currentPath && newPath !== currentPath) {
+      trackNavigation(currentPath, newPath, 'navigation');
+    }
+    
+    currentPath = newPath;
     setTimeout(updateActiveIndicator, 100);
+  }
+
+  function handleNavClick(event: MouseEvent, item: any) {
+    trackInteraction('navbar_link', 'click', {
+      href: item.href,
+      label: item.label,
+      fromPath: currentPath,
+      toPath: item.href,
+      clickCoordinates: {
+        x: event.clientX,
+        y: event.clientY
+      }
+    });
   }
 </script>
 
@@ -119,6 +143,7 @@
           title={item.label}
           aria-current={$page.url.pathname === item.href ? 'page' : undefined}
           style="--index: {index}"
+          on:click={(event) => handleNavClick(event, item)}
         >
           <div class="nav-icon">
             {@html item.svg}
