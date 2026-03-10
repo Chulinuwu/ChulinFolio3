@@ -1,0 +1,200 @@
+\documentclass[a4paper,10pt]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{charter} % Professional font
+
+% --- Geometry & Spacing ---
+\geometry{left=0.6in, right=0.6in, top=0.5in, bottom=0.5in}
+\setlength{\parindent}{0pt}
+\setlist[itemize]{noitemsep, topsep=0pt, leftmargin=1.5em, parsep=0pt, partopsep=0pt}
+
+% --- Colors ---
+\definecolor{primary}{HTML}{2B2D42}
+\definecolor{accent}{HTML}{457B9D}
+\definecolor{link}{HTML}{1D3557}
+
+% --- Section Styling ---
+\titleformat{\section}{\large\bfseries\color{primary}}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{1.2ex}{1ex}
+
+\newcommand{\entry}[4]{
+  \vspace{1.2ex}
+  \textbf{#1} \hfill #2 \\
+  \textit{#3} \hfill \textit{#4} \par
+}
+
+\newcommand{\project}[3]{
+  \vspace{1.2ex}
+  \textbf{#1} \hfill #2 \\
+  \textit{#3} \par
+}
+
+% --- Document ---
+\begin{document}
+
+% --- Header ---
+\begin{center}
+    {\Huge \textbf{Jirameth Wannasiwaporn}} \\[1ex]
+    \href{mailto:jirameth.wa@gmail.com}{\faEnvelope\ jirameth.wa@gmail.com} \quad
+    \href{tel:+66994989885}{\faPhone\ +66 99-498-9885} \\
+    \href{https://github.com/Chulinuwu}{\faGithub\ github.com/Chulinuwu} \quad
+    \href{https://chulin-folio2.vercel.app/}{\faGlobe\ chulin-folio2.vercel.app} \quad
+    \href{https://www.linkedin.com/in/jirameth-wannasiwaporn-734207310/}{\faLinkedin\ Jirameth}
+\end{center}
+
+% --- Objective ---
+\section*{Objective}
+To apply my skills in AI/ML, neural networks, and DevOps practices to build intelligent, scalable systems. Interested in exploring the intersection between machine learning implementation and modern infrastructure, contributing to projects that combine cutting-edge AI capabilities with reliable deployment and system architecture.
+
+% --- Education ---
+\section*{Education}
+\entry{Chulalongkorn University}{Bangkok, Thailand}{Bachelor of Engineering, Computer Engineering and Digital Technology}{2022 -- 2026 (Expected)}
+
+% --- Work Experience ---
+\section*{Work Experience}
+
+\entry{Siam Commercial Bank Public Co. Ltd (SCB)}{Sep 2025 -- Present}{Data Scientist Intern}{Bangkok, Thailand}
+\begin{itemize}
+    \item Analysis on improving advertisements using AI/ML, NLP, Stable Diffusion (SD) etc.
+    \item Roles: Data Scientist, ML Engineer.
+\end{itemize}
+
+\entry{Freelance Full-stack Developer \& UX/UI Designer \& Digital Artist}{2021 -- Present}{Self-employed}{}
+\begin{itemize}
+    \item Designed and developed websites in collaboration with the police department (e.g., \href{https://donhualor-chonburi-police.com/}{Don Hualor Police Station}).
+    \item Developed a daily inventory management ERP system for import/export retail business.
+\end{itemize}
+
+\entry{AIFUL Corporation / Aira \& Aiful Public Co. Ltd}{May -- July 2025}{Data Scientist Intern}{Bangkok, Thailand}
+\begin{itemize}
+    \item National Credit Bureau (NCB) data analysis and credit risk assessment model development.
+    \item Developed using Pandas, Polars, AutoGluon, Scikit-learn, and PowerBI.
+\end{itemize}
+
+\entry{Bangkok Bank}{May -- July 2024}{Developer, UX/UI Designer Intern}{Bangkok, Thailand}
+\begin{itemize}
+    \item Developed a website for managing the bank's provident funds, with companies as primary users.
+    \item Utilized Next.js and Java Quarkus for development.
+\end{itemize}
+
+% --- Academic Projects ---
+\section*{Academic Projects}
+
+\project{Smart Home System (Simulated)}{August -- December 2025}{IoT System Architect \& Embedded Developer}
+\begin{itemize}
+    \item Implemented using ESP32 + Raspberry Pi 5, multi-sensor integration (MPU6050, ultrasonic, light, temperature). [\href{https://github.com/Chulinuwu/Smart_Farm_Plant_Monitoring_System}{GitHub}]
+    \item Cloud-based monitoring with MQTT and InfluxDB.
+\end{itemize}
+
+\project{Digital Wallet System Design}{April 2025}{System Architect \& Backend Engineer}
+\begin{itemize}
+    \item Designed a high-throughput digital wallet system supporting 1M TPS.
+    \item Implemented using Raft consensus, RocksDB, Cassandra, and Saga coordinator.
+\end{itemize}
+
+\project{AI Paper Citation Prediction}{December 2024}{Data Engineer \& Data Scientist}
+\begin{itemize}
+    \item Predictive model to forecast the number of citations (citedBy) for academic papers using AutoGluon. [\href{https://github.com/Chulinuwu/ArticlePopularityPrediction}{GitHub}]
+\end{itemize}
+
+\project{AI Plant Disease Detection Platform, IoT System}{November 2024}{System Architecture \& Full-stack Developer}
+\begin{itemize}
+    \item Platform to monitor plants and detect diseases using AI, developed with Python, C++, and SvelteKit. [\href{https://github.com/Chulinuwu/Smart_Farm_Plant_Monitoring_System}{GitHub}]
+\end{itemize}
+
+\project{Dog Vs Monkey Game: Space Shooter Game}{May 2024}{JavaFX Developer}
+\begin{itemize}
+    \item A space shooter game where the player controls a dog that throws bananas at incoming monkeys. [\href{https://github.com/amphikapha/Dog-VS-Monkey}{GitHub}]
+\end{itemize}
+
+% --- Extracurricular Projects & Hackathons ---
+\section*{Extracurricular Projects \& Hackathons}
+
+\project{Autonomous Data Analyst Agent}{December 2025 -- Present}{Solo Project}
+\begin{itemize}
+    \item AI-powered platform for automated data analysis and predictive modeling using SvelteKit (Svelte 5), Node.js, Vertex AI (Gemini), BigQuery ML, and Supabase. [\href{https://aurora-analytic-ai.vercel.app/}{Website}]
+\end{itemize}
+
+\project{LINE Chatbot for Order Management}{January 2026}{Solo Project}
+\begin{itemize}
+    \item Integrated LINE Chatbot with real-time status updates and automated customer support. [\href{https://line.me/R/ti/p/@vlt6835j}{Add Line: @vlt6835j}]
+\end{itemize}
+
+\project{AI Virtual Idol Chatbot}{January 2025}{Solo Engineer}
+\begin{itemize}
+    \item Generative model to communicate with users, acting as "Pekora" using Llama 3.2 and OpenAI API.
+\end{itemize}
+
+\project{Uniclub}{January 2025}{Solo Engineer}
+\begin{itemize}
+    \item A platform designed to help university students discover, join, and manage clubs within the campus. [\href{https://github.com/Chulinuwu/UniClubFrontend}{GitHub}]
+\end{itemize}
+
+\project{Inventory Management ERP System}{May -- July 2025}{Full-Stack Developer \& DevOps Engineer}
+\begin{itemize}
+    \item Managing daily operations and legacy stock for import/export retail business.
+    \item Built custom Odoo modules from scratch with automated inventory workflows.
+\end{itemize}
+
+\project{Chula Macaron}{April 2024}{Front-end Developer}
+\begin{itemize}
+    \item A mobile application for reporting campus incidents, built with React-Native. [\href{https://github.com/xXpeira12/ChulaMacaron}{GitHub}]
+\end{itemize}
+
+\project{4th Place, AiHack Hackathon 2025 by AIFUL Group}{December 2025}{Data Scientist \& Data Analyst}
+\begin{itemize}
+    \item Developed a model to predict loan applicant repayment probability using AutoGluon.
+\end{itemize}
+
+\project{7th Place, Cyber Top Talent 2025}{September 2025}{Cybersecurity Participant}
+\begin{itemize}
+    \item Solved reverse engineering, web exploitation, and cryptography challenges in national-level qualifiers (Top 7 out of 500+ teams).
+\end{itemize}
+
+\project{Finalist, ITMX Hack to the Max 2025}{August -- September 2025}{Architecture \& Modeling}
+\begin{itemize}
+    \item Developed Thailand Deferred Payment architecture (Top 15 out of 200+ teams).
+\end{itemize}
+
+\project{4th Place, AiHack Hackathon 2023 by AIFUL Group}{December 2023}{Researcher \& Data Analyst}
+\begin{itemize}
+    \item Model predicting loan applicants' repayment success using AutoGluon.
+\end{itemize}
+
+\project{Police Alerts and Public News Web Platform}{May 2022}{Solo Engineer}
+\begin{itemize}
+    \item Full-stack platform for police departments to report incidents and inform the public.
+    \item Developed with WordPress, PHP, HTML, CSS, and JavaScript. [\href{https://donhualor-chonburi-police.com/}{Website}]
+\end{itemize}
+
+% --- Extracurricular Activities ---
+\section*{Extracurricular Activities}
+
+\entry{Information System Development (ISD)}{2024 -- Present}{Front-end Developer}{}
+\begin{itemize}
+    \item Developed projects using software development techniques as a Front-end Developer.
+\end{itemize}
+
+\entry{Google Developer Student Club (GDSC)}{2024 -- 2025}{Core Team - Graphic Designer \& UX/UI Designer}{}
+\begin{itemize}
+    \item Designed Graphics and UX/UI for various projects within the club.
+\end{itemize}
+
+% --- Skills ---
+\section*{Skills}
+\textbf{Programming Languages:} C, C++, Python, Java, JavaScript, TypeScript, Dart, Go \\
+\textbf{Libraries \& Frameworks:} Express, Java Quarkus, React, React-Native, Flutter, Astro, Next.js, Svelte, Vue, Streamlit, Transformers, AutoGluon, Flask, FastAPI, Spark, ThreeJS, Polars, Pandas, Kafka \\
+\textbf{Tools \& Cloud:} VS Code, IntelliJ, Android Studio, Postman, Procreate, Blender, Git, MongoDB, PostgreSQL, MySQL, Figma, PowerBI, GCP, AWS, Docker \\
+\textbf{Languages:} English (Fluent, CEFR B2), Japanese (Basic, JLPT N4) \\
+\textbf{Soft Skills:} Teamwork, Leadership, Problem Solving, Adaptability, Innovation
+
+\end{document}
