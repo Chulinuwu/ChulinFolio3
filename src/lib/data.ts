@@ -1,4 +1,50 @@
-// Badge data
+export type ProjectCategory = 'data-science' | 'web-dev' | 'iot' | 'hackathon' | 'freelance';
+
+export interface Project {
+	slug: string;
+	name: string;
+	description: string;
+	explanation: string;
+	role: string;
+	category: ProjectCategory;
+	techStack: string[];
+	link?: string;
+	github?: string;
+	image?: string;
+	featured: boolean;
+	placement?: string;
+}
+
+export interface Experience {
+	year: string;
+	role: string;
+	company: string;
+	description: string;
+	techUsed?: string[];
+	featured: boolean;
+	type: 'internship' | 'freelance' | 'academic' | 'extracurricular';
+}
+
+export interface Hackathon {
+	name: string;
+	placement: string;
+	year: string;
+	description: string;
+	icon: 'trophy' | 'medal' | 'star';
+}
+
+export interface SkillCategory {
+	name: string;
+	skills: string[];
+}
+
+export interface Education {
+	institution: string;
+	degree: string;
+	location: string;
+	period: string;
+}
+
 export const badges = [
 	'Consultant',
 	'Web Design',
@@ -10,203 +56,305 @@ export const badges = [
 ];
 
 export const heroData = {
-	name: 'An-An',
-	title: 'Developer / Designer',
-	subtitle: '3rd Year Computer Engineering and Digital Technology (CEDT), Chulalongkorn University',
+	name: 'Jirameth Wannasiwaporn',
+	nickname: 'An-An',
+	title: 'Developer / Designer / Data Scientist',
+	subtitle: '3rd Year CEDT, Chulalongkorn University',
+	objective: 'Building intelligent, scalable systems at the intersection of AI/ML and modern infrastructure.',
 	buttons: {
-		primary: { text: 'My projects', href: './work' },
-		secondary: { text: 'Contact me', href: './contact' }
+		primary: { text: 'View Projects', href: '/projects' },
+		secondary: { text: 'Get in Touch', href: '#connect' }
 	}
 };
 
-// Projects data from old code
-export const projects = [
-	{
-		name: 'Real-time AI Leaf Disease Detection',
-		description: 'A real-time system for detecting plant leaf diseases using deep learning.',
-		explanation:
-			'This project uses ESP32 for communication, Svelte for the frontend, and Python Flask for the backend. It integrates with Blynk Cloud, Google Sheets, and sends alerts through WhatsApp via Twilio and Gmail.',
-		role: 'Full-stack Developer',
-		link: 'https://github.com/Chulinuwu/Smart_Farm_Plant_Monitoring_System',
-		image: '/img/project1.jpg'
-	},
-	{
-		name: 'QR Code Generator',
-		description: 'A web app that generates QR codes from entered links.',
-		explanation:
-			'Developed using Svelte, this app allows users to input a URL and generate a corresponding QR code.',
-		role: 'Full-stack Developer',
-		link: 'https://q-rcode-gen.vercel.app/',
-		image: '/img/project2.jpg'
-	},
-	{
-		name: 'UniClub',
-		description: 'A platform for university students to search and manage their favorite clubs.',
-		explanation:
-			'This project allows students to find and manage clubs at their university. The platform also provides a back-office management system for clubs.',
-		role: 'Full-stack Developer',
-		link: 'https://uni-club-frontend-pey5.vercel.app/',
-		image: '/img/project3.jpg'
-	},
-	{
-		name: 'ChulaMacaron',
-		description: 'A system for Chula students to report broken buildings.',
-		explanation:
-			'Developed using React Native, this system allows students to submit pictures and details about broken buildings on campus, enabling the relevant departments to take action.',
-		role: 'UX/UI and Frontend Developer',
-		link: 'https://github.com/xXpeira12/ChulaMacaron',
-		image: '/img/project4.jpg'
-	},
-	{
-		name: 'Dog vs Monkey Game',
-		description: 'A space shooter game where you control a dog throwing bananas at monkeys.',
-		explanation:
-			'Developed using JavaFX, this game allows the player to control a dog and throw bananas at monkeys in a space-themed environment.',
-		role: 'Developer',
-		link: 'https://github.com/amphikapha/Dog-VS-Monkey',
-		image: '/img/project5.jpg'
-	},
-	{
-		name: 'ChatwithGPT',
-		description: 'A web app for real-time communication with generative models.',
-		explanation:
-			'Built with FastAPI and Svelte, this app allows users to communicate with generative models in real time, with a base model acting as a Pekora VTuber.',
-		role: 'Full-stack Developer',
-		link: 'https://github.com/Chulinuwu/ChatwithGPT',
-		image: '/img/project6.jpg'
-	}
-];
-
-// Experience data
-export const experiences = [
+export const experiences: Experience[] = [
 	{
 		year: 'Apr 2021',
 		role: 'POSN 1-2 Computer Student',
 		company: 'Burapha University',
-		description: 'Begin to learn competitive programming, data structure and algorithm'
+		description: 'Begin to learn competitive programming, data structure and algorithm',
+		featured: false,
+		type: 'academic'
 	},
 	{
 		year: 'Aug 2023 - now',
 		role: 'CEDT Student',
 		company: 'Computer Engineering and Digital Technology, Chulalongkorn University',
-		description: 'Begin academic life'
+		description: 'Begin academic life',
+		featured: false,
+		type: 'academic'
 	},
 	{
 		year: 'May 2024 - July 2024',
 		role: 'UX/UI Designer and Developer Intern',
 		company: 'Bangkok Bank Public Company Limited (BBL)',
-		description: 'iFunds project developed by Next.js + Java Quarkus + PostgreSQL'
+		description: 'iFunds project developed by Next.js + Java Quarkus + PostgreSQL',
+		techUsed: ['Next.js', 'Java Quarkus', 'PostgreSQL'],
+		featured: true,
+		type: 'internship'
 	},
 	{
 		year: 'May 2025 - July 2025',
 		role: 'Data Scientist & Data Analyst Intern',
 		company: 'Aiful Corp, Aira & Aiful Public Company Limited',
-		description:
-			'Developed credit scoring models and performed data analysis to extract insights for business decision making'
+		description: 'Developed credit scoring models and performed data analysis to extract insights for business decision making',
+		techUsed: ['Pandas', 'Polars', 'AutoGluon', 'PowerBI'],
+		featured: true,
+		type: 'internship'
 	},
 	{
 		year: 'Aug 2025 - now',
 		role: 'Data Scientist Intern',
 		company: 'Siam Commercial Bank (SCB)',
-		description:
-			'Working on computer vision models for SCB graphics and conversion rate optimization through advanced ML techniques'
+		description: 'Working on computer vision models for SCB graphics and conversion rate optimization through advanced ML techniques',
+		techUsed: ['Python', 'Stable Diffusion', 'NLP'],
+		featured: true,
+		type: 'internship'
 	},
 	{
 		year: 'Sep 2024 - now',
 		role: 'Information System Development (ISD) Frontend Developer',
 		company: 'Computer Engineering and Digital Technology, Chulalongkorn University',
-		description: 'SUCU Project development and system implementation'
+		description: 'SUCU Project development and system implementation',
+		techUsed: ['SvelteKit'],
+		featured: false,
+		type: 'extracurricular'
 	},
 	{
 		year: 'Sep 2024 - now',
 		role: 'Google Developer Student Clubs (GDSC) Core Team (Graphic)',
 		company: 'Computer Engineering and Digital Technology, Chulalongkorn University',
-		description: 'Designing and creating graphics for GDSC events and campaigns'
+		description: 'Designing and creating graphics for GDSC events and campaigns',
+		featured: false,
+		type: 'extracurricular'
 	},
 	{
 		year: 'Aug 2025 - now',
 		role: 'Freelance Multi-disciplinary Consultant',
 		company: 'Self-employed',
-		description:
-			'Providing consultancy services in graphic design, illustration, web development, UX/UI design, and data science solutions'
-	}
-];
-// Skills data
-export const skills = [
-	{
-		name: 'Data Science & ML',
-		icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/></svg>',
-		description:
-			'Developing credit scoring models, data analysis, and machine learning solutions for financial institutions using Python and various ML frameworks.'
-	},
-	{
-		name: 'Full-Stack Development',
-		icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>',
-		description:
-			'End-to-end web development using TypeScript, React, Svelte, Next.js for frontend and Node.js, FastAPI, Java Quarkus for backend systems.'
-	},
-	{
-		name: 'UX/UI Design',
-		icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1v-2z" clip-rule="evenodd"/></svg>',
-		description:
-			'Designing user-centered interfaces and experiences using Figma. From wireframes to high-fidelity prototypes for web and mobile applications.'
-	},
-	{
-		name: 'Cybersecurity & CTF',
-		icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>',
-		description:
-			'Security analysis and penetration testing skills developed through CTF competitions. Passed ISC2 in Cybersecurity (CC) exam with knowledge in security fundamentals. ( No membership )'
-	},
-	{
-		name: 'System Architecture',
-		icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>',
-		description:
-			'Designing scalable system architectures and integrating ML models into production environments. Experience with Docker, cloud services, and microservices.'
-	},
-	{
-		name: 'Digital Illustration',
-		icon: '<svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>',
-		description:
-			'Creating digital artwork and illustrations using Procreate and other digital tools. Available for commission work and graphic design projects.'
+		description: 'Providing consultancy services in graphic design, illustration, web development, UX/UI design, and data science solutions',
+		techUsed: ['WordPress', 'PHP', 'Odoo', 'React'],
+		featured: true,
+		type: 'freelance'
 	}
 ];
 
-// Programming languages for infinite scroll
-export const programmingLanguages = [
-	{ name: 'TypeScript', icon: '⚡' },
-	{ name: 'Python', icon: '🐍' },
-	{ name: 'JavaScript', icon: '🟨' },
-	{ name: 'Java', icon: '☕' },
-	{ name: 'C++', icon: '🔧' },
-	{ name: 'React', icon: '⚛️' },
-	{ name: 'Svelte', icon: '🧡' },
-	{ name: 'Node.js', icon: '🟢' },
-	{ name: 'Go', icon: '🚀' },
-	{ name: 'Dart', icon: '🎯' },
-	{ name: 'Flutter', icon: '💙' },
-	{ name: 'FastAPI', icon: '🏃‍♂️' }
+export const projects: Project[] = [
+	{
+		slug: 'aurora-ai',
+		name: 'Aurora Analytic AI',
+		description: 'AI-powered analytics platform for business intelligence and data visualization.',
+		explanation: 'A full-stack analytics platform built on SvelteKit with Vertex AI and BigQuery ML for predictive modeling. Integrates Supabase for real-time data storage and Node.js APIs for orchestration of AI inference pipelines.',
+		role: 'Full-stack Developer & ML Engineer',
+		category: 'data-science',
+		techStack: ['SvelteKit', 'Node.js', 'Vertex AI', 'BigQuery ML', 'Supabase'],
+		link: 'https://aurora-analytic-ai.vercel.app/',
+		featured: true
+	},
+	{
+		slug: 'digital-wallet',
+		name: 'Digital Wallet System',
+		description: 'Distributed digital wallet with consensus-based fault tolerance and saga transactions.',
+		explanation: 'Implements a distributed wallet backend using Raft consensus for leader election and replication, RocksDB for local state persistence, and Cassandra for scalable storage. Saga pattern handles cross-service transactions safely.',
+		role: 'Backend & Distributed Systems Developer',
+		category: 'web-dev',
+		techStack: ['Raft', 'RocksDB', 'Cassandra', 'Saga'],
+		featured: true
+	},
+	{
+		slug: 'smart-home',
+		name: 'Smart Home System',
+		description: 'IoT-based smart home monitoring with real-time sensor data and remote control.',
+		explanation: 'Built on ESP32 and Raspberry Pi communicating over MQTT, storing time-series sensor data in InfluxDB. Features real-time dashboards, alert systems, and remote actuator control for a full home automation stack.',
+		role: 'IoT & Embedded Systems Developer',
+		category: 'iot',
+		techStack: ['ESP32', 'Raspberry Pi', 'MQTT', 'InfluxDB'],
+		github: 'https://github.com/Chulinuwu/Smart_Farm_Plant_Monitoring_System',
+		featured: true
+	},
+	{
+		slug: 'police-platform',
+		name: 'Police Alerts Platform',
+		description: 'Public-facing alerts and information platform for a regional police department.',
+		explanation: 'Freelance project delivering a WordPress-based alerts platform for Don Hualor Chonburi Police. Custom PHP templates, HTML/CSS/JS for interactive alert feeds and public announcement management.',
+		role: 'Freelance Full-stack Developer',
+		category: 'freelance',
+		techStack: ['WordPress', 'PHP', 'HTML', 'CSS', 'JavaScript'],
+		link: 'https://donhualor-chonburi-police.com/',
+		featured: true
+	},
+	{
+		slug: 'plant-disease',
+		name: 'AI Plant Disease Detection',
+		description: 'Real-time plant disease detection system using computer vision on edge hardware.',
+		explanation: 'Runs a deep learning image classification model on ESP32-CAM for real-time leaf disease detection. C++ firmware communicates results to a SvelteKit dashboard, integrating cloud alerts via WhatsApp and Gmail.',
+		role: 'Full-stack & Embedded Developer',
+		category: 'iot',
+		techStack: ['Python', 'C++', 'SvelteKit', 'ESP32'],
+		github: 'https://github.com/Chulinuwu/Smart_Farm_Plant_Monitoring_System',
+		featured: false
+	},
+	{
+		slug: 'citation-prediction',
+		name: 'AI Paper Citation Prediction',
+		description: 'ML model predicting the citation popularity of academic papers.',
+		explanation: 'Trained AutoGluon ensemble models on paper metadata and abstract features to predict future citation counts. Includes feature engineering, hyperparameter tuning, and evaluation against baseline models.',
+		role: 'Data Scientist',
+		category: 'data-science',
+		techStack: ['AutoGluon', 'Python'],
+		github: 'https://github.com/Chulinuwu/ArticlePopularityPrediction',
+		featured: false
+	},
+	{
+		slug: 'line-chatbot',
+		name: 'LINE Chatbot Order Management',
+		description: 'LINE chatbot for automating order intake and management for small businesses.',
+		explanation: 'Integrates LINE Messaging API with a Node.js backend to handle order creation, status updates, and customer notifications. Supports rich menu interactions and webhook event processing.',
+		role: 'Backend Developer',
+		category: 'web-dev',
+		techStack: ['LINE API', 'Node.js'],
+		featured: false
+	},
+	{
+		slug: 'virtual-idol',
+		name: 'AI Virtual Idol Chatbot',
+		description: 'Conversational AI chatbot with a VTuber persona powered by open-source LLMs.',
+		explanation: 'Combines Llama 3.2 with OpenAI API for persona-driven conversation, served via FastAPI backend and Svelte frontend. Includes character memory, response streaming, and customizable personality prompts.',
+		role: 'Full-stack Developer & ML Engineer',
+		category: 'data-science',
+		techStack: ['Llama 3.2', 'OpenAI API', 'FastAPI', 'Svelte'],
+		featured: false
+	},
+	{
+		slug: 'uniclub',
+		name: 'UniClub',
+		description: 'Platform for university students to discover and manage campus clubs.',
+		explanation: 'React frontend with Node.js backend enabling students to browse clubs, submit memberships, and manage profiles. Includes a back-office system for club administrators to track members and post announcements.',
+		role: 'Full-stack Developer',
+		category: 'web-dev',
+		techStack: ['React', 'Node.js'],
+		github: 'https://github.com/Chulinuwu/UniClubFrontend',
+		link: 'https://uni-club-frontend-pey5.vercel.app/',
+		featured: false
+	},
+	{
+		slug: 'erp-system',
+		name: 'Inventory Management ERP',
+		description: 'Custom ERP module for inventory and supply chain management.',
+		explanation: 'Freelance Odoo ERP customization with Python modules for inventory tracking, purchase orders, and reporting. Deployed via Docker for client on-premise infrastructure.',
+		role: 'Freelance ERP Developer',
+		category: 'freelance',
+		techStack: ['Odoo', 'Python', 'Docker'],
+		featured: false
+	},
+	{
+		slug: 'chula-macaron',
+		name: 'Chula Macaron',
+		description: 'Mobile app for Chula students to report campus facility issues.',
+		explanation: 'React Native app allowing students to photograph and report damaged facilities on campus. Submissions route to relevant departments with location tagging and status tracking.',
+		role: 'UX/UI and Frontend Developer',
+		category: 'web-dev',
+		techStack: ['React-Native'],
+		github: 'https://github.com/xXpeira12/ChulaMacaron',
+		featured: false
+	},
+	{
+		slug: 'dog-vs-monkey',
+		name: 'Dog vs Monkey Game',
+		description: 'Space shooter game where a dog throws bananas at incoming monkeys.',
+		explanation: 'JavaFX desktop game with sprite animation, collision detection, and progressive difficulty. Player controls a dog character in a space environment, throwing bananas to defeat waves of monkeys.',
+		role: 'Game Developer',
+		category: 'web-dev',
+		techStack: ['JavaFX'],
+		github: 'https://github.com/amphikapha/Dog-VS-Monkey',
+		featured: false
+	},
+	{
+		slug: 'qr-generator',
+		name: 'QR Code Generator',
+		description: 'Lightweight web app to generate QR codes from any URL.',
+		explanation: 'Svelte single-page app that takes a user-entered URL and renders a downloadable QR code. Fast, minimal, and deployed on Vercel.',
+		role: 'Frontend Developer',
+		category: 'web-dev',
+		techStack: ['Svelte'],
+		link: 'https://q-rcode-gen.vercel.app/',
+		featured: false
+	},
+	{
+		slug: 'chatwithgpt',
+		name: 'ChatwithGPT',
+		description: 'Real-time web chat interface with OpenAI GPT and a custom VTuber persona.',
+		explanation: 'FastAPI backend streams OpenAI API responses to a Svelte frontend. Ships with a Pekora VTuber base persona and supports custom system prompts for character switching.',
+		role: 'Full-stack Developer',
+		category: 'data-science',
+		techStack: ['FastAPI', 'Svelte', 'OpenAI API'],
+		github: 'https://github.com/Chulinuwu/ChatwithGPT',
+		featured: false
+	}
 ];
 
-// Tools data
-export const tools = [
+export const hackathons: Hackathon[] = [
 	{
-		name: 'Figma',
-		description: 'Web-based design tool for UI/UX design and collaboration',
-		icon: '🎨'
-	},
-	{ name: 'VS Code', description: 'Popular source code editor by Microsoft', icon: '💻' },
-	{
-		name: 'IntelliJ',
-		description: 'Integrated development environment for Java and other languages',
-		icon: '🧠'
+		name: 'AiHack 2025',
+		placement: '4th Place',
+		year: '2025',
+		description: 'Loan repayment prediction model using AutoGluon',
+		icon: 'trophy'
 	},
 	{
-		name: 'Notion',
-		description: 'Productivity tool for note-taking and project management',
-		icon: '📝'
+		name: 'Cyber Top Talent 2025',
+		placement: '7th / 500+ teams',
+		year: '2025',
+		description: 'Reverse engineering, web exploitation, cryptography',
+		icon: 'medal'
 	},
-	{ name: 'Linear', description: 'Tool for tracking issues and project management', icon: '📈' },
-	{ name: 'Procreate', description: 'Powerful digital painting app for iPad', icon: '🎨' }
+	{
+		name: 'ITMX Hack to the Max 2025',
+		placement: 'Finalist (Top 15/200+)',
+		year: '2025',
+		description: 'Thailand Deferred Payment architecture',
+		icon: 'star'
+	},
+	{
+		name: 'AiHack 2023',
+		placement: '4th Place',
+		year: '2023',
+		description: 'Loan repayment success prediction',
+		icon: 'trophy'
+	}
+];
+
+export const skillCategories: SkillCategory[] = [
+	{
+		name: 'Languages',
+		skills: ['C', 'C++', 'Python', 'Java', 'JavaScript', 'TypeScript', 'Dart', 'Go']
+	},
+	{
+		name: 'Frameworks',
+		skills: ['React', 'Next.js', 'Svelte', 'Vue', 'React-Native', 'Flutter', 'Astro', 'Express', 'FastAPI', 'Flask', 'Quarkus', 'Streamlit', 'ThreeJS']
+	},
+	{
+		name: 'Tools & Cloud',
+		skills: ['Docker', 'GCP', 'AWS', 'Git', 'Figma', 'PowerBI', 'Postman', 'Blender', 'MongoDB', 'PostgreSQL', 'MySQL']
+	},
+	{
+		name: 'Data & ML',
+		skills: ['AutoGluon', 'Scikit-learn', 'Transformers', 'Pandas', 'Polars', 'Spark', 'Kafka']
+	}
+];
+
+export const education: Education = {
+	institution: 'Chulalongkorn University',
+	degree: 'B.Eng. CEDT',
+	location: 'Bangkok Thailand',
+	period: '2022-2026'
+};
+
+export const stats = [
+	{ label: 'Internships', value: 3, suffix: '+' },
+	{ label: 'Projects', value: 12, suffix: '+' },
+	{ label: 'Hackathon Awards', value: 4, suffix: '' },
+	{ label: 'CTT 2025', value: 7, suffix: 'th / 500+' }
 ];
 
 export const contacts = {
@@ -253,12 +401,3 @@ export const contacts = {
 		description: ''
 	}
 };
-
-// Interactive features data
-export const floatingElements = [
-	{ shape: 'circle', delay: 0, size: 'w-4 h-4', color: 'bg-pink-400' },
-	{ shape: 'triangle', delay: 500, size: 'w-6 h-6', color: 'bg-pink-300' },
-	{ shape: 'square', delay: 1000, size: 'w-5 h-5', color: 'bg-pink-500' },
-	{ shape: 'circle', delay: 1500, size: 'w-3 h-3', color: 'bg-pink-200' },
-	{ shape: 'diamond', delay: 2000, size: 'w-4 h-4', color: 'bg-pink-600' }
-];

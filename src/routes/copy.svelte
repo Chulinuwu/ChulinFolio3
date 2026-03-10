@@ -7,7 +7,7 @@
 	import InfiniteScrollTech from '../components/InfiniteScrollTech.svelte';
 	import anan from '../public/anan.jpg';
 	import { experiences } from '$lib/data';
-	import { skills } from '$lib/data';
+	import { skillCategories } from '$lib/data';
 	import { contacts } from '$lib/data';
 	import Letsconnect from '../components/letsconnect.svelte';
 	
@@ -495,100 +495,37 @@
 			</div>
 
 			<!-- Creative Grid Layout -->
-			<div class="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-				{#each skills as skill, index}
+			<div class="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-2">
+				{#each skillCategories as category, index}
 					<div class="reveal-up group relative" style="animation-delay: {index * 0.15}s;">
-						<!-- Card Background with Morphing Border -->
 						<div
 							class="absolute inset-0 scale-95 transform rounded-2xl bg-gradient-to-br from-pink-400/5 to-purple-400/5 blur-xl transition-transform duration-700 group-hover:scale-100"
 						></div>
-
-						<!-- Main Card -->
 						<div class="relative h-full">
-							<!-- Animated Border -->
 							<div
 								class="absolute inset-0 rounded-2xl border border-gray-700/30 transition-all duration-500 group-hover:border-pink-400/50"
 							></div>
 							<div
-								class="absolute inset-0 rounded-2xl border border-transparent bg-gradient-to-br from-pink-400/20 via-transparent to-purple-400/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-							></div>
-
-							<!-- Card Content -->
-							<div
-								class="relative flex h-full transform flex-col items-center rounded-2xl bg-gray-900/20 p-8 text-center backdrop-blur-md transition-all duration-500 group-hover:translate-y-[-4px]"
+								class="relative flex h-full transform flex-col rounded-2xl bg-gray-900/20 p-8 backdrop-blur-md transition-all duration-500 group-hover:translate-y-[-4px]"
 							>
-								<!-- Icon Container with Advanced Effects -->
-								<div class="relative mb-6">
-									<!-- Icon Glow Ring -->
-									<div
-										class="absolute inset-0 scale-150 animate-pulse rounded-full bg-gradient-to-r from-pink-400 to-purple-400 opacity-0 blur-xl group-hover:opacity-30"
-									></div>
-
-									<!-- Icon Background -->
-									<div
-										class="relative flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 transition-transform duration-500 group-hover:rotate-12"
-									>
-										<div
-											class="absolute inset-1 rounded-xl bg-gradient-to-br from-pink-400/10 to-purple-400/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-										></div>
-										<div
-											class="relative z-10 transform text-3xl transition-transform duration-300 group-hover:scale-110"
-										>
-											{@html skill.icon}
-										</div>
-									</div>
-
-									<!-- Floating Sparkles -->
-									<div
-										class="absolute -right-2 -top-2 h-3 w-3 animate-ping rounded-full bg-pink-400 opacity-0 group-hover:opacity-100"
-									></div>
-									<div
-										class="absolute -bottom-2 -left-2 h-2 w-2 animate-pulse rounded-full bg-purple-400 opacity-0 group-hover:opacity-100"
-										style="animation-delay: 0.3s;"
-									></div>
-								</div>
-
-								<!-- Title with Gradient Effect -->
 								<h3
 									class="mb-4 text-xl font-bold text-white transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-pink-300 group-hover:to-white group-hover:bg-clip-text group-hover:text-transparent"
 								>
-									{skill.name}
+									{category.name}
 								</h3>
-
-								<!-- Description with Animation -->
-								<p
-									class="flex-1 text-sm leading-relaxed text-gray-400 transition-colors duration-300 group-hover:text-gray-300"
-								>
-									{skill.description}
-								</p>
-
-								<!-- Interactive Bottom Element -->
+								<div class="flex flex-wrap gap-2">
+									{#each category.skills as skill}
+										<span class="rounded-full border border-pink-400/20 bg-pink-400/10 px-3 py-1 text-sm text-pink-300">
+											{skill}
+										</span>
+									{/each}
+								</div>
 								<div class="mt-6 w-full">
 									<div
 										class="h-1 rounded-full bg-gradient-to-r from-transparent via-gray-600 to-transparent transition-all duration-500 group-hover:via-pink-400"
 									></div>
-									<div class="mt-2 flex justify-center space-x-1">
-										{#each Array(3) as _, i}
-											<div
-												class="h-1.5 w-1.5 rounded-full bg-gray-600 transition-colors duration-300 group-hover:bg-pink-400"
-												style="transition-delay: {i * 0.1}s;"
-											></div>
-										{/each}
-									</div>
 								</div>
 							</div>
-						</div>
-
-						<!-- Hover Spotlight Effect -->
-						<div
-							class="bg-gradient-radial pointer-events-none absolute inset-0 rounded-2xl from-pink-400/5 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100"
-						></div>
-
-						<!-- Card Number Badge -->
-						<div
-							class="absolute -right-3 -top-3 flex h-8 w-8 scale-0 transform items-center justify-center rounded-full bg-gradient-to-br from-pink-400 to-purple-500 text-sm font-bold text-white opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100"
-						>
-							{(index + 1).toString().padStart(2, '0')}
 						</div>
 					</div>
 				{/each}
