@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
   import { onMount } from 'svelte';
   import { trackNavigation, trackInteraction } from '$lib/analytics';
-  
-  let mounted = false;
+
+  let mounted = $state(false);
   let activeIndicatorEl: HTMLElement;
   let navEl: HTMLElement;
-  let currentPath = '';
-  
+  let currentPath = $state('');
+
   const items = [
     {
       href: '/',
@@ -21,7 +21,7 @@
     },
     {
       href: '/projects',
-      label: 'My Projects',
+      label: 'Projects',
       svg: `
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="2" y="4" width="20" height="14" rx="3" ry="3"/>
@@ -35,8 +35,8 @@
       `
     },
     {
-      href: '/activities',
-      label: 'My Activities',
+      href: '/experience',
+      label: 'Experience',
       svg: `
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 12c0 5-4 9-9 9s-9-4-9-9"/>
@@ -48,55 +48,38 @@
           <circle cx="6" cy="18" r="2" fill="currentColor"/>
         </svg>
       `
-    },
-    {
-      href: '/artwork',
-      label: 'My Artwork',
-      svg: `
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 2l2.5 6h6l-5 4 2 6-5.5-4L6.5 18l2-6-5-4h6z"/>
-          <path d="M8 12c0-2.2 1.8-4 4-4s4 1.8 4 4"/>
-          <circle cx="12" cy="15" r="1" fill="currentColor"/>
-          <path d="M9 15h6"/>
-        </svg>
-      `
     }
   ];
 
   onMount(() => {
     mounted = true;
     updateActiveIndicator();
-    
-    currentPath = $page.url.pathname;
+    currentPath = page.url.pathname;
   });
 
   function updateActiveIndicator() {
     if (!mounted || !navEl) return;
-    
+
     const activeLink = navEl.querySelector('[aria-current="page"]') as HTMLElement;
     if (activeLink && activeIndicatorEl) {
       const rect = activeLink.getBoundingClientRect();
       const navRect = navEl.getBoundingClientRect();
-      
-      // Calculate exact center position including padding
       const itemCenter = rect.left - navRect.left + (rect.width / 2);
-      const bubbleCenter = itemCenter - (56 / 2); // 56px is new bubble size
-      
+      const bubbleCenter = itemCenter - (56 / 2);
       activeIndicatorEl.style.transform = `translateX(${bubbleCenter}px)`;
     }
   }
 
-  // Watch for route changes
-  $: if (mounted && $page.url.pathname) {
-    const newPath = $page.url.pathname;
-    
-    if (currentPath && newPath !== currentPath) {
-      trackNavigation(currentPath, newPath, 'navigation');
+  $effect(() => {
+    if (mounted && page.url.pathname) {
+      const newPath = page.url.pathname;
+      if (currentPath && newPath !== currentPath) {
+        trackNavigation(currentPath, newPath, 'navigation');
+      }
+      currentPath = newPath;
+      setTimeout(updateActiveIndicator, 100);
     }
-    
-    currentPath = newPath;
-    setTimeout(updateActiveIndicator, 100);
-  }
+  });
 
   function handleNavClick(event: MouseEvent, item: any) {
     trackInteraction('navbar_link', 'click', {
@@ -112,57 +95,42 @@
   }
 </script>
 
-{#if !$page.status || $page.status < 400}
-<nav 
+<nav
   bind:this={navEl}
   class="liquid-glass-nav fixed left-1/2 transform -translate-x-1/2 z-50 mt-4"
   style="--nav-items: {items.length}"
 >
-  <!-- Main glass container -->
   <div class="glass-container">
-    <!-- Background blur and glass effect -->
     <div class="glass-backdrop"></div>
-    
-    <!-- Border highlight -->
     <div class="glass-border"></div>
-    
-    <!-- Active indicator bubble -->
-    <div 
+    <div
       bind:this={activeIndicatorEl}
       class="active-bubble"
     ></div>
-    
-    <!-- Navigation items -->
     <div class="nav-items">
       {#each items as item, index}
         <a
           href={item.href}
           class="nav-link"
-          class:active={$page.url.pathname === item.href}
+          class:active={page.url.pathname === item.href}
           aria-label={item.label}
           title={item.label}
-          aria-current={$page.url.pathname === item.href ? 'page' : undefined}
+          aria-current={page.url.pathname === item.href ? 'page' : undefined}
           style="--index: {index}"
-          on:click={(event) => handleNavClick(event, item)}
+          onclick={(event) => handleNavClick(event, item)}
         >
           <div class="nav-icon">
             {@html item.svg}
           </div>
-          
-          <!-- Label text below icon -->
           <div class="nav-label">
             {item.label}
           </div>
-          
-          <!-- Ripple effect on click -->
           <div class="ripple-effect"></div>
         </a>
       {/each}
     </div>
   </div>
 </nav>
-
-{/if}
 
 <style>
   .liquid-glass-nav {
@@ -182,10 +150,9 @@
     border-radius: 34px;
     padding: var(--nav-padding);
     overflow: hidden;
-    transform: translateZ(0); /* Force GPU acceleration */
+    transform: translateZ(0);
   }
 
-  /* Glass backdrop with blur */
   .glass-backdrop {
     position: absolute;
     inset: 0;
@@ -193,14 +160,11 @@
     backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
     -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
     border-radius: inherit;
-    
-    /* Add subtle texture */
-    background-image: 
+    background-image:
       radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
       radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
   }
 
-  /* Glass border highlight */
   .glass-border {
     position: absolute;
     inset: 0;
@@ -220,7 +184,6 @@
     -webkit-mask-composite: xor;
   }
 
-  /* Active indicator bubble */
   .active-bubble {
     position: absolute;
     top: var(--nav-padding);
@@ -238,19 +201,14 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: 
+    box-shadow:
       0 4px 16px rgba(236, 72, 153, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.3),
       inset 0 -1px 0 rgba(236, 72, 153, 0.1);
-    
-    /* Pink glow effect */
     filter: drop-shadow(0 0 12px rgba(236, 72, 153, 0.3));
-    
-    /* Animated bubble pattern inside */
     overflow: hidden;
   }
 
-  /* Floating bubbles inside active indicator */
   .active-bubble::before,
   .active-bubble::after {
     content: '';
@@ -287,7 +245,6 @@
     }
   }
 
-  /* Navigation items container */
   .nav-items {
     position: relative;
     display: flex;
@@ -296,7 +253,6 @@
     z-index: 1;
   }
 
-  /* Individual navigation links */
   .nav-link {
     position: relative;
     display: flex;
@@ -311,8 +267,6 @@
     transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
     overflow: visible;
     gap: 2px;
-    
-    /* Micro-interactions */
     transform-origin: center;
     will-change: transform;
   }
@@ -320,8 +274,6 @@
   .nav-link:hover {
     color: rgba(255, 255, 255, 0.9);
     transform: scale(1.05);
-    
-    /* Add subtle glow on hover */
     box-shadow: 0 0 16px rgba(236, 72, 153, 0.2);
   }
 
@@ -333,7 +285,6 @@
     color: rgba(255, 255, 255, 1);
   }
 
-  /* Icon container */
   .nav-icon {
     position: relative;
     z-index: 2;
@@ -348,7 +299,6 @@
     transform: translateY(-1px);
   }
 
-  /* Label text */
   .nav-label {
     position: absolute;
     bottom: -18px;
@@ -376,7 +326,6 @@
     bottom: -20px;
   }
 
-  /* Ripple effect */
   .ripple-effect {
     position: absolute;
     inset: 0;
@@ -393,7 +342,6 @@
     transition: all 0.1s ease;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 640px) {
     .liquid-glass-nav {
       --nav-height: 72px;
@@ -407,7 +355,6 @@
     }
   }
 
-  /* Enhance glass effect for supported browsers */
   @supports (backdrop-filter: blur(1px)) {
     .glass-backdrop {
       background: rgba(255, 255, 255, 0.08);
@@ -416,14 +363,12 @@
     }
   }
 
-  /* Fallback for browsers without backdrop-filter */
   @supports not (backdrop-filter: blur(1px)) {
     .glass-backdrop {
       background: rgba(0, 0, 0, 0.7);
     }
   }
 
-  /* Add subtle animation on mount */
   .liquid-glass-nav {
     animation: fadeInScale 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   }
@@ -439,7 +384,6 @@
     }
   }
 
-  /* Stagger animation for nav items */
   .nav-link {
     animation: slideInUp 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     animation-delay: calc(var(--index) * 0.1s);
@@ -457,48 +401,45 @@
     }
   }
 
-  /* Focus states for accessibility */
   .nav-link:focus {
     outline: none;
-    box-shadow: 
+    box-shadow:
       0 0 0 2px rgba(255, 255, 255, 0.1),
       0 0 16px rgba(255, 255, 255, 0.2);
   }
 
   .nav-link:focus-visible {
-    box-shadow: 
+    box-shadow:
       0 0 0 2px rgba(255, 255, 255, 0.3),
       0 0 16px rgba(255, 255, 255, 0.3);
   }
 
-  /* Reduce motion for accessibility */
   @media (prefers-reduced-motion: reduce) {
     .nav-link,
     .active-bubble,
     .ripple-effect {
       transition-duration: 0.1s;
     }
-    
+
     .liquid-glass-nav,
     .nav-link {
       animation: none;
     }
   }
 
-  /* High contrast mode */
   @media (prefers-contrast: high) {
     .glass-backdrop {
       background: rgba(255, 255, 255, 0.2);
     }
-    
+
     .glass-border {
       background: rgba(255, 255, 255, 0.5);
     }
-    
+
     .nav-link {
       color: rgba(255, 255, 255, 0.8);
     }
-    
+
     .nav-link.active {
       color: white;
     }

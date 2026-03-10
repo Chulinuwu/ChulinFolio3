@@ -1,10 +1,11 @@
 <script lang="ts">
 	import '../app.css';
 	import Navbar from '../components/navbar.svelte';
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 
-	// Inject external script at client runtime using env vars
+	let { children } = $props();
+
 	onMount(() => {
 		if (typeof window === 'undefined') return;
 		const token = import.meta.env.VITE_TINYBIRD_TOKEN;
@@ -21,8 +22,8 @@
 	});
 </script>
 
-{#if !$page.status || $page.status < 400}
+{#if !page.status || page.status < 400}
 	<Navbar />
 {/if}
 
-<slot />
+{@render children?.()}
