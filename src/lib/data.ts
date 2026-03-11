@@ -7,6 +7,7 @@ export interface Project {
 	explanation: string;
 	role: string;
 	category: ProjectCategory;
+	categories?: ProjectCategory[];
 	techStack: string[];
 	link?: string;
 	github?: string;
@@ -190,9 +191,10 @@ export const projects: Project[] = [
 		name: 'AI Plant Disease Detection',
 		description: 'Real-time plant disease detection system using computer vision on edge hardware.',
 		explanation: 'Runs a deep learning image classification model on ESP32-CAM for real-time leaf disease detection. C++ firmware communicates results to a SvelteKit dashboard, integrating cloud alerts via WhatsApp and Gmail.',
-		role: 'Full-stack & Embedded Developer',
+		role: 'ML Engineer & Embedded Developer',
 		category: 'iot',
-		techStack: ['Python', 'C++', 'SvelteKit', 'ESP32'],
+		categories: ['iot', 'data-science'],
+		techStack: ['Python', 'Deep Learning', 'C++', 'SvelteKit', 'ESP32-CAM'],
 		github: 'https://github.com/Chulinuwu/Smart_Farm_Plant_Monitoring_System',
 		featured: false
 	},

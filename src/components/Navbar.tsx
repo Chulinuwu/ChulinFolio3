@@ -21,7 +21,7 @@ const items = [
     label: 'Projects',
     svg: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z" />
+        <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z" />
       </svg>
     )
   },
@@ -30,19 +30,11 @@ const items = [
     label: 'Experience',
     svg: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-        <line x1="16" x2="16" y1="2" y2="6" />
-        <line x1="8" x2="8" y1="2" y2="6" />
-        <line x1="3" x2="21" y1="10" y2="10" />
-        <path d="M8 14h.01" />
-        <path d="M12 14h.01" />
-        <path d="M16 14h.01" />
-        <path d="M8 18h.01" />
-        <path d="M12 18h.01" />
-        <path d="M16 18h.01" />
+        <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
       </svg>
     )
-  }
+  },
 ];
 
 export default function Navbar() {
@@ -50,6 +42,12 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const activeIndicatorRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
+
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    if (href.startsWith('/#')) return pathname === '/';
+    return pathname === href;
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -62,7 +60,7 @@ export default function Navbar() {
       const rect = activeLink.getBoundingClientRect();
       const navRect = navRef.current.getBoundingClientRect();
       const itemCenter = rect.left - navRect.left + rect.width / 2;
-      const bubbleCenter = itemCenter - 56 / 2;
+      const bubbleCenter = itemCenter - 60 / 2;
       activeIndicatorRef.current.style.transform = `translateX(${bubbleCenter}px)`;
     }
   }, [mounted, pathname]);
@@ -78,19 +76,19 @@ export default function Navbar() {
         <div ref={activeIndicatorRef} className={styles.activeBubble} />
         <div className={styles.navItems}>
           {items.map((item, index) => {
-            const isActive = pathname === item.href;
+            const active = isActive(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`${styles.navLink}${isActive ? ` ${styles.active}` : ''}`}
+                className={`${styles.navLink}${active ? ` ${styles.active}` : ''}`}
                 aria-label={item.label}
                 title={item.label}
-                aria-current={isActive ? 'page' : undefined}
+                aria-current={active ? 'page' : undefined}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className={styles.navIcon}>{item.svg}</div>
-                <div className={styles.navLabel}>{item.label}</div>
+                <span className={styles.navLabelAlways}>{item.label}</span>
                 <div className={styles.rippleEffect} />
               </Link>
             );

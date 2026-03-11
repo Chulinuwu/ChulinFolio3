@@ -57,21 +57,26 @@ export default function ConnectSection() {
           </div>
         </motion.div>
 
-        <motion.div
-          className="mb-10 overflow-hidden rounded-2xl border border-white/10"
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <Image
-            src="/banner.webp"
-            alt="Illustration by An-An"
-            width={1200}
-            height={208}
-            className="h-40 w-full object-cover object-center opacity-80 transition-opacity duration-300 hover:opacity-100 sm:h-52"
-          />
-        </motion.div>
+      </div>
+
+      {/* Full-width banner outside container */}
+      <motion.div
+        className="mb-10"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <Image
+          src="/banner.webp"
+          alt="Illustration by An-An"
+          width={1920}
+          height={400}
+          className="h-48 w-full object-cover object-center opacity-80 transition-opacity duration-300 hover:opacity-100 sm:h-64"
+        />
+      </motion.div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {contactList.map((contact, i) => (

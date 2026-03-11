@@ -1,53 +1,64 @@
 'use client';
 
 import Image from 'next/image';
+import { motion } from 'motion/react';
 import ExperienceTimeline from '@/components/ExperienceTimeline';
 import SkillsGrid from '@/components/SkillsGrid';
 import Achievements from '@/components/Achievements';
 import InfiniteScrollTech from '@/components/InfiniteScrollTech';
 import Footer from '@/components/Footer';
 import { education } from '@/lib/data';
-import { useRevealOnScroll } from '@/lib/hooks';
+import { TypingText } from '@/components/ui/typing-text';
 
 export default function ExperiencePage() {
-  const revealRef = useRevealOnScroll();
-
   return (
-    <div className="min-h-screen bg-black pt-24 text-white">
-      <div ref={revealRef} className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header with photo */}
-        <div className="mb-12 flex flex-col items-center gap-6 sm:flex-row sm:justify-center sm:gap-10">
-          <div className="relative shrink-0">
-            <div className="absolute inset-0 rounded-2xl bg-pink-500/20 blur-xl" />
+    <div className="flex min-h-screen flex-col bg-black text-white">
+      {/* Hero banner with art background */}
+      <div className="relative h-[320px] overflow-hidden sm:h-[380px]">
+        <Image
+          src="/pic1.webp"
+          alt="Illustration artwork"
+          fill
+          className="object-cover object-center"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
+
+        <div className="relative z-10 flex h-full flex-col items-center justify-end gap-4 px-4 pb-10 sm:flex-row sm:justify-center sm:gap-8 sm:pb-12">
+          <motion.div
+            className="relative shrink-0"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, type: 'spring' }}
+          >
+            <div className="absolute inset-0 rounded-2xl bg-pink-500/30 blur-xl" />
             <Image
               src="/anan.jpg"
               alt="An-An"
-              width={160}
-              height={160}
-              className="relative h-32 w-32 rounded-2xl border border-white/10 object-cover shadow-lg sm:h-40 sm:w-40"
+              width={128}
+              height={128}
+              className="relative h-24 w-24 rounded-2xl border-2 border-pink-400/40 object-cover shadow-lg sm:h-32 sm:w-32"
             />
-          </div>
-          <div className="text-center sm:text-left">
+          </motion.div>
+          <motion.div
+            className="text-center sm:text-left"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <h1 className="text-4xl font-bold sm:text-5xl">
-              <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-300 bg-clip-text text-transparent">
-                Experience
-              </span>
+              <TypingText
+                text="Experience"
+                speed={70}
+                delay={400}
+                className="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-300 bg-clip-text text-transparent"
+                cursorClassName="bg-pink-400"
+              />
             </h1>
-            <p className="mt-4 max-w-xl text-gray-400">
+            <p className="mt-3 max-w-xl text-sm text-gray-300 sm:text-base">
               {education.degree} at {education.institution} · {education.period}
             </p>
-          </div>
-        </div>
-
-        {/* Art showcase strip */}
-        <div className="mb-12 overflow-hidden rounded-2xl border border-white/10">
-          <Image
-            src="/pic1.webp"
-            alt="Illustration artwork by An-An"
-            width={1200}
-            height={256}
-            className="h-48 w-full object-cover object-top opacity-70 transition-opacity duration-300 hover:opacity-100 sm:h-64"
-          />
+          </motion.div>
         </div>
       </div>
 
@@ -57,7 +68,9 @@ export default function ExperiencePage() {
         <InfiniteScrollTech />
       </div>
       <Achievements />
-      <Footer />
+      <div className="mt-auto">
+        <Footer />
+      </div>
     </div>
   );
 }
