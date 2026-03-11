@@ -7,6 +7,7 @@ export interface Project {
 	explanation: string;
 	role: string;
 	category: ProjectCategory;
+	categories?: ProjectCategory[];
 	techStack: string[];
 	link?: string;
 	github?: string;
@@ -149,6 +150,7 @@ export const projects: Project[] = [
 		category: 'data-science',
 		techStack: ['SvelteKit', 'Node.js', 'Vertex AI', 'BigQuery ML', 'Supabase'],
 		link: 'https://aurora-analytic-ai.vercel.app/',
+		image: '/projects/aurora.png',
 		featured: true
 	},
 	{
@@ -159,6 +161,7 @@ export const projects: Project[] = [
 		role: 'Backend & Distributed Systems Developer',
 		category: 'web-dev',
 		techStack: ['Raft', 'RocksDB', 'Cassandra', 'Saga'],
+		image: '/projects/digital_wallet.png',
 		featured: true
 	},
 	{
@@ -188,9 +191,10 @@ export const projects: Project[] = [
 		name: 'AI Plant Disease Detection',
 		description: 'Real-time plant disease detection system using computer vision on edge hardware.',
 		explanation: 'Runs a deep learning image classification model on ESP32-CAM for real-time leaf disease detection. C++ firmware communicates results to a SvelteKit dashboard, integrating cloud alerts via WhatsApp and Gmail.',
-		role: 'Full-stack & Embedded Developer',
+		role: 'ML Engineer & Embedded Developer',
 		category: 'iot',
-		techStack: ['Python', 'C++', 'SvelteKit', 'ESP32'],
+		categories: ['iot', 'data-science'],
+		techStack: ['Python', 'Deep Learning', 'C++', 'SvelteKit', 'ESP32-CAM'],
 		github: 'https://github.com/Chulinuwu/Smart_Farm_Plant_Monitoring_System',
 		featured: false
 	},
@@ -296,7 +300,7 @@ export const projects: Project[] = [
 export const hackathons: Hackathon[] = [
 	{
 		name: 'AiHack 2025',
-		placement: '4th Place',
+		placement: '3rd Runner Up',
 		year: '2025',
 		description: 'Loan repayment prediction model using AutoGluon',
 		icon: 'trophy'
@@ -317,7 +321,7 @@ export const hackathons: Hackathon[] = [
 	},
 	{
 		name: 'AiHack 2023',
-		placement: '4th Place',
+		placement: '3rd Runner Up',
 		year: '2023',
 		description: 'Loan repayment success prediction',
 		icon: 'trophy'
@@ -351,10 +355,10 @@ export const education: Education = {
 };
 
 export const stats = [
-	{ label: 'Internships', value: 3, suffix: '+' },
-	{ label: 'Projects', value: 12, suffix: '+' },
-	{ label: 'Hackathon Awards', value: 4, suffix: '' },
-	{ label: 'CTT 2025', value: 7, suffix: 'th / 500+' }
+	{ label: 'Years of Experience', value: 3, suffix: '+' },
+	{ label: 'Projects Delivered', value: 15, suffix: '+' },
+	{ label: 'Tech Stacks', value: 20, suffix: '+' },
+	{ label: 'Clients & Orgs Served', value: 8, suffix: '+' }
 ];
 
 export const contacts = {
@@ -376,7 +380,7 @@ export const contacts = {
 		href: 'https://www.linkedin.com/in/jiramethwa/',
 		target: '_blank',
 		title: 'LinkedIn',
-		handle: '',
+		handle: '@jiramethwa',
 		description: 'Professional Network'
 	},
 	email: {
@@ -390,7 +394,7 @@ export const contacts = {
 		href: 'https://fastwork.co/user/chulinxz',
 		target: '_blank',
 		title: 'Fastwork',
-		handle: '',
+		handle: '@chulinxz',
 		description: 'Freelance Services'
 	},
 	discord: {

@@ -1,0 +1,311 @@
+.liquidGlassNav {
+  --glass-blur: 24px;
+  --glass-opacity: 0.1;
+  --border-opacity: 0.3;
+  --active-opacity: 0.2;
+  --nav-height: 72px;
+  --nav-padding: 6px;
+  --item-size: 60px;
+  --item-gap: 8px;
+
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  top: 0;
+  margin-top: 1rem;
+  animation: fadeInScale 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.glassContainer {
+  position: relative;
+  height: var(--nav-height);
+  border-radius: 34px;
+  padding: var(--nav-padding);
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.glassBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, var(--glass-opacity));
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
+  border-radius: inherit;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+}
+
+.glassBorder {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, var(--border-opacity)) 0%,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.1) 75%,
+    rgba(255, 255, 255, var(--border-opacity)) 100%
+  );
+  mask: linear-gradient(black, black) content-box, linear-gradient(black, black);
+  mask-composite: xor;
+  -webkit-mask: linear-gradient(black, black) content-box, linear-gradient(black, black);
+  -webkit-mask-composite: xor;
+}
+
+.activeBubble {
+  position: absolute;
+  top: var(--nav-padding);
+  left: 1px;
+  height: var(--item-size);
+  width: var(--item-size);
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(236, 72, 153, 0.4) 0%,
+    rgba(219, 39, 119, 0.3) 25%,
+    rgba(244, 114, 182, 0.25) 50%,
+    rgba(236, 72, 153, 0.35) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow:
+    0 4px 16px rgba(236, 72, 153, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(236, 72, 153, 0.1);
+  filter: drop-shadow(0 0 12px rgba(236, 72, 153, 0.3));
+  overflow: hidden;
+}
+
+.activeBubble::before,
+.activeBubble::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  animation: floatBubble 3s ease-in-out infinite;
+}
+
+.activeBubble::before {
+  width: 8px;
+  height: 8px;
+  top: 12px;
+  left: 14px;
+  animation-delay: 0s;
+}
+
+.activeBubble::after {
+  width: 5px;
+  height: 5px;
+  top: 28px;
+  right: 16px;
+  animation-delay: 1.5s;
+}
+
+@keyframes floatBubble {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-4px) scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+.navItems {
+  position: relative;
+  display: flex;
+  gap: var(--item-gap);
+  height: 100%;
+  z-index: 1;
+}
+
+.navLink {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: var(--item-size);
+  height: var(--item-size);
+  border-radius: 50%;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: visible;
+  gap: 2px;
+  transform-origin: center;
+  will-change: transform;
+  animation: slideInUp 0.5s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.navLink:hover {
+  color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.05);
+  box-shadow: 0 0 16px rgba(236, 72, 153, 0.2);
+}
+
+.navLink:active {
+  transform: scale(0.95);
+}
+
+.navLink.active {
+  color: rgba(255, 255, 255, 1);
+}
+
+.navLink:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.1),
+    0 0 16px rgba(255, 255, 255, 0.2);
+}
+
+.navLink:focus-visible {
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.3),
+    0 0 16px rgba(255, 255, 255, 0.3);
+}
+
+.navIcon {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.navLink:hover .navIcon {
+  transform: translateY(-1px);
+}
+
+.navLabel {
+  display: none;
+}
+
+.navLabelAlways {
+  font-size: 9px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0.6;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.navLink:hover .navLabelAlways {
+  opacity: 0.9;
+}
+
+.navLink.active .navLabelAlways {
+  opacity: 1;
+  color: rgba(236, 72, 153, 0.9);
+  font-weight: 600;
+}
+
+.rippleEffect {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  transform: scale(0);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.navLink:active .rippleEffect {
+  transform: scale(1);
+  opacity: 1;
+  transition: all 0.1s ease;
+}
+
+@media (max-width: 640px) {
+  .liquidGlassNav {
+    --nav-height: 68px;
+    --item-size: 56px;
+    --glass-blur: 20px;
+    --nav-padding: 7px;
+    top: auto;
+    bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .navLabelAlways {
+    font-size: 8px;
+  }
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  .glassBackdrop {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.8) brightness(1.1);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.8) brightness(1.1);
+  }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glassBackdrop {
+    background: rgba(0, 0, 0, 0.7);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1) translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navLink,
+  .activeBubble,
+  .rippleEffect {
+    transition-duration: 0.1s;
+  }
+
+  .liquidGlassNav,
+  .navLink {
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .glassBackdrop {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .glassBorder {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .navLink {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .navLink.active {
+    color: white;
+  }
+}

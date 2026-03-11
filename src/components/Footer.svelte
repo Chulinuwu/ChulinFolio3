@@ -10,6 +10,6 @@
 			<p class="font-semibold text-white">{heroData.name}</p>
 			<p class="text-sm text-gray-500">{education.degree} · {education.institution} · {education.period}</p>
 		</div>
-		<p class="text-sm text-gray-500">© {year} {heroData.name}</p>
+		<p class="text-sm text-gray-500">© {year} {heroData.name} </p>
 	</div>
 </footer>
