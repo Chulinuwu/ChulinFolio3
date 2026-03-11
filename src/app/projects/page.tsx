@@ -103,6 +103,22 @@ export default function ProjectsPage() {
               </motion.div>
             ))}
           </AnimatePresence>
+
+          {activeFilter === 'freelance' && (
+            <motion.div
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: filtered.length * 0.05 }}
+              className="flex h-[280px] flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-6 text-center"
+            >
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mb-3 text-gray-500">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <p className="text-sm font-medium text-gray-400">+ More Confidential Projects</p>
+              <p className="mt-1 max-w-[220px] text-xs text-gray-600">Some client projects are under NDA and cannot be displayed publicly.</p>
+            </motion.div>
+          )}
         </motion.div>
 
         {filtered.length === 0 && (

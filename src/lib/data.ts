@@ -351,7 +351,7 @@ export const education: Education = {
 	institution: 'Chulalongkorn University',
 	degree: 'B.Eng. CEDT',
 	location: 'Bangkok Thailand',
-	period: '2022-2026'
+	period: '2023-2026'
 };
 
 export const stats = [
