@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './InfiniteScrollTech.module.css';
+import { useRef, useEffect } from 'react';
 
 const technologies = [
   { name: 'TypeScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg' },
@@ -16,70 +16,92 @@ const technologies = [
   { name: 'Flutter', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg' },
   { name: 'FastAPI', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg' },
   { name: 'Vue.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg' },
-  { name: 'Angular', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-original.svg' },
+  { name: 'Docker', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg' },
   { name: 'Next.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg' },
 ];
 
-interface Props {
-  speed?: number;
-  gap?: number;
-  opacity?: number;
-  hoverOpacity?: number;
-  itemWidth?: number;
-  itemHeight?: number;
-}
+export default function InfiniteScrollTech() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const hoveredRef = useRef(false);
+  const offsetRef = useRef(0);
 
-export default function InfiniteScrollTech({
-  speed = 25,
-  gap = 24,
-  opacity = 0.5,
-  hoverOpacity = 1,
-  itemWidth = 140,
-  itemHeight = 56,
-}: Props) {
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    let raf: number;
+
+    const step = () => {
+      if (!hoveredRef.current) {
+        offsetRef.current -= 0.5;
+        const half = track.scrollWidth / 2;
+        if (Math.abs(offsetRef.current) >= half) {
+          offsetRef.current = 0;
+        }
+        track.style.transform = `translateX(${offsetRef.current}px)`;
+      }
+      raf = requestAnimationFrame(step);
+    };
+
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  const items = [...technologies, ...technologies];
+
   return (
-    <section className={`${styles.container} ${styles.fadeMask}`}>
-      <ul
-        className={`${styles.techList} ${styles.scrollAnimation}`}
-        style={{ gap: `${gap}px`, animationDuration: `${speed}s` }}
+    <div
+      style={{
+        width: '100%',
+        overflow: 'hidden',
+        maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+        padding: '16px 0',
+      }}
+      onMouseEnter={() => { hoveredRef.current = true; }}
+      onMouseLeave={() => { hoveredRef.current = false; }}
+    >
+      <div
+        ref={trackRef}
+        style={{
+          display: 'flex',
+          gap: '16px',
+          width: 'max-content',
+          willChange: 'transform',
+        }}
       >
-        {technologies.map((tech) => (
-          <li
-            key={tech.name}
-            className={styles.techItem}
+        {items.map((tech, i) => (
+          <div
+            key={`${tech.name}-${i}`}
+            aria-hidden={i >= technologies.length}
             style={{
-              width: `${itemWidth}px`,
-              height: `${itemHeight}px`,
-              opacity,
-              ['--hover-opacity' as string]: hoverOpacity,
+              flexShrink: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              width: '110px',
+              height: '80px',
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '12px',
+              padding: '8px',
+              cursor: 'pointer',
             }}
           >
-            <div className={styles.techContent}>
-              <img src={tech.logo} alt={tech.name} className={styles.techLogo} loading="lazy" />
-              <span className={styles.techName}>{tech.name}</span>
-            </div>
-          </li>
+            <img
+              src={tech.logo}
+              alt={tech.name}
+              style={{ width: '28px', height: '28px', objectFit: 'contain' }}
+              loading="lazy"
+            />
+            <span style={{ fontSize: '11px', fontWeight: 600, color: 'rgba(255, 255, 255, 0.7)', whiteSpace: 'nowrap' }}>
+              {tech.name}
+            </span>
+          </div>
         ))}
-
-        {technologies.map((tech) => (
-          <li
-            key={`dup-${tech.name}`}
-            aria-hidden="true"
-            className={styles.techItem}
-            style={{
-              width: `${itemWidth}px`,
-              height: `${itemHeight}px`,
-              opacity,
-              ['--hover-opacity' as string]: hoverOpacity,
-            }}
-          >
-            <div className={styles.techContent}>
-              <img src={tech.logo} alt={tech.name} className={styles.techLogo} loading="lazy" />
-              <span className={styles.techName}>{tech.name}</span>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </section>
+      </div>
+    </div>
   );
 }

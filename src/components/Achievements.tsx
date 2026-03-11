@@ -1,7 +1,8 @@
 'use client';
 
+import { motion } from 'motion/react';
 import { hackathons } from '@/lib/data';
-import { useRevealOnScroll } from '@/lib/hooks';
+import { TypingText } from '@/components/ui/typing-text';
 import styles from './Achievements.module.css';
 
 const iconPaths: Record<string, string> = {
@@ -11,27 +12,40 @@ const iconPaths: Record<string, string> = {
 };
 
 export default function Achievements() {
-  const ref = useRevealOnScroll();
-
   return (
-    <section ref={ref} className="py-12 sm:py-20">
+    <motion.section
+      className="py-12 sm:py-20"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
+        <motion.div
+          className="mb-12 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-3xl font-bold sm:text-5xl">
-            <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-300 bg-clip-text text-transparent">
-              Achievements
-            </span>
+            <TypingText text="Achievements" speed={60} className="bg-gradient-to-r from-pink-400 via-purple-400 to-pink-300 bg-clip-text text-transparent" cursorClassName="bg-pink-400" />
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {hackathons.map((hack, i) => (
-            <div
+            <motion.div
               key={i}
               className={`${styles.card} rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-300 hover:border-pink-400/30`}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
               <div className="mb-3 flex items-center gap-3">
-                <svg
+                <motion.svg
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -41,9 +55,13 @@ export default function Achievements() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   className="text-pink-400"
+                  initial={{ rotate: -20, opacity: 0 }}
+                  whileInView={{ rotate: 0, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.1 + 0.2, type: 'spring' }}
                 >
                   <path d={iconPaths[hack.icon]} />
-                </svg>
+                </motion.svg>
                 <span className="rounded-full border border-pink-400/20 bg-pink-400/10 px-2 py-0.5 text-xs text-pink-400">
                   {hack.year}
                 </span>
@@ -51,10 +69,10 @@ export default function Achievements() {
               <p className="text-lg font-bold text-pink-400">{hack.placement}</p>
               <p className="mt-1 font-semibold text-white">{hack.name}</p>
               <p className="mt-2 text-sm text-gray-400">{hack.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

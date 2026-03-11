@@ -58,7 +58,7 @@ export default function ProjectsPage() {
             <ProjectCard
               key={project.slug}
               project={project}
-              size="standard"
+              variant="standard"
               onClick={() => setSelectedProject(project)}
             />
           ))}
