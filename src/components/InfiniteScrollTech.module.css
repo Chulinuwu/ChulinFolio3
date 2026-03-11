@@ -1,0 +1,157 @@
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.scrollAnimation {
+  animation: scroll-left linear infinite;
+}
+
+.scrollAnimationRight {
+  animation: scroll-left 25s linear infinite;
+}
+
+.scrollAnimationLeft {
+  animation: scroll-right 25s linear infinite;
+}
+
+.scrollAnimation:hover,
+.scrollAnimationRight:hover,
+.scrollAnimationLeft:hover {
+  animation-play-state: paused;
+}
+
+.fadeMask {
+  mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgb(0,0,0) 12.5%, rgb(0,0,0) 87.5%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgb(0,0,0) 12.5%, rgb(0,0,0) 87.5%, rgba(0,0,0,0) 100%);
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.techList {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  place-items: flex-start;
+  margin: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  list-style-type: none;
+  position: relative;
+  flex-direction: row;
+  will-change: transform;
+}
+
+.techItem {
+  flex-shrink: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.techItem:hover {
+  opacity: var(--hover-opacity) !important;
+  transform: translateY(-2px);
+}
+
+.techContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 8px;
+  transition: all 0.3s ease;
+  min-height: 60px;
+}
+
+.techContent:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
+}
+
+.techLogo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0.9);
+  transition: filter 0.3s ease;
+  flex-shrink: 0;
+  margin-bottom: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.techContent:hover .techLogo {
+  filter: brightness(1.1);
+}
+
+.techName {
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  line-height: 1.3;
+  letter-spacing: 0.025em;
+  display: block;
+  margin-top: 2px;
+}
+
+.techItem:focus-within .techContent {
+  outline: 2px solid #4ade80;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .techLogo { width: 20px; height: 20px; }
+  .techName { font-size: 10px; }
+  .techContent { padding: 6px; min-height: 48px; }
+}
+
+@media (max-width: 480px) {
+  .techLogo { width: 18px; height: 18px; }
+  .techName { font-size: 9px; }
+  .techContent { padding: 4px; min-height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .techList { animation: none; }
+  .techItem:hover { transform: none; }
+  .techContent:hover { transform: none; }
+}
+
+@media (prefers-contrast: high) {
+  .techContent { background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.3); }
+  .techContent:hover { background: rgba(255, 255, 255, 0.25); border-color: rgba(255, 255, 255, 0.5); }
+}
+
+@media (prefers-color-scheme: dark) {
+  .techLogo { filter: brightness(0.9) invert(0); }
+  .techContent:hover .techLogo { filter: brightness(1.1) invert(0); }
+}

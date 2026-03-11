@@ -7,6 +7,8 @@ node_modules
 .wrangler
 /.svelte-kit
 /build
+/.next
+/out
 
 # OS
 .DS_Store
@@ -21,5 +23,8 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Next.js
+next-env.d.ts
 
 .omc
