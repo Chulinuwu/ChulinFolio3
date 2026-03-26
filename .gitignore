@@ -34,4 +34,4 @@ next-env.d.ts
 logs
 .playwright-mcp
 
-.mcp.json.mcp.json
+.mcp.json
