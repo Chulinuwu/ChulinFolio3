@@ -1,10 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { motion } from 'motion/react';
 import { heroData, badges } from '@/lib/data';
 import { TypingText } from '@/components/ui/typing-text';
 import { Spotlight } from '@/components/ui/spotlight';
+
+const HeroScene3D = dynamic(() => import('./HeroScene3D'), { ssr: false });
 
 export default function Hero() {
   return (
@@ -16,6 +19,11 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-1/4 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-900/25 blur-[150px]" />
         <div className="absolute left-1/3 top-[20%] h-[300px] w-[300px] rounded-full bg-pink-600/10 blur-[120px]" />
+      </div>
+
+      {/* 3D Scene */}
+      <div className="pointer-events-none absolute inset-0 z-[5]">
+        <HeroScene3D />
       </div>
 
       {/* Text content with animations */}

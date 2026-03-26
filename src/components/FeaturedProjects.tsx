@@ -1,11 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'motion/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { projects, type Project } from '@/lib/data';
 import { TypingText } from '@/components/ui/typing-text';
 import ProjectCard from './ProjectCard';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const WIDE_INDICES = new Set([0, 4]);
 
@@ -13,9 +19,40 @@ export default function FeaturedProjects() {
   const featured = projects.filter((p) => p.featured);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const gsapRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!gsapRef.current) return;
+    const el = gsapRef.current;
+    const cards = el.querySelectorAll('.project-card');
+    if (!cards.length) return;
+
+    gsap.set(cards, { rotateX: 8, rotateY: -5, opacity: 0, y: 40 });
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: 'top 75%',
+      once: true,
+      onEnter: () => {
+        gsap.to(cards, {
+          rotateX: 0,
+          rotateY: 0,
+          opacity: 1,
+          y: 0,
+          stagger: 0.12,
+          duration: 0.7,
+          ease: 'power2.out',
+        });
+      },
+    });
+
+    return () => {
+      st.kill();
+    };
+  }, []);
 
   return (
     <motion.section
+      ref={gsapRef}
       className="py-12 sm:py-20"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -36,13 +73,13 @@ export default function FeaturedProjects() {
         </motion.div>
 
         {/* Desktop bento grid */}
-        <div className="hidden md:grid md:grid-cols-3 md:gap-4">
+        <div className="hidden md:grid md:grid-cols-3 md:gap-4" style={{ perspective: '1000px' }}>
           {featured.map((project, i) => {
             const isWide = WIDE_INDICES.has(i);
             return (
               <motion.div
                 key={project.slug}
-                className={`relative ${isWide ? 'md:col-span-2' : ''}`}
+                className={`project-card relative ${isWide ? 'md:col-span-2' : ''}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
@@ -73,10 +110,11 @@ export default function FeaturedProjects() {
         </div>
 
         {/* Mobile: single column */}
-        <div className="flex flex-col gap-4 md:hidden">
+        <div className="flex flex-col gap-4 md:hidden" style={{ perspective: '1000px' }}>
           {featured.map((project, i) => (
             <motion.div
               key={project.slug}
+              className="project-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -102,7 +140,7 @@ export default function FeaturedProjects() {
             href="/projects"
             className="text-sm text-gray-400 transition-colors duration-200 hover:text-pink-400"
           >
-            View All Projects →
+            View All Projects &rarr;
           </a>
         </motion.div>
       </div>

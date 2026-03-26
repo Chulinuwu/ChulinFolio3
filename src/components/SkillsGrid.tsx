@@ -1,8 +1,15 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { skillCategories } from '@/lib/data';
 import { TypingText } from '@/components/ui/typing-text';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface Props {
   condensed?: boolean;
@@ -17,9 +24,38 @@ const categoryIcons: Record<string, string> = {
 
 export default function SkillsGrid({ condensed = false }: Props) {
   const categories = condensed ? skillCategories : skillCategories;
+  const gsapRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!gsapRef.current) return;
+    const el = gsapRef.current;
+    const pills = el.querySelectorAll('.skill-pill');
+    if (!pills.length) return;
+
+    gsap.set(pills, { scale: 0, opacity: 0 });
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: 'top 70%',
+      once: true,
+      onEnter: () => {
+        gsap.to(pills, {
+          scale: 1,
+          opacity: 1,
+          stagger: { amount: 0.8, from: 'start', grid: 'auto' },
+          duration: 0.4,
+          ease: 'back.out(1.4)',
+        });
+      },
+    });
+
+    return () => {
+      st.kill();
+    };
+  }, []);
 
   return (
     <motion.section
+      ref={gsapRef}
       className="py-12 sm:py-20"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -72,7 +108,7 @@ export default function SkillsGrid({ condensed = false }: Props) {
                 {category.skills.map((skill, j) => (
                   <motion.span
                     key={skill}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-300 transition-colors duration-200 hover:border-pink-400/30 hover:text-pink-300"
+                    className="skill-pill rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-300 transition-colors duration-200 hover:border-pink-400/30 hover:text-pink-300"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
@@ -95,7 +131,7 @@ export default function SkillsGrid({ condensed = false }: Props) {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <a href="/experience" className="text-pink-400 transition-colors hover:text-pink-300">
-              View All Skills →
+              View All Skills &rarr;
             </a>
           </motion.div>
         )}

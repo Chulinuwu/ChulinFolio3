@@ -9,10 +9,13 @@ import InfiniteScrollTech from '@/components/InfiniteScrollTech';
 import Footer from '@/components/Footer';
 import { education } from '@/lib/data';
 import { TypingText } from '@/components/ui/typing-text';
+import ParticleBackground from '@/components/ParticleBackground';
 
 export default function ExperiencePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-black text-white">
+    <div className="relative flex min-h-screen flex-col bg-black text-white">
+      <ParticleBackground />
+      <div className="relative z-10 flex min-h-screen flex-col">
       {/* Hero banner with art background */}
       <div className="relative h-[320px] overflow-hidden sm:h-[380px]">
         <Image
@@ -70,6 +73,7 @@ export default function ExperiencePage() {
       <Achievements />
       <div className="mt-auto">
         <Footer />
+      </div>
       </div>
     </div>
   );

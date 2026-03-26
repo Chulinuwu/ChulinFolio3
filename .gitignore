@@ -28,3 +28,10 @@ vite.config.ts.timestamp-*
 next-env.d.ts
 
 .omc
+
+# *.png
+
+logs
+.playwright-mcp
+
+.mcp.json.mcp.json

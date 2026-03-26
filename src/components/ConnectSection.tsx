@@ -1,15 +1,45 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { contacts } from '@/lib/data';
 import { TypingText } from '@/components/ui/typing-text';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const contactList = Object.values(contacts);
 
 export default function ConnectSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (imageRef.current) {
+        gsap.to(imageRef.current, {
+          boxShadow: '0 0 50px rgba(236, 72, 153, 0.35)',
+          duration: 1.5,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: imageRef.current,
+            start: 'top 80%',
+            once: true,
+          },
+        });
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <motion.section
+      ref={sectionRef}
       id="connect"
       className="py-12 sm:py-20"
       initial={{ opacity: 0 }}
@@ -26,6 +56,7 @@ export default function ConnectSection() {
           transition={{ duration: 0.6 }}
         >
           <motion.div
+            ref={imageRef}
             className="relative"
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
@@ -77,7 +108,6 @@ export default function ConnectSection() {
       </motion.div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {contactList.map((contact, i) => (
             <motion.a

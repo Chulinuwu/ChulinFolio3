@@ -1,14 +1,65 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { heroData, education } from '@/lib/data';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const year = new Date().getFullYear();
 
 export default function Footer() {
+  const footerRef = useRef<HTMLElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (bgRef.current) {
+        gsap.fromTo(
+          bgRef.current.querySelector('img'),
+          { backgroundPositionY: '0%' },
+          {
+            backgroundPositionY: '-20%',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: footerRef.current,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1,
+            },
+          }
+        );
+
+        gsap.fromTo(
+          bgRef.current.querySelector('img'),
+          { y: '0%' },
+          {
+            y: '-10%',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: footerRef.current,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1,
+            },
+          }
+        );
+      }
+    }, footerRef);
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
+
   return (
     <motion.footer
+      ref={footerRef}
       className="relative"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -16,7 +67,7 @@ export default function Footer() {
       transition={{ duration: 0.6 }}
     >
       {/* Cloud art as background spanning entire footer */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div ref={bgRef} className="absolute inset-0 overflow-hidden">
         <Image
           src="/cloud.webp"
           alt=""

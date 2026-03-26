@@ -2,12 +2,19 @@
 
 import { Fragment, useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { stats } from '@/lib/data';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function StatsBar() {
   const [current, setCurrent] = useState(stats.map(() => 0));
   const [triggered, setTriggered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const gsapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!triggered) return;
@@ -29,6 +36,33 @@ export default function StatsBar() {
     });
   }, [triggered]);
 
+  useEffect(() => {
+    if (!gsapRef.current) return;
+    const el = gsapRef.current;
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+        once: true,
+      },
+    });
+    tl.to(el, {
+      boxShadow: '0 0 60px rgba(236, 72, 153, 0.15)',
+      scale: 1.02,
+      duration: 0.4,
+      ease: 'power2.out',
+    }).to(el, {
+      boxShadow: 'none',
+      scale: 1,
+      duration: 0.4,
+      ease: 'power2.inOut',
+    });
+    return () => {
+      tl.scrollTrigger?.kill();
+      tl.kill();
+    };
+  }, []);
+
   return (
     <motion.section
       className="py-12 sm:py-16"
@@ -47,7 +81,7 @@ export default function StatsBar() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="grid grid-cols-2 gap-8 sm:flex sm:flex-row sm:items-center sm:justify-around sm:gap-0">
+          <div ref={gsapRef} className="grid grid-cols-2 gap-8 sm:flex sm:flex-row sm:items-center sm:justify-around sm:gap-0">
             {stats.map((stat, i) => (
               <Fragment key={stat.label}>
                 <motion.div

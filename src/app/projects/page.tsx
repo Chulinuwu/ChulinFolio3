@@ -7,6 +7,12 @@ import { projects, type ProjectCategory, type Project } from '@/lib/data';
 import { TypingText } from '@/components/ui/typing-text';
 import ProjectCard from '@/components/ProjectCard';
 import Footer from '@/components/Footer';
+import ParticleBackground from '@/components/ParticleBackground';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const categories: { label: string; value: ProjectCategory | 'all' }[] = [
   { label: 'All', value: 'all' },
@@ -26,7 +32,9 @@ export default function ProjectsPage() {
       : projects.filter((p) => p.category === activeFilter || p.categories?.includes(activeFilter as any));
 
   return (
-    <div className="flex min-h-screen flex-col bg-black pt-24 text-white">
+    <div className="relative min-h-screen bg-black text-white">
+      <ParticleBackground />
+      <div className="relative z-10 flex min-h-screen flex-col pt-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="mb-12 text-center"
@@ -221,6 +229,7 @@ export default function ProjectsPage() {
       <div className="mt-auto">
         <Footer />
       </div>
+    </div>
     </div>
   );
 }
