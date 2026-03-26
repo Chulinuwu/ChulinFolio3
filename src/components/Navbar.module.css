@@ -228,14 +228,15 @@
 
 @media (max-width: 640px) {
   .liquidGlassNav {
-    --nav-height: 68px;
-    --item-size: 56px;
+    --nav-height: 64px;
+    --item-size: 52px;
     --glass-blur: 20px;
     --nav-padding: 7px;
     top: auto;
     bottom: 0;
     margin-top: 0;
-    margin-bottom: 0.75rem;
+    margin-bottom: env(safe-area-inset-bottom, 0.5rem);
+    padding-bottom: env(safe-area-inset-bottom, 0);
   }
 
   .navLabelAlways {

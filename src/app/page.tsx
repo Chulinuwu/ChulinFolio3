@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="relative flex min-h-screen flex-col bg-black text-white">
       <ParticleBackground />
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-1 flex-col">
         <Hero />
         <StatsBar />
         <FeaturedProjects />
@@ -20,9 +20,7 @@ export default function Home() {
         <SkillsGrid condensed />
         <div className="py-8"><InfiniteScrollTech /></div>
         <ConnectSection />
-        <div className="mt-auto">
-          <Footer />
-        </div>
+        <Footer />
       </div>
     </div>
   );

@@ -226,7 +226,7 @@ export default function ProjectsPage() {
         )}
       </AnimatePresence>
 
-      <div className="mt-auto">
+      <div className="">
         <Footer />
       </div>
     </div>

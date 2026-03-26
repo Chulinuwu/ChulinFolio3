@@ -60,7 +60,8 @@ export default function Footer() {
   return (
     <motion.footer
       ref={footerRef}
-      className="relative"
+      className="relative mt-auto mb-0"
+      style={{ marginBottom: 0 }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -72,7 +73,7 @@ export default function Footer() {
           src="/cloud.webp"
           alt=""
           fill
-          className="object-cover object-top opacity-40"
+          className="object-cover opacity-40 translate-y-4"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black/60" />
       </div>

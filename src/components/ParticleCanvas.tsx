@@ -31,7 +31,7 @@ function createParticle(width: number, height: number): Particle {
     vy: (Math.random() - 0.5) * 0.1,
     radius: 1 + Math.random() * 2,
     color: COLORS[Math.floor(Math.random() * COLORS.length)],
-    opacity: 0.1 + Math.random() * 0.4,
+    opacity: (0.1 + Math.random() * 0.4) * 0.5,
   };
 }
 

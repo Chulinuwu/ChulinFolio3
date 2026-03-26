@@ -67,10 +67,10 @@ export default function ExperienceTimeline({ condensed = false }: Props) {
         setActiveIndex(idx);
       },
       onRefresh: () => {
-        // Remove overflow:hidden from GSAP pin-spacer wrapper
         const spacer = containerRef.current?.parentElement;
         if (spacer?.classList.contains('pin-spacer')) {
-          spacer.style.overflow = 'visible';
+          spacer.style.overflowX = 'clip';
+          spacer.style.overflowY = 'visible';
         }
       },
     });
@@ -81,7 +81,7 @@ export default function ExperienceTimeline({ condensed = false }: Props) {
   const sceneProgress = (progress * entries.length) % 1;
 
   return (
-    <section className="relative overflow-visible">
+    <section className="relative overflow-x-clip">
       <div
         ref={containerRef}
         className="relative h-screen bg-black"
@@ -107,11 +107,10 @@ export default function ExperienceTimeline({ condensed = false }: Props) {
 
         {/* 3D Globe on the right */}
         <div
-          className="pointer-events-none absolute -right-[5%] -top-[10%] hidden h-[120%] w-[60%] lg:block"
+          className="pointer-events-none absolute right-0 -top-[10%] hidden h-[120%] w-[55%] lg:block"
           style={{
             maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 100%)',
             WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 100%)',
-            overflow: 'visible',
           }}
         >
           <ExperienceGlobe activeIndex={activeIndex} progress={progress} />
