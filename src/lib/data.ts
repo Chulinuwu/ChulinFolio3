@@ -98,17 +98,26 @@ export const experiences: Experience[] = [
 		year: 'May 2025 - July 2025',
 		role: 'Data Scientist & Data Analyst Intern',
 		company: 'Aiful Corp, Aira & Aiful Public Company Limited',
-		description: 'Developed credit scoring models and performed data analysis to extract insights for business decision making',
-		techUsed: ['Pandas', 'Polars', 'AutoGluon', 'PowerBI'],
+		description: 'National Credit Bureau (NCB) data analysis and credit risk assessment model development for business decision making',
+		techUsed: ['Pandas', 'Polars', 'AutoGluon', 'Scikit-learn', 'PowerBI'],
 		featured: true,
 		type: 'internship'
 	},
 	{
-		year: 'Aug 2025 - now',
+		year: 'Sep 2025 - Apr 2026',
 		role: 'Data Scientist Intern',
 		company: 'Siam Commercial Bank (SCB)',
-		description: 'Working on computer vision models for SCB graphics and conversion rate optimization through advanced ML techniques',
-		techUsed: ['Python', 'Stable Diffusion', 'NLP'],
+		description: 'Built AI/ML workflows for advertisement generation, evaluation, and improvement using NLP and generative models across data science, ML engineering, and MLOps',
+		techUsed: ['Python', 'NLP', 'Generative AI', 'MLOps'],
+		featured: true,
+		type: 'internship'
+	},
+	{
+		year: 'May 2026 - now',
+		role: 'Data Scientist Intern',
+		company: 'Visai AI Co., Ltd.',
+		description: 'Developing legal NLP systems for Thai legal documents including extraction, classification, and retrieval workflows, with data pipelines and model evaluation',
+		techUsed: ['Python', 'NLP', 'Transformers'],
 		featured: true,
 		type: 'internship'
 	},
@@ -130,11 +139,11 @@ export const experiences: Experience[] = [
 		type: 'extracurricular'
 	},
 	{
-		year: 'Aug 2025 - now',
-		role: 'Freelance Multi-disciplinary Consultant',
+		year: '2021 - now',
+		role: 'Freelance Full-stack Developer & AI Engineer',
 		company: 'Self-employed',
-		description: 'Providing consultancy services in graphic design, illustration, web development, UX/UI design, and data science solutions',
-		techUsed: ['WordPress', 'PHP', 'Odoo', 'React'],
+		description: 'Delivered end-to-end software engineering, data science, and AI solutions across product design, backend services, frontend interfaces, deployment, and data workflows',
+		techUsed: ['Next.js', 'FastAPI', 'Odoo', 'React', 'Supabase'],
 		featured: true,
 		type: 'freelance'
 	}
@@ -152,6 +161,26 @@ export const projects: Project[] = [
 		link: 'https://aurora-analytic-ai.vercel.app/',
 		image: '/projects/aurora.png',
 		featured: true
+	},
+	{
+		slug: 'aivertise',
+		name: 'Aivertise',
+		description: 'Autonomous advertisement workflow that turns campaign briefs into production-ready creative.',
+		explanation: 'Built an autonomous workflow that ingests campaign PDFs and context, then generates ad layout specifications, background direction, text placement, and production-ready creative outputs. Integrated CTR and persona-analysis signals to inform future ad direction, with FastAPI and Vue services for ingestion, specification generation, creative orchestration, and review.',
+		role: 'AI Engineer',
+		category: 'data-science',
+		techStack: ['FastAPI', 'Vue', 'Generative AI', 'NLP'],
+		featured: true
+	},
+	{
+		slug: 'ugc-moderation',
+		name: 'Thai-English UGC Moderation System',
+		description: 'Severity-based profanity and inappropriate-content detection for high-volume user content.',
+		explanation: 'Built a Thai-English profanity and inappropriate-content detection system for high-volume user-generated content. Designed severity-based moderation that auto-bans highly unsafe content and routes borderline cases to admin review, with scalable batch processing, monitoring, and retraining workflows orchestrated by Airflow.',
+		role: 'ML Systems & MLOps Engineer',
+		category: 'data-science',
+		techStack: ['Transformers', 'Airflow', 'NLP', 'MLOps'],
+		featured: false
 	},
 	{
 		slug: 'digital-wallet',
@@ -210,14 +239,15 @@ export const projects: Project[] = [
 		featured: false
 	},
 	{
-		slug: 'line-chatbot',
-		name: 'LINE Chatbot Order Management',
-		description: 'LINE chatbot for automating order intake and management for small businesses.',
-		explanation: 'Integrates LINE Messaging API with a Node.js backend to handle order creation, status updates, and customer notifications. Supports rich menu interactions and webhook event processing.',
-		role: 'Backend Developer',
+		slug: 'nubsatang',
+		name: 'Nubsatang',
+		description: 'AI-first LINE chatbot evolved into a configurable order-management SaaS for small businesses.',
+		explanation: 'Built an AI-first LINE chatbot for bill intake, customer Q&A, slip verification, income and expense tracking, stock management, and online storefront workflows. Evolved the order-management chatbot into a configurable SaaS foundation using Next.js, Cloudflare, Redis, and Supabase.',
+		role: 'Founder & Full-stack Engineer',
 		category: 'web-dev',
-		techStack: ['LINE API', 'Node.js'],
-		featured: false
+		techStack: ['Next.js', 'Cloudflare', 'Redis', 'Supabase', 'LINE API'],
+		link: 'https://nubsatang.com/',
+		featured: true
 	},
 	{
 		slug: 'virtual-idol',
