@@ -1,27 +1,27 @@
-import Hero from '@/components/Hero';
-import StatsBar from '@/components/StatsBar';
-import FeaturedProjects from '@/components/FeaturedProjects';
-import ExperienceTimeline from '@/components/ExperienceTimeline';
-import SkillsGrid from '@/components/SkillsGrid';
-import InfiniteScrollTech from '@/components/InfiniteScrollTech';
-import ConnectSection from '@/components/ConnectSection';
-import Footer from '@/components/Footer';
-import ParticleBackground from '@/components/ParticleBackground';
+import HandDrawnNav from '@/components/hero/HandDrawnNav';
+import HeroPreview from '@/components/hero/HeroPreview';
+import WhatIDo from '@/components/sections/WhatIDo';
+import Journey from '@/components/sections/Journey';
+import SelectedWork from '@/components/sections/SelectedWork';
+import Wins from '@/components/sections/Wins';
+import Toolbox from '@/components/sections/Toolbox';
+import Connect from '@/components/sections/Connect';
+import SiteFooter from '@/components/sections/SiteFooter';
 
 export default function Home() {
-  return (
-    <div className="relative flex min-h-screen flex-col bg-black text-white">
-      <ParticleBackground />
-      <div className="relative z-10 flex flex-1 flex-col">
-        <Hero />
-        <StatsBar />
-        <FeaturedProjects />
-        <ExperienceTimeline condensed />
-        <SkillsGrid condensed />
-        <div className="py-8"><InfiniteScrollTech /></div>
-        <ConnectSection />
-        <Footer />
-      </div>
-    </div>
-  );
+	return (
+		<>
+			<HandDrawnNav />
+			<main id="top">
+				<HeroPreview />
+				<WhatIDo />
+				<Journey />
+				<SelectedWork />
+				<Wins />
+				<Toolbox />
+				<Connect />
+			</main>
+			<SiteFooter />
+		</>
+	);
 }

@@ -1,23 +1,18 @@
 import type { Metadata } from 'next';
 import '@/app.css';
-import Navbar from '@/components/Navbar';
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+import { cn } from '@/lib/utils';
+import { fontVariables } from '@/lib/fonts';
 
 export const metadata: Metadata = {
-  title: 'An-An | Portfolio',
-  description: 'Developer / Designer / Data Scientist — Building intelligent, scalable systems',
+	title: 'An-An | Developer, Designer, Data Scientist',
+	description:
+		'An-An (Jirameth Wannasiwaporn) builds cute, clever and scalable things across software engineering, design and AI.'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" className={cn("dark font-sans", geist.variable)}>
-      <body>
-        <Navbar />
-        {children}
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en" className={cn(...fontVariables)}>
+			<body className="hd-scope [font-family:var(--font-body)]">{children}</body>
+		</html>
+	);
 }

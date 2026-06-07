@@ -92,3 +92,26 @@ html {
     @apply font-sans;
 	}
 }
+
+/* Hand-drawn theme tokens (light). Scoped so it never leaks into the dark site. */
+.hd-scope {
+	--hd-cream: #fff6f3;
+	--hd-surface: #ffffff;
+	--hd-surface-tint: #ffefef;
+	--hd-ink: #3f2e34;
+	--hd-ink-muted: #8c757d;
+	--hd-pink-soft: #ffbaba;
+	--hd-pink: #ff8fa3;
+	--hd-pink-strong: #cc3d63;
+	--hd-peach: #ffd3b6;
+	--hd-butter: #fff2a6;
+	--hd-mint: #b8e8d0;
+	--hd-sky: #aedff2;
+	--hd-lavender: #d9c2ff;
+	background-color: var(--hd-cream);
+	color: var(--hd-ink);
+}
+
+body:has(.hd-scope) {
+	background-color: #fff6f3;
+}

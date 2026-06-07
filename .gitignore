@@ -37,3 +37,6 @@ logs
 .mcp.json
 
 tsconfig.tsbuildinfo
+
+.omx
+.lean-ctx

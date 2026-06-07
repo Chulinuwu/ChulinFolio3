@@ -113,7 +113,7 @@ export const experiences: Experience[] = [
 		type: 'internship'
 	},
 	{
-		year: 'May 2026 - now',
+		year: 'May 2026 - July 2026',
 		role: 'Data Scientist Intern',
 		company: 'Visai AI Co., Ltd.',
 		description: 'Developing legal NLP systems for Thai legal documents including extraction, classification, and retrieval workflows, with data pipelines and model evaluation',
@@ -122,7 +122,7 @@ export const experiences: Experience[] = [
 		type: 'internship'
 	},
 	{
-		year: 'Sep 2024 - now',
+		year: 'Sep 2024 - Sep 2025',
 		role: 'Information System Development (ISD) Frontend Developer',
 		company: 'Computer Engineering and Digital Technology, Chulalongkorn University',
 		description: 'SUCU Project development and system implementation',
@@ -131,7 +131,7 @@ export const experiences: Experience[] = [
 		type: 'extracurricular'
 	},
 	{
-		year: 'Sep 2024 - now',
+		year: 'Sep 2024 - Sep 2025',
 		role: 'Google Developer Student Clubs (GDSC) Core Team (Graphic)',
 		company: 'Computer Engineering and Digital Technology, Chulalongkorn University',
 		description: 'Designing and creating graphics for GDSC events and campaigns',
@@ -240,12 +240,12 @@ export const projects: Project[] = [
 	},
 	{
 		slug: 'nubsatang',
-		name: 'Nubsatang',
-		description: 'AI-first LINE chatbot evolved into a configurable order-management SaaS for small businesses.',
-		explanation: 'Built an AI-first LINE chatbot for bill intake, customer Q&A, slip verification, income and expense tracking, stock management, and online storefront workflows. Evolved the order-management chatbot into a configurable SaaS foundation using Next.js, Cloudflare, Redis, and Supabase.',
+		name: 'Nubsatang (นับสตางค์)',
+		description: 'All-in-one commerce system for Thai online sellers: AI chatbot, storefront, orders, stock and finances in one place.',
+		explanation: 'Nubsatang pulls the whole back office of a Thai online shop into one platform. A 24/7 AI chatbot takes orders, answers customers and verifies payment slips, backed by a customizable web storefront, inventory and order management, a financial dashboard, and LINE OA plus shipping-label integration. Built and run as a configurable SaaS with no commission fees, free to start.',
 		role: 'Founder & Full-stack Engineer',
 		category: 'web-dev',
-		techStack: ['Next.js', 'Cloudflare', 'Redis', 'Supabase', 'LINE API'],
+		techStack: ['Next.js', 'Cloudflare', 'Redis', 'Supabase', 'LINE OA', 'AI'],
 		link: 'https://nubsatang.com/',
 		featured: true
 	},
