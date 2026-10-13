@@ -1,6 +1,6 @@
 export const HOME_COPY = {
 	tagline:
-		'I build machine learning models and data pipelines, from credit risk scoring to generative AI. I love to draw.',
+		'I build machine learning models and data pipelines, from credit risk scoring to generative AI.',
 	meta: ['Data science, machine learning and full-stack software engineering', 'Bangkok, Thailand'],
 	experience: 'Experiences',
 	now: 'Right now',

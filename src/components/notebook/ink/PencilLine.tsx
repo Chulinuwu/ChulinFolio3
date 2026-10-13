@@ -5,7 +5,13 @@ import type { PencilLineProps } from '../types/notebook.types';
 const HEIGHT = 10;
 
 // A hand-ruled underline: geometry from a seeded wobble, so it is stable across renders.
-export default function PencilLine({ width, seed, tone = 'ink', className }: PencilLineProps) {
+export default function PencilLine({
+	width,
+	seed,
+	tone = 'ink',
+	draw = false,
+	className
+}: PencilLineProps) {
 	const d = pencilPath(
 		[
 			{ x: 2, y: HEIGHT / 2 + 1 },
@@ -20,10 +26,11 @@ export default function PencilLine({ width, seed, tone = 'ink', className }: Pen
 			aria-hidden
 			viewBox={`0 0 ${width} ${HEIGHT}`}
 			preserveAspectRatio="none"
-			className={cn('block h-2.5 w-full overflow-visible', className)}
+			className={cn('block h-2.5 w-full overflow-visible', draw && 'pencil-draw', className)}
 		>
 			<path
 				d={d}
+				pathLength={draw ? 1 : undefined}
 				fill="none"
 				strokeLinecap="round"
 				strokeWidth={tone === 'pink' ? 3.4 : 1.6}

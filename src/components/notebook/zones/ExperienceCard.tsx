@@ -4,7 +4,7 @@ import type { ExperienceCardProps } from '../types/notebook.types';
 
 export default function ExperienceCard({ card }: ExperienceCardProps) {
 	return (
-		<li className="border-ink-line/20 grid gap-x-10 gap-y-2 border-b py-5 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
+		<li className="reveal border-ink-line/20 grid gap-x-10 gap-y-2 border-b py-5 md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
 			<p className="text-ink flex items-baseline gap-2.5 text-[1rem] leading-snug font-semibold">
 				<span
 					aria-hidden

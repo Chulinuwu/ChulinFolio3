@@ -77,15 +77,6 @@ export const heroData = {
 
 export const experiences: Experience[] = [
 	{
-		year: 'Apr 2021',
-		role: 'POSN 1-2 Computer Student',
-		company: 'Burapha University',
-		short: 'Burapha University',
-		description: 'Competitive programming, data structures and algorithms',
-		featured: false,
-		type: 'academic'
-	},
-	{
 		year: 'Aug 2023 - now',
 		role: 'CEDT Student',
 		company: 'Computer Engineering and Digital Technology, Chulalongkorn University',

@@ -10,7 +10,7 @@ export default function WorkHero({ project, scene }: WorkHeroProps) {
 				<Breadcrumb trail={[{ label: scene.label, href: scene.path }, { label: displayName(project) }]} />
 			</div>
 			<div className="mt-6">
-				<PageHeading>{displayName(project)}</PageHeading>
+				<PageHeading text={displayName(project)} />
 			</div>
 			<p className="mt-5 max-w-[40rem] text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-ink">{project.description}</p>
 		</header>

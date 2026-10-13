@@ -16,7 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Next.js 16** (App Router) + **React 19** with TypeScript
 - **Tailwind CSS v4** (CSS-based config via `@import 'tailwindcss'` in `src/app.css`, no `tailwind.config`)
 - **Turbopack** bundler
-- **Motion**: closed-form springs in `src/lib/motion/spring.ts` (timeline draw-on), React `<ViewTransition>` for page turns, transitions.dev motion tokens in `src/app.css`. No animation library, no WebGL.
+- **Motion**: `ui/DotField` swaps the CSS dot grid for a three.js point field (dots part around the mouse, ripple on press; loaded lazily, skipped under reduced motion, CSS grid stays as fallback). `ui/RiseText` + `PencilLine draw` animate headings; `.enter` staggers first-screen blocks; `.reveal` uses CSS scroll-driven `view()` timelines; `ui/TiltFrame` tilts framed images toward the mouse. `home/AvatarCoin` is a three.js two-sided coin (drawing front, `public/notebook/photo.webp` back) that tilts with the mouse and flips on its button; under reduced motion or without WebGL it swaps a plain image. The dot field also swells into a travelling wave while scrolling. Closed-form springs in `src/lib/motion/spring.ts`, React `<ViewTransition>` page turns, tokens in `src/app.css`. No animation library.
 - **Icons**: `@phosphor-icons/react` (v2.1, exported names end with `Icon`). Server-side icon maps import from `@phosphor-icons/react/dist/ssr`.
 - **Deployed on Vercel**, Node ^20 || ^22 (enforced via `.npmrc` engine-strict)
 
@@ -54,7 +54,7 @@ Every page is wrapped in `ui/PageTurn` (`<ViewTransition>` keyed by `turn-forwar
 
 ### Static Assets
 
-- `public/notebook/avatar.png` - Her own avatar drawing, cut from `docs/character/reference-avatar.png`. The only image of her.
+- `public/notebook/avatar.png` - Her own avatar drawing, cut from `docs/character/reference-avatar.png`. `public/notebook/photo.webp` - her real photo (square crop of the old `anan.jpg`), the back of the avatar coin.
 - `public/projects/` - Project images referenced by `projects[].image` (Nubsatang is a real screenshot; the rest are illustrated thumbnails). Provenance is embedded or in `.json` sidecars.
 
 ## Design System

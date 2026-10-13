@@ -19,7 +19,7 @@ export default function WorkshopPage() {
 			{featured && <FeaturedProject project={featured} />}
 			<section className="mt-20" aria-labelledby="workshop-more">
 				<SubHeading id="workshop-more">{copy.more}</SubHeading>
-				<div className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-x-12 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+				<div className="reveal-group mt-8 grid grid-cols-[minmax(0,1fr)] gap-x-12 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
 					{pinned.map((p, i) => (
 						<ProjectNote
 							key={p.slug}
@@ -34,7 +34,7 @@ export default function WorkshopPage() {
 				</div>
 				<ul className="mt-12 grid max-w-[46rem] grid-cols-[minmax(0,1fr)]">
 					{rest.map((p) => (
-						<li key={p.slug}>
+						<li key={p.slug} className="reveal">
 							<ProjectRow project={p} icon={PROJECT_ICONS[p.slug] ?? FALLBACK_PROJECT_ICON} />
 						</li>
 					))}

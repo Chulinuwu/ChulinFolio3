@@ -2,7 +2,12 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { projects } from '@/lib/data';
 import { SCENES } from '@/components/notebook/config/scenes';
-import { displayName, findProject, neighborsOf, primaryZoneOf } from '@/components/notebook/lib/projects';
+import {
+	displayName,
+	findProject,
+	neighborsOf,
+	primaryZoneOf
+} from '@/components/notebook/lib/projects';
 import PageTurn from '@/components/notebook/ui/PageTurn';
 import WorkFacts from '@/components/work/WorkFacts';
 import WorkHero from '@/components/work/WorkHero';

@@ -5,9 +5,12 @@ export function useInView(ref: RefObject<Element | null>, rootMargin = '0px 0px 
 	useEffect(() => {
 		const el = ref.current;
 		if (!el || seen) return;
-		const io = new IntersectionObserver(([entry]) => {
-			if (entry.isIntersecting) setSeen(true);
-		}, { rootMargin });
+		const io = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) setSeen(true);
+			},
+			{ rootMargin }
+		);
 		io.observe(el);
 		return () => io.disconnect();
 	}, [ref, rootMargin, seen]);

@@ -95,7 +95,17 @@ export interface PencilLineProps {
 	width: number;
 	seed: number;
 	tone?: 'ink' | 'pink';
+	draw?: boolean;
 	className?: string;
+}
+
+export interface PageHeadingProps {
+	text: string;
+}
+
+export interface RiseTextProps {
+	text: string;
+	delayMs?: number;
 }
 
 export interface HandNoteProps {
@@ -121,6 +131,7 @@ export interface FramedImageProps {
 	sizes: string;
 	aspect?: string;
 	priority?: boolean;
+	parallax?: boolean;
 	className?: string;
 }
 
@@ -200,4 +211,22 @@ export interface ExperienceGroup {
 
 export interface ExperienceCardProps {
 	card: ExperienceCard;
+}
+
+export interface DotFieldFrame {
+	time: number;
+	x: number;
+	y: number;
+	active: number;
+	scroll: number;
+	velocity: number;
+}
+
+export type CoinFace = 'drawing' | 'photo';
+
+export interface CoinPose {
+	time: number;
+	tiltX: number;
+	tiltY: number;
+	spin: number;
 }

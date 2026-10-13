@@ -9,7 +9,7 @@ export default function FeaturedWork() {
 	return (
 		<section aria-label="Selected work">
 			<FeaturedProject project={requireProject(HOME_SPOTLIGHT)} />
-			<div className="mt-20 grid grid-cols-[minmax(0,1fr)] gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+			<div className="reveal-group mt-20 grid grid-cols-[minmax(0,1fr)] gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
 				{HOME_FEATURES.map((f, i) => (
 					<ProjectNote
 						key={f.slug}

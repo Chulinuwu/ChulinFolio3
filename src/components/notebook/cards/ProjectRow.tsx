@@ -4,13 +4,23 @@ import type { ProjectRowProps } from '../types/notebook.types';
 
 export default function ProjectRow({ project, icon: Icon }: ProjectRowProps) {
 	return (
-		<Link href={`/work/${project.slug}`} transitionTypes={['turn-forward']} className="group flex h-full gap-4 border-b border-ink-line/25 py-4">
-			<Icon weight="light" aria-hidden className="mt-0.5 size-7 shrink-0 text-ink-soft transition-colors duration-(--duration-quick) group-hover:text-pink" />
+		<Link
+			href={`/work/${project.slug}`}
+			transitionTypes={['turn-forward']}
+			className="group border-ink-line/25 flex h-full gap-4 border-b py-4"
+		>
+			<Icon
+				weight="light"
+				aria-hidden
+				className="text-ink-soft group-hover:text-pink mt-0.5 size-7 shrink-0 transition-colors duration-(--duration-quick)"
+			/>
 			<span className="min-w-0">
-				<span className="block text-[1.05rem] font-semibold text-pink underline decoration-pink/30 underline-offset-4 group-hover:decoration-pink">
+				<span className="text-pink decoration-pink/30 group-hover:decoration-pink block text-[1.05rem] font-semibold underline underline-offset-4">
 					{displayName(project)}
 				</span>
-				<span className="mt-0.5 block text-[0.95rem] leading-snug text-ink-soft">{project.description}</span>
+				<span className="text-ink-soft mt-0.5 block text-[0.95rem] leading-snug">
+					{project.description}
+				</span>
 			</span>
 		</Link>
 	);

@@ -16,17 +16,17 @@ export default function NextTabCard({ from }: NextTabCardProps) {
 		<Link
 			href={next.path}
 			transitionTypes={[turnBetween(here, next)]}
-			className="group flex items-center justify-between gap-6 border-t-[1.5px] border-ink-line pt-5"
+			className="group border-ink-line flex items-center justify-between gap-6 border-t-[1.5px] pt-5"
 		>
 			<span>
-				<span className="block font-hand text-[clamp(1.8rem,2.6vw,2.4rem)] leading-none text-ink transition-colors duration-(--duration-quick) group-hover:text-pink">
+				<span className="font-hand text-ink group-hover:text-pink block text-[clamp(1.8rem,2.6vw,2.4rem)] leading-none transition-colors duration-(--duration-quick)">
 					{home ? TOUR_COPY.home : `${TOUR_COPY.nextPrefix} ${next.label}`}
 				</span>
 			</span>
 			<ArrowRightIcon
 				weight="bold"
 				aria-hidden
-				className="size-7 shrink-0 text-pink transition-transform duration-(--duration-fast) ease-(--ease-smooth-out) group-hover:translate-x-1.5"
+				className="text-pink size-7 shrink-0 transition-transform duration-(--duration-fast) ease-(--ease-smooth-out) group-hover:translate-x-1.5"
 			/>
 		</Link>
 	);

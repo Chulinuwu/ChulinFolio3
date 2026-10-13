@@ -26,7 +26,7 @@ export default function NotFound() {
 				/>
 			</div>
 			<div>
-				<PageHeading>{NOT_FOUND_COPY.title}</PageHeading>
+				<PageHeading text={NOT_FOUND_COPY.title} />
 				<p className="text-ink-soft mt-4 max-w-[32rem] text-[1.05rem] leading-relaxed">
 					{NOT_FOUND_COPY.body}
 				</p>

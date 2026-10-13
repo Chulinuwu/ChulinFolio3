@@ -15,7 +15,7 @@ export default function LabPage() {
 
 	return (
 		<ZoneSpread scene={SCENES.lab} title={copy.title} intro={copy.intro}>
-			<div className="grid grid-cols-[minmax(0,1fr)] gap-x-14 gap-y-14 md:grid-cols-2">
+			<div className="reveal-group grid grid-cols-[minmax(0,1fr)] gap-x-14 gap-y-14 md:grid-cols-2">
 				{pinned.map((p, i) => (
 					<ProjectNote
 						key={p.slug}
@@ -31,9 +31,9 @@ export default function LabPage() {
 			{rest.length > 0 && (
 				<section className="mt-20" aria-labelledby="lab-more">
 					<SubHeading id="lab-more">{copy.more}</SubHeading>
-					<ul className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-x-12 md:grid-cols-3">
+					<ul className="reveal-group mt-6 grid grid-cols-[minmax(0,1fr)] gap-x-12 md:grid-cols-3">
 						{rest.map((p) => (
-							<li key={p.slug}>
+							<li key={p.slug} className="reveal">
 								<ProjectRow project={p} icon={PROJECT_ICONS[p.slug] ?? FALLBACK_PROJECT_ICON} />
 							</li>
 						))}

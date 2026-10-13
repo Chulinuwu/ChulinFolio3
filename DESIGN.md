@@ -112,7 +112,7 @@ The site is one white notebook page, open to today. Data and drawing share the s
 
 Density is calm and editorial. Content runs in two unequal columns on wide screens and stacks to one on phones, with generous air between zones. Graphite carries all reading; a single pink marker carries everything you can click. Hand lettering is the voice of the page (names, headings, links, margin notes) while lists, facts and prose stay in a clean humanist sans so the data reads as data.
 
-Navigation is a set of flat index tabs fixed to the right edge. Moving between tabs turns the page sideways in the direction of the tab order; nothing else on the site performs. The one ambient motion is the timeline drawing itself on: a pencil spring sweeps across the years when it scrolls into view.
+Navigation is a set of flat index tabs fixed to the right edge. Moving between tabs turns the page sideways in the direction of the tab order; nothing else on the site performs. The ground itself is alive: the dot grid is a WebGL point field whose dots part around the mouse, warm to pink near it and ripple outward on a press. Headings arrive letter by letter with the pencil underline drawing in after them; content is uncovered by the scroll; framed images lean toward the mouse. Reduced motion renders every final state and keeps the static CSS grid.
 
 **Key Characteristics:**
 - White page, dot-grid ground, graphite ink, one pink marker.

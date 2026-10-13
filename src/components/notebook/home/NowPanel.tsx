@@ -8,16 +8,16 @@ export default function NowPanel() {
 	const links = contactEntries().filter((c) => HOME_CONTACTS.some((k) => k === c.key));
 
 	return (
-		<aside aria-labelledby="right-now">
-			<h2 id="right-now" className="font-hand text-[1.6rem] leading-none text-ink">
+		<aside aria-labelledby="right-now" className="enter [--enter-delay:700ms]">
+			<h2 id="right-now" className="font-hand text-ink text-[1.6rem] leading-none">
 				{HOME_COPY.now}
 			</h2>
 			<PencilLine width={130} seed={41} className="mt-1 max-w-[130px]" />
 			<ul className="mt-4 grid gap-3">
 				{currentRoles().map((e) => (
 					<li key={e.role}>
-						<p className="text-[0.95rem] leading-snug font-medium text-ink">{e.role}</p>
-						<p className="text-[0.85rem] text-ink-muted">
+						<p className="text-ink text-[0.95rem] leading-snug font-medium">{e.role}</p>
+						<p className="text-ink-muted text-[0.85rem]">
 							{e.short} / since {e.year.replace(/ - now$/, '')}
 						</p>
 					</li>
