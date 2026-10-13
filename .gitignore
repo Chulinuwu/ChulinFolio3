@@ -40,3 +40,5 @@ tsconfig.tsbuildinfo
 
 .omx
 .lean-ctx
+.impeccable/
+

@@ -16,56 +16,52 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Next.js 16** (App Router) + **React 19** with TypeScript
 - **Tailwind CSS v4** (CSS-based config via `@import 'tailwindcss'` in `src/app.css`, no `tailwind.config`)
 - **Turbopack** bundler
-- **Animation**: `motion` (motion/react)
-- **3D / canvas (optional)**: `@react-three/fiber`, `three` (available, not used by the current home)
-- **Icons**: `@phosphor-icons/react` (v2.1, exported names end with `Icon`, e.g. `ArrowRightIcon`)
-- **Hand-drawn borders**: `roughjs`
+- **Motion**: closed-form springs in `src/lib/motion/spring.ts` (timeline draw-on), React `<ViewTransition>` for page turns, transitions.dev motion tokens in `src/app.css`. No animation library, no WebGL.
+- **Icons**: `@phosphor-icons/react` (v2.1, exported names end with `Icon`). Server-side icon maps import from `@phosphor-icons/react/dist/ssr`.
 - **Deployed on Vercel**, Node ^20 || ^22 (enforced via `.npmrc` engine-strict)
 
 ## Architecture
 
-Personal portfolio. Single-page site at `/` (hand-drawn, light pastel theme). No backend or API routes.
+Personal portfolio, "Chulin's Notebook": her research notebook with the paper costume removed. Statically rendered routes, no backend or API routes. The full visual system lives in `DESIGN.md`; product truth in `PRODUCT.md`.
 
 ### Routing (`src/app/`)
 
-- `layout.tsx` — Root layout. Loads `app.css`, sets the four hand-drawn fonts (via `src/lib/fonts.ts`) and the `hd-scope` light theme on `<body>`.
-- `page.tsx` — Home. Renders `HandDrawnNav` + hero + all sections + `SiteFooter`.
-- `hero-preview/page.tsx` — Standalone hero preview route (kept for isolated iteration).
-- `not-found.tsx` — 404 page.
+One route map, `SCENES` in `src/components/notebook/config/scenes.ts` (path, order, tab label, title, description, next tab). Pages, index tabs, metadata, page-turn direction and `sitemap.ts` all read it.
 
-### Components
+- `layout.tsx` - Root layout: fonts, global CSS, the fixed right-edge index tabs.
+- `page.tsx` - First page: avatar, name and tagline beside `NowPanel` (current roles from `data.ts`, email, GitHub, LinkedIn); the Nubsatang spotlight then three framed projects; the full-width experience ledger (`RoleTimeline`); other projects.
+- `lab/` (Data Projects), `workshop/` (Software Projects), `studio/` (Experiences: work, activities and education cards grouped by `config/experience.ts`), `contact/` - Zone pages built on `zones/ZoneSpread`, each ending with a next-tab link.
+- `work/[slug]/page.tsx` - Case pages (`generateStaticParams`, `generateMetadata`, `notFound()`), built from `src/components/work/`.
+- `not-found.tsx` - Her avatar with a handwritten note.
+- `sitemap.ts` - Every scene path plus every work page. Base URL from `config/site.ts`.
 
-- `src/components/hero/` — Hero building blocks and shared primitives:
-  - `HeroPreview.tsx` (the hero), `HandDrawnNav.tsx` (floating pill nav)
-  - `RoughFrame.tsx` (rough.js hand-drawn border box; stroke renders on top of content; optional solid `fill` becomes the wrap background)
-  - `DoodleUnderline.tsx`, `Doodles.tsx` (`Star`, `Sparkle`, `Heart`)
-- `src/components/sections/` — One file per home section:
-  - `SectionShell.tsx` (id + padding + centered max-w-1200 container), `SectionHeading.tsx` (kicker + title + doodle underline)
-  - `WhatIDo`, `Journey`, `SelectedWork` (client, filterable), `Wins`, `Toolbox`, `Connect`, `SiteFooter`
-- `src/components/ui/` — shadcn-style primitives (currently unused by the home).
+Every page is wrapped in `ui/PageTurn` (`<ViewTransition>` keyed by `turn-forward` / `turn-back` link types); untyped navigations (browser back) swap instantly, reduced motion zeroes the durations.
+
+### Components (`src/components/notebook/`)
+
+- `home/` - First-page sections, including `RoleTimeline` (ledger of roles with date tracks, `useTimelineDraw` grows the bars). `zones/` - Zone pages and their rows. `cards/` - Featured project spotlight (Nubsatang on home and Software Projects), project note (framed image + title + link), project row, next-tab link.
+- `ink/` - The only SVG: `PencilLine` (ruled underline).
+- `nav/` - `IndexTabs` / `IndexTab` (active from `usePathname`); the pink name above the tabs links home.
+- `ui/` - `FramedImage`, `MarkerLink`, `HandNote`, `PageHeading`, `PageTurn`.
+- `hooks/` - `useTimelineDraw`, `useInView`, media query hooks. `lib/` - pure helpers (timeline rows and geometry, wobble, dates, selectors over `data.ts`, scene lookup).
+- `config/` - All module constants (scenes, copy, timeline, icons, images, assets, zones, site). `types/notebook.types.ts` - all props and shared types.
 
 ### Data & Lib (`src/lib/`)
 
-- `data.ts` — Single source of truth for all portfolio content: `heroData`, `experiences`, `projects`, `hackathons`, `skillCategories`, `contacts`, `education`, `stats`, `badges`. Keep in sync with the resume.
-- `fonts.ts` — `next/font` setup: Fredoka (`--font-display`), Shantell Sans (`--font-hand`), Nunito (`--font-body`), JetBrains Mono (`--font-mono-hd`); plus `fontVariables`.
-- `utils.ts` — `cn()` (clsx + tailwind-merge).
+- `data.ts` - Single source of truth for portfolio content. Keep in sync with the resume.
+- `motion/spring.ts` - `spring`, `lerp`, `progress`, `clamp01`.
+- `fonts.ts` - The Girl Next Door (hand) and Figtree (body), served by next/font from this origin. `utils.ts` - `cn()`.
 
 ### Static Assets
 
-- `public/` — Images: `Chulinpic.png` (mascot avatar, transparent), `cloud.webp`, `projects/`, `logo/`. (`src/public/` is a legacy mirror.)
+- `public/notebook/avatar.png` - Her own avatar drawing, cut from `docs/character/reference-avatar.png`. The only image of her.
+- `public/projects/` - Project images referenced by `projects[].image` (Nubsatang is a real screenshot; the rest are illustrated thumbnails). Provenance is embedded or in `.json` sidecars.
 
-## Design System (hand-drawn, light)
+## Design System
 
-Tokens are CSS variables under `.hd-scope` in `src/app.css`:
-
-- Surfaces: `--hd-cream` (page), `--hd-surface` (#fff cards), `--hd-surface-tint`
-- Text: `--hd-ink`, `--hd-ink-muted`
-- Pink accent (the ONLY color for interactive elements: buttons, links, active, focus): `--hd-pink-strong` (#cc3d63, white text AA-safe), `--hd-pink`, `--hd-pink-soft`
-- Decorative-only pastels (never on interactive elements): `--hd-peach`, `--hd-butter`, `--hd-mint`, `--hd-sky`, `--hd-lavender`
-- `body:has(.hd-scope)` is set to cream so the whole viewport stays light.
+See `DESIGN.md` for tokens and rules. Short version: white ground with a faint dot grid, ink lines, handwriting only for the name, page titles, sub-headings and links (no slogans or margin notes; the 404 note is the only one); Figtree for everything read. Pink `#cc3d63` marks clickable things only. Thin ink frames on images (rotation at most 1.5deg), no shadows, no paper texture, no yellow.
 
 Conventions:
-- Cards = `RoughFrame` with an inner padded div; slight tilt (-3deg..3deg); hover lift; pink-tinted shadow `0_10px_30px_rgba(204,61,99,0.15)`; radius ~20px; pill buttons.
-- Scroll reveals use `motion/react` `whileInView`. IMPORTANT: keep the `whileInView` target unconditional (always the visible state) and gate only `initial` on `useReducedMotion()`. A conditional `whileInView` (`reduce ? {} : ...`) leaves elements stuck at opacity 0 under `prefers-reduced-motion`.
-- Any file importing `@phosphor-icons/react` or `motion/react` must start with `'use client'`.
-- No em-dash or en-dash anywhere; hyphen only. No emoji in output.
+- Motion: one timeline draw-on (spring, from a visible default once JS arms it) and one page turn (transitions.dev tokens). Reduced motion renders final states.
+- Files importing `@phosphor-icons/react` start with `'use client'`; icon maps used by server components import the `dist/ssr` entry. One component per file; types in `types/`, constants in `config/`; no casts or `any`; SVG only in `ink/`.
+- No kickers or eyebrow labels, no em-dash or en-dash anywhere; hyphen only. No emoji in output.

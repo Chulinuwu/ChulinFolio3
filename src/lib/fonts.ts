@@ -1,8 +1,7 @@
-import { Fredoka, Shantell_Sans, Nunito, JetBrains_Mono } from 'next/font/google';
+import { Figtree, The_Girl_Next_Door } from 'next/font/google';
 
-export const display = Fredoka({ subsets: ['latin'], variable: '--font-display' });
-export const hand = Shantell_Sans({ subsets: ['latin'], variable: '--font-hand' });
-export const body = Nunito({ subsets: ['latin'], variable: '--font-body' });
-export const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono-hd' });
+// next/font downloads both faces at build time and serves them from this origin.
+const hand = The_Girl_Next_Door({ subsets: ['latin'], weight: '400', variable: '--font-girl-next-door' });
+const body = Figtree({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-figtree' });
 
-export const fontVariables = [display.variable, hand.variable, body.variable, mono.variable];
+export const fontVariables = [hand.variable, body.variable];
