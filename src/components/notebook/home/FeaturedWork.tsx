@@ -19,7 +19,7 @@ export default function FeaturedWork() {
 					<li
 						key={f.slug}
 						className="md:sticky"
-						style={{ top: `${DECK.topRem + i * DECK.stepRem}rem` }}
+						style={{ top: `${DECK.topRem + i * DECK.bandRem}rem` }}
 					>
 						<DeckCard
 							project={requireProject(f.slug)}
