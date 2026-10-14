@@ -1,25 +1,35 @@
-import FeaturedProject from '../cards/FeaturedProject';
-import ProjectNote from '../cards/ProjectNote';
-import { HOME_FEATURES, HOME_SPOTLIGHT } from '../config/copy';
+import DeckCard from '../cards/DeckCard';
+import { HOME_COPY, HOME_DECK } from '../config/copy';
+import { DECK } from '../config/deck';
+import PencilLine from '../ink/PencilLine';
 import { requireProject } from '../lib/projects';
-
-const TILTS = [-1.2, 0.8, -0.6];
 
 export default function FeaturedWork() {
 	return (
-		<section aria-label="Selected work">
-			<FeaturedProject project={requireProject(HOME_SPOTLIGHT)} />
-			<div className="reveal-group mt-20 grid grid-cols-[minmax(0,1fr)] gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
-				{HOME_FEATURES.map((f, i) => (
-					<ProjectNote
+		<section aria-labelledby="selected-work">
+			<h2
+				id="selected-work"
+				className="font-hand text-ink text-[clamp(1.9rem,2.6vw,2.4rem)] leading-none"
+			>
+				{HOME_COPY.selected}
+			</h2>
+			<PencilLine width={220} seed={13} className="mt-1 max-w-[220px]" />
+			<ol className="mt-10 grid gap-10 md:gap-[12svh]">
+				{HOME_DECK.map((f, i) => (
+					<li
 						key={f.slug}
-						project={requireProject(f.slug)}
-						subtitle={f.subtitle}
-						tilt={TILTS[i % TILTS.length]}
-						sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 28vw"
-					/>
+						className="md:sticky"
+						style={{ top: `${DECK.topRem + i * DECK.stepRem}rem` }}
+					>
+						<DeckCard
+							project={requireProject(f.slug)}
+							subtitle={f.subtitle}
+							index={i}
+							total={HOME_DECK.length}
+						/>
+					</li>
 				))}
-			</div>
+			</ol>
 		</section>
 	);
 }

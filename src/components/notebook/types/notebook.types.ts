@@ -230,3 +230,25 @@ export interface CoinPose {
 	tiltY: number;
 	spin: number;
 }
+
+export interface HalftoneFrame {
+	time: number;
+	reveal: number;
+	scatter: number;
+	x: number;
+	y: number;
+	active: number;
+}
+
+export interface HalftoneHeroProps {
+	name: string;
+	before: ReactNode;
+	after: ReactNode;
+}
+
+export interface DeckCardProps {
+	project: Project;
+	subtitle: string;
+	index: number;
+	total: number;
+}

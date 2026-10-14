@@ -3,14 +3,14 @@ export const HOME_COPY = {
 		'I build machine learning models and data pipelines, from credit risk scoring to generative AI.',
 	meta: ['Data science, machine learning and full-stack software engineering', 'Bangkok, Thailand'],
 	experience: 'Experiences',
+	selected: 'Selected work',
 	now: 'Right now',
 	moreHead: 'Other projects',
 	viewProject: 'View project'
 } as const;
 
-export const HOME_SPOTLIGHT = 'nubsatang';
-
-export const HOME_FEATURES = [
+export const HOME_DECK = [
+	{ slug: 'nubsatang', subtitle: 'AI commerce SaaS / Founder' },
 	{ slug: 'aivertise', subtitle: 'Generative ad workflow / AI Engineer' },
 	{ slug: 'aurora-ai', subtitle: 'Predictive analytics / ML Engineer' },
 	{ slug: 'ugc-moderation', subtitle: 'Thai-English moderation / MLOps' }
