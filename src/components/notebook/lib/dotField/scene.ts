@@ -12,6 +12,7 @@ import {
 } from 'three';
 import { FIELD } from '../../config/field';
 import type { DotFieldFrame } from '../../types/notebook.types';
+import { readPenGradient } from '../pens/read';
 import { FIELD_FRAGMENT, FIELD_VERTEX } from './shaders';
 
 function gridGeometry(width: number, height: number) {
@@ -60,7 +61,7 @@ export function createDotField(canvas: HTMLCanvasElement) {
 		},
 		uGrid: { value: new Vector3(...FIELD.grid.rgb) },
 		uGridAlpha: { value: FIELD.grid.alpha },
-		uPink: { value: new Vector3(...FIELD.pink) }
+		uPens: { value: readPenGradient() }
 	};
 	const material = new ShaderMaterial({
 		uniforms,

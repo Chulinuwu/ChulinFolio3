@@ -16,7 +16,5 @@ export const HALFTONE = {
 	activeEase: 0.08,
 	scatterSpan: 0.75,
 	minFontPx: 64,
-	maxDpr: 2,
-	ink: [47 / 255, 38 / 255, 41 / 255],
-	pink: [204 / 255, 61 / 255, 99 / 255]
+	maxDpr: 2
 } as const;

@@ -6,7 +6,7 @@ import { requireProject } from '../lib/projects';
 
 export default function FeaturedWork() {
 	return (
-		<section aria-labelledby="selected-work">
+		<section aria-labelledby="selected-work" data-pen="pink">
 			<h2
 				id="selected-work"
 				className="font-hand text-ink text-[clamp(1.9rem,2.6vw,2.4rem)] leading-none"
@@ -24,6 +24,7 @@ export default function FeaturedWork() {
 						<DeckCard
 							project={requireProject(f.slug)}
 							subtitle={f.subtitle}
+							pen={f.pen}
 							index={i}
 							total={HOME_DECK.length}
 						/>

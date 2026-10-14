@@ -1,6 +1,6 @@
 ---
 name: Chulin's Notebook
-description: A data scientist's research notebook on a plain white page, written in graphite and one pink marker.
+description: A data scientist's research notebook on a plain white page, written in graphite and five gel pens.
 colors:
   page: "#ffffff"
   ink: "#2f2629"
@@ -11,6 +11,11 @@ colors:
   pink: "#cc3d63"
   pink-deep: "#ad2f51"
   pink-wash: "#fdebf0"
+  pen-pink: "#cc3d63"
+  pen-blue: "#2f6db5"
+  pen-green: "#1e7f6a"
+  pen-violet: "#8a52a8"
+  pen-orange: "#c2531c"
 typography:
   display:
     fontFamily: "The Girl Next Door, Segoe Print, cursive"
@@ -110,12 +115,12 @@ components:
 
 The site is one white notebook page, open to today. Data and drawing share the same sheet: a ledger of real roles with date tracks shares the page with the owner's own avatar drawing, real product screenshots sit in thin ink frames, and headings are lettered by hand. The paper costume is gone. There is no tape, no torn edges, no texture, no shadow. The only notebook cue in the ground is a faint dot grid (1.1px dots on a 24px cell); everything else is ink on white.
 
-Density is calm and editorial. Content runs in two unequal columns on wide screens and stacks to one on phones, with generous air between zones. Graphite carries all reading; a single pink marker carries everything you can click. Hand lettering is the voice of the page (names, headings, links, margin notes) while lists, facts and prose stay in a clean humanist sans so the data reads as data.
+Density is calm and editorial. Content runs in two unequal columns on wide screens and stacks to one on phones, with generous air between zones. Graphite carries all reading; each section writes its lines and labels in its own gel pen, and inline links stay pink. Hand lettering is the voice of the page (names, headings, links, margin notes) while lists, facts and prose stay in a clean humanist sans so the data reads as data.
 
-Navigation is a set of flat index tabs fixed to the right edge. Moving between tabs turns the page sideways in the direction of the tab order; nothing else on the site performs. Home opens on a photoreal MacBook Pro (WebGL, studio lighting) resting on the dot grid, its screen showing the live page; it leans toward the mouse, and scrolling flies the camera into the screen until the page fills the window and the laptop fades away. The ground itself is alive: the dot grid is a WebGL point field whose dots part around the mouse, warm to pink near it and ripple outward on a press. The hero name is a heavy uppercase wordmark printed as a halftone of the grid itself: inside the letters the page dots swell in a wave, a pink lens magnifies them under the mouse, and scrolling lets them shrink back into plain grid dots. Selected work is a deck of large sticky cards that stack as you scroll. Headings arrive letter by letter with the pencil underline drawing in after them; content is uncovered by the scroll; framed images lean toward the mouse. Reduced motion renders every final state and keeps the static CSS grid.
+Navigation is a set of flat index tabs fixed to the right edge. Moving between tabs turns the page sideways in the direction of the tab order; nothing else on the site performs. Home opens on a photoreal MacBook Pro (WebGL, studio lighting) resting on the dot grid, its screen showing the live page; it leans toward the mouse, and scrolling flies the camera into the screen until the page fills the window and the laptop fades away. The ground itself is alive: the dot grid is a WebGL point field whose dots part around the mouse, take on the pen colour of that part of the screen near it and ripple outward on a press. The hero name is a heavy uppercase wordmark printed as a halftone of the grid itself: inside the letters the page dots swell in a wave, coloured by the pens from blue to orange, a lens under the mouse magnifies them and shifts their colour one pen along, and scrolling lets them shrink back into plain grid dots. Selected work is a deck of large sticky cards that stack as you scroll. Headings arrive letter by letter with the pencil underline drawing in after them; content is uncovered by the scroll; framed images lean toward the mouse. Reduced motion renders every final state and keeps the static CSS grid.
 
 **Key Characteristics:**
-- White page, dot-grid ground, graphite ink, one pink marker.
+- White page, dot-grid ground, graphite ink, five gel pens (one per section), pink links.
 - Hand lettering for voice, Figtree for data and prose.
 - Thin 1.5px ink frames with a slight tilt; flat, no shadows.
 - Seeded wobbly pencil underlines that render identically every visit.
@@ -124,26 +129,30 @@ Navigation is a set of flat index tabs fixed to the right edge. Moving between t
 
 ## Colors
 
-A near-monochrome warm graphite scale on white, punctuated by a single rose-pink marker.
+A warm graphite scale on white, written over in five gel pens. Each section of the site holds one pen.
 
-### Primary
-- **Marker Pink** (`pink`): every interactive element: links, the active index tab, inactive tab labels, arrow icons, focus rings, the caret.
-- **Pressed Marker** (`pink-deep`): hover state of marker links (text and underline).
-- **Highlighter Wash** (`pink-wash`): text selection and the hover fill of inactive index tabs. Never a large surface.
+### Pens
+- **Pink** (`pen-pink`): Home, the selected-work heading.
+- **Blue** (`pen-blue`): Data Projects, other projects on home, the data area in the experience ledger.
+- **Green** (`pen-green`): Software Projects, the software area.
+- **Violet** (`pen-violet`): Experiences, the experience ledger heading, the design area.
+- **Orange** (`pen-orange`): Contact, the Right now panel.
+
+A section sets `data-pen`, and everything inside reads `var(--pen)`: the index tab (label at rest, fill when active, 10% wash on hover), the pencil underline under every heading, and the deck card border, count and 10% background wash. Every pen reaches 4.5:1 on white so it can carry hand-lettered text. The hero wordmark and the live dot grid run the pens left to right (blue, violet, pink, orange, `PEN_GRADIENT`), read from the CSS tokens at runtime so WebGL and CSS share one palette.
+
+### Marker
+- **Marker Pink** (`pink`): marker links, focus rings, the caret. **Pressed Marker** (`pink-deep`) is their hover. **Highlighter Wash** (`pink-wash`) is text selection only.
 
 ### Neutral
-- **Notebook White** (`page`): the page and every framed surface. There is no second surface color.
-- **Graphite** (`ink`): headings, names, strong data labels, data science timeline bars.
-- **Soft Graphite** (`ink-soft`): body prose, row descriptions, margin notes, timeline year labels, row icons at rest.
-- **Faded Graphite** (`ink-muted`): captions, fact labels, footer, breadcrumb separators, de-emphasized years.
-- **Area colors** (`area-data`, `area-software`, `area-design`): only in the experience ledger bars, dots and legend. Never on anything clickable, so the One Marker Rule holds.
-- **Ink Line** (`ink-line`): frame borders, tab borders, timeline axis, pencil underlines, heavy dividers. At 25% opacity it becomes the hairline between list rows.
-- **Grid Dot** (`grid`): the dot grid on the body background only.
+- **Notebook White** (`page`): the page and every framed surface.
+- **Graphite** (`ink`), **Soft Graphite** (`ink-soft`), **Faded Graphite** (`ink-muted`): headings and names, body prose, captions and labels.
+- **Ink Line** (`ink-line`): frame borders, inactive tab borders, the timeline axis, heavy dividers.
+- **Grid Dot** (`grid`): the dot grid at rest.
 
 ### Named Rules
-**The One Marker Rule.** If it is clickable it is pink, and nothing clickable is any other color. Pink outside interaction is limited to selection and the caret.
+**The Pen Rule.** Colour belongs to a section, not to decoration: a coloured mark always says which part of the notebook you are in. Body text stays graphite; pens draw lines, fills, dots and labels.
 
-**The Graphite Rule.** All non-interactive UI is drawn from the ink scale on white. Color beyond pink and graphite comes only from content: screenshots and illustrations. No yellow anywhere in UI chrome.
+**The Marker Rule.** Inline links are always pink, whatever pen the section holds. No yellow anywhere in UI chrome.
 
 ## Typography
 
@@ -192,8 +201,8 @@ Mostly square-cornered ink drawing. Framed images use a barely softened 6px corn
 ### Index Tabs (navigation)
 Flat file-folder tabs fixed to the right page edge, labels set vertically in the hand.
 - **Shape:** 1.5px border with no right edge, outer corners rounded (14px).
-- **Inactive:** white fill, Ink Line border, pink label, nudged 4px outward; on hover or focus it slides flush and fills with Highlighter Wash.
-- **Active:** solid Marker Pink with white label, flush to the edge.
+- **Inactive:** white fill, Ink Line border, label in the tab's pen, nudged 4px outward; on hover or focus it slides flush and fills with a 10% wash of its pen.
+- **Active:** solid fill and border in the tab's pen with a white label, flush to the edge.
 - **Home link:** the owner's name in pink hand lettering above the stack.
 - **Motion:** translate and color at 250ms smooth-out. The tab stack is excluded from page turns so it stays put while pages slide.
 

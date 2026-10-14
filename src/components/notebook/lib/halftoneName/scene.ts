@@ -7,11 +7,11 @@ import {
 	Scene,
 	ShaderMaterial,
 	Vector2,
-	Vector3,
 	WebGLRenderer
 } from 'three';
 import { HALFTONE } from '../../config/halftone';
 import type { HalftoneFrame } from '../../types/notebook.types';
+import { readPenGradient } from '../pens/read';
 import { HALFTONE_FRAGMENT, HALFTONE_VERTEX } from './shaders';
 
 export function createHalftoneName(canvas: HTMLCanvasElement) {
@@ -37,8 +37,7 @@ export function createHalftoneName(canvas: HTMLCanvasElement) {
 		uScale: { value: HALFTONE.dotScale },
 		uGridDot: { value: HALFTONE.gridDot },
 		uDpr: { value: 1 },
-		uInk: { value: new Vector3(...HALFTONE.ink) },
-		uPink: { value: new Vector3(...HALFTONE.pink) }
+		uPens: { value: readPenGradient() }
 	};
 	const material = new ShaderMaterial({
 		uniforms,

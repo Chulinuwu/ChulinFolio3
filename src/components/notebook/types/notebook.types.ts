@@ -1,9 +1,12 @@
 import type { ReactNode } from 'react';
+import type { PENS } from '../config/pens';
 import type { Experience, ExperienceArea, Project, ProjectCategory, contacts } from '@/lib/data';
 
 export type ZoneId = 'lab' | 'studio' | 'workshop';
 
 export type SceneId = 'home' | ZoneId | 'contact';
+
+export type Pen = (typeof PENS)[number];
 
 export type TurnDirection = 'turn-forward' | 'turn-back';
 
@@ -16,6 +19,7 @@ export interface Scene {
 	title: string;
 	description: string;
 	next: SceneId;
+	pen: Pen;
 }
 
 export type CategoryZones = Record<ProjectCategory, ZoneId | null>;
@@ -94,7 +98,6 @@ export interface ChildrenProps {
 export interface PencilLineProps {
 	width: number;
 	seed: number;
-	tone?: 'ink' | 'pink';
 	draw?: boolean;
 	className?: string;
 }
@@ -249,6 +252,7 @@ export interface HalftoneHeroProps {
 export interface DeckCardProps {
 	project: Project;
 	subtitle: string;
+	pen: Pen;
 	index: number;
 	total: number;
 }

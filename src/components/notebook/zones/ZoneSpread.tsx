@@ -6,6 +6,7 @@ export default function ZoneSpread({ scene, title, intro, children }: ZoneSpread
 	return (
 		<main
 			aria-label={scene.label}
+			data-pen={scene.pen}
 			className="mx-auto max-w-[1320px] pt-5 pr-14 pb-12 pl-5 md:pr-28 md:pl-12"
 		>
 			<div className="mt-8">

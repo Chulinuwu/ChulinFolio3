@@ -10,6 +10,5 @@ export const FIELD = {
 	maxDpr: 2,
 	swell: { gain: 0.35, max: 14, ease: 0.1 },
 	ripple: { speed: 700, width: 46, push: 10, decay: 1.6, life: 2.5 },
-	grid: { rgb: [60 / 255, 80 / 255, 120 / 255], alpha: 0.22 },
-	pink: [204 / 255, 61 / 255, 99 / 255]
+	grid: { rgb: [60 / 255, 80 / 255, 120 / 255], alpha: 0.22 }
 } as const;

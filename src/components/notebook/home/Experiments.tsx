@@ -6,7 +6,7 @@ import ProjectRow from '../cards/ProjectRow';
 
 export default function Experiments() {
 	return (
-		<section aria-labelledby="more-experiments">
+		<section aria-labelledby="more-experiments" data-pen="blue">
 			<h2
 				id="more-experiments"
 				className="font-hand text-ink text-[clamp(1.9rem,2.6vw,2.4rem)] leading-none"

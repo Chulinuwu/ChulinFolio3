@@ -59,7 +59,7 @@ Every page is wrapped in `ui/PageTurn` (`<ViewTransition>` keyed by `turn-forwar
 
 ## Design System
 
-See `DESIGN.md` for tokens and rules. Short version: white ground with a faint dot grid, ink lines, handwriting only for the name, page titles, sub-headings and links (no slogans or margin notes; the 404 note is the only one); Figtree for everything read. Pink `#cc3d63` marks clickable things only. Thin ink frames on images (rotation at most 1.5deg), no shadows, no paper texture, no yellow.
+See `DESIGN.md` for tokens and rules. Short version: white ground with a faint dot grid, ink lines, five gel pens (`--color-pen-*`, one per section via `data-pen` and `var(--pen)`: tabs, heading underlines, deck cards; the halftone name and dot field run them as a gradient from `config/pens.ts`), handwriting only for the name, page titles, sub-headings and links (no slogans or margin notes; the 404 note is the only one); Figtree for everything read. Inline links are always pink `#cc3d63`. Thin ink frames on images (rotation at most 1.5deg), no shadows, no paper texture, no yellow.
 
 Conventions:
 - Motion: one timeline draw-on (spring, from a visible default once JS arms it) and one page turn (transitions.dev tokens). Reduced motion renders final states.

@@ -1,4 +1,7 @@
+import { PEN_PALETTE } from '../pens/glsl';
+
 export const FIELD_VERTEX = /* glsl */ `
+${PEN_PALETTE}
 uniform vec2 uRes;
 uniform vec2 uPointer;
 uniform float uActive;
@@ -13,6 +16,7 @@ uniform float uGrow;
 uniform vec4 uWave;
 uniform float uVel;
 varying float vHeat;
+varying vec3 vTint;
 
 void main() {
 	vec2 p = position.xy;
@@ -35,6 +39,7 @@ void main() {
 		p += rd / rl * ring * 10.0;
 	}
 
+	vTint = penAt(p.x / uRes.x);
 	vHeat = clamp(max(max(near, ring), abs(swell * uVel) * 0.05), 0.0, 1.0);
 	gl_Position = vec4(p.x / uRes.x * 2.0 - 1.0, 1.0 - p.y / uRes.y * 2.0, 0.0, 1.0);
 	gl_PointSize = uSize * (1.0 + vHeat * uGrow) * uDpr;
@@ -44,14 +49,14 @@ void main() {
 export const FIELD_FRAGMENT = /* glsl */ `
 uniform vec3 uGrid;
 uniform float uGridAlpha;
-uniform vec3 uPink;
 varying float vHeat;
+varying vec3 vTint;
 
 void main() {
 	float r = length(gl_PointCoord - 0.5);
 	float shape = 1.0 - smoothstep(0.36, 0.5, r);
 	float t = smoothstep(0.12, 0.85, vHeat);
 	float alpha = shape * mix(uGridAlpha, 0.85, t);
-	gl_FragColor = vec4(mix(uGrid, uPink, t) * alpha, alpha);
+	gl_FragColor = vec4(mix(uGrid, vTint, t) * alpha, alpha);
 }
 `;

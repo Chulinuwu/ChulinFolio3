@@ -8,7 +8,7 @@ export default function NowPanel() {
 	const links = contactEntries().filter((c) => HOME_CONTACTS.some((k) => k === c.key));
 
 	return (
-		<aside aria-labelledby="right-now" className="enter [--enter-delay:700ms]">
+		<aside aria-labelledby="right-now" data-pen="orange" className="enter [--enter-delay:700ms]">
 			<h2 id="right-now" className="font-hand text-ink text-[1.6rem] leading-none">
 				{HOME_COPY.now}
 			</h2>

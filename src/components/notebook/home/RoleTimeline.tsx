@@ -15,7 +15,7 @@ export default function RoleTimeline({ layout }: RoleTimelineProps) {
 	const root = useTimelineDraw();
 
 	return (
-		<section aria-labelledby="where-worked">
+		<section aria-labelledby="where-worked" data-pen="violet">
 			<h2
 				id="where-worked"
 				className="font-hand text-ink text-[clamp(1.9rem,2.6vw,2.4rem)] leading-none"

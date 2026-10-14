@@ -4,14 +4,8 @@ import type { PencilLineProps } from '../types/notebook.types';
 
 const HEIGHT = 10;
 
-// A hand-ruled underline: geometry from a seeded wobble, so it is stable across renders.
-export default function PencilLine({
-	width,
-	seed,
-	tone = 'ink',
-	draw = false,
-	className
-}: PencilLineProps) {
+// A hand-ruled underline in the section's pen: geometry from a seeded wobble, so it is stable across renders.
+export default function PencilLine({ width, seed, draw = false, className }: PencilLineProps) {
 	const d = pencilPath(
 		[
 			{ x: 2, y: HEIGHT / 2 + 1 },
@@ -33,8 +27,8 @@ export default function PencilLine({
 				pathLength={draw ? 1 : undefined}
 				fill="none"
 				strokeLinecap="round"
-				strokeWidth={tone === 'pink' ? 3.4 : 1.6}
-				className={tone === 'pink' ? 'stroke-pink/80' : 'stroke-ink-line'}
+				strokeWidth={3.4}
+				className="stroke-(--pen)/80"
 				vectorEffect="non-scaling-stroke"
 			/>
 		</svg>

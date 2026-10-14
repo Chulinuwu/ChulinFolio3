@@ -1,4 +1,7 @@
+import { PEN_PALETTE } from '../pens/glsl';
+
 export const HALFTONE_VERTEX = /* glsl */ `
+${PEN_PALETTE}
 attribute float aCover;
 uniform vec2 uRes;
 uniform float uTime;
@@ -12,7 +15,7 @@ uniform float uCell;
 uniform float uScale;
 uniform float uGridDot;
 uniform float uDpr;
-varying float vHeat;
+varying vec3 vColor;
 
 float easeOutBack(float t) {
 	float c = 1.7;
@@ -34,20 +37,19 @@ void main() {
 	float size = mix(uGridDot, full, grow);
 	size = mix(size, uGridDot, uScatter);
 
-	vHeat = heat;
+	// The pens run across the word and drift slowly; the lens pushes the colour one pen along.
+	vColor = penAt(p.x / uRes.x + 0.08 * sin(uTime * 0.6 + p.y * 0.012) + heat * 0.3);
 	gl_Position = vec4(p.x / uRes.x * 2.0 - 1.0, 1.0 - p.y / uRes.y * 2.0, 0.0, 1.0);
 	gl_PointSize = size * uDpr;
 }
 `;
 
 export const HALFTONE_FRAGMENT = /* glsl */ `
-uniform vec3 uInk;
-uniform vec3 uPink;
-varying float vHeat;
+varying vec3 vColor;
 
 void main() {
 	float r = length(gl_PointCoord - 0.5);
 	float a = 1.0 - smoothstep(0.44, 0.5, r);
-	gl_FragColor = vec4(mix(uInk, uPink, smoothstep(0.05, 0.6, vHeat)) * a, a);
+	gl_FragColor = vec4(vColor * a, a);
 }
 `;

@@ -8,16 +8,19 @@ import type { DeckCardProps } from '../types/notebook.types';
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
-export default function DeckCard({ project, subtitle, index, total }: DeckCardProps) {
+export default function DeckCard({ project, subtitle, pen, index, total }: DeckCardProps) {
 	const size = project.image
 		? (PROJECT_IMAGE_SIZES[project.image] ?? DEFAULT_IMAGE_SIZE)
 		: DEFAULT_IMAGE_SIZE;
 	const [headline, details] = project.description.split(': ');
 
 	return (
-		<article className="border-ink-line grid min-h-[min(72svh,44rem)] grid-cols-[minmax(0,1fr)] items-center gap-x-12 gap-y-8 rounded-[22px] border-[1.5px] bg-white p-6 md:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
+		<article
+			data-pen={pen}
+			className="grid min-h-[min(72svh,44rem)] grid-cols-[minmax(0,1fr)] items-center gap-x-12 gap-y-8 rounded-[22px] border-[1.5px] border-(--pen) bg-[color-mix(in_oklab,var(--pen)_10%,white)] p-6 md:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]"
+		>
 			<div className="flex h-full flex-col justify-between gap-8">
-				<p className="text-ink-muted text-[0.9rem] font-semibold tracking-[0.08em] tabular-nums">
+				<p className="text-[0.9rem] font-semibold tracking-[0.08em] text-(--pen) tabular-nums">
 					{pad(index + 1)} / {pad(total)}
 				</p>
 				<div>

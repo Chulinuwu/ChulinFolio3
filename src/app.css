@@ -16,10 +16,16 @@
 	--color-pink-deep: #ad2f51;
 	--color-pink-wash: #fdebf0;
 
-	/* Experience areas: data and status colors, never used on anything clickable. */
-	--color-area-data: #2f6db5;
-	--color-area-software: #23927a;
-	--color-area-design: #8a52a8;
+	/* Gel pens: each section writes in its own colour. All pass 4.5:1 on white for hand-lettered text. */
+	--color-pen-pink: #cc3d63;
+	--color-pen-blue: #2f6db5;
+	--color-pen-green: #1e7f6a;
+	--color-pen-violet: #8a52a8;
+	--color-pen-orange: #c2531c;
+
+	--color-area-data: var(--color-pen-blue);
+	--color-area-software: var(--color-pen-green);
+	--color-area-design: var(--color-pen-violet);
 
 	--radius-frame: 6px;
 	--radius-tab: 14px;
@@ -53,6 +59,24 @@ body {
 	caret-color: var(--color-pink);
 	overflow-x: clip;
 	-webkit-font-smoothing: antialiased;
+}
+
+/* The pen in hand: set by data-pen on a section, read as var(--pen) by headings, tabs and cards. */
+:root,
+[data-pen='pink'] {
+	--pen: var(--color-pen-pink);
+}
+[data-pen='blue'] {
+	--pen: var(--color-pen-blue);
+}
+[data-pen='green'] {
+	--pen: var(--color-pen-green);
+}
+[data-pen='violet'] {
+	--pen: var(--color-pen-violet);
+}
+[data-pen='orange'] {
+	--pen: var(--color-pen-orange);
 }
 
 /* The live WebGL grid takes over once it is running. */

@@ -10,10 +10,10 @@ export const HOME_COPY = {
 } as const;
 
 export const HOME_DECK = [
-	{ slug: 'nubsatang', subtitle: 'AI commerce SaaS / Founder' },
-	{ slug: 'aivertise', subtitle: 'Generative ad workflow / AI Engineer' },
-	{ slug: 'aurora-ai', subtitle: 'Predictive analytics / ML Engineer' },
-	{ slug: 'ugc-moderation', subtitle: 'Thai-English moderation / MLOps' }
+	{ slug: 'nubsatang', subtitle: 'AI commerce SaaS / Founder', pen: 'pink' },
+	{ slug: 'aivertise', subtitle: 'Generative ad workflow / AI Engineer', pen: 'blue' },
+	{ slug: 'aurora-ai', subtitle: 'Predictive analytics / ML Engineer', pen: 'orange' },
+	{ slug: 'ugc-moderation', subtitle: 'Thai-English moderation / MLOps', pen: 'green' }
 ] as const;
 
 export const HOME_CONTACTS = ['email', 'github', 'linkedin'] as const;

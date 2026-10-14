@@ -13,7 +13,8 @@ export const SCENES: Record<SceneId, Scene> = {
 		title: SITE,
 		description:
 			'Chulin (Jirameth Wannasiwaporn) builds machine learning models and data pipelines. Her notebook: roles and selected projects.',
-		next: 'lab'
+		next: 'lab',
+		pen: 'pink'
 	},
 	lab: {
 		id: 'lab',
@@ -24,7 +25,8 @@ export const SCENES: Record<SceneId, Scene> = {
 		title: `Data Projects | ${SITE}`,
 		description:
 			'Data science and machine learning projects by Chulin: generative ad workflows, text-to-SQL, Thai-English moderation, analytics and computer vision.',
-		next: 'workshop'
+		next: 'workshop',
+		pen: 'blue'
 	},
 	workshop: {
 		id: 'workshop',
@@ -35,7 +37,8 @@ export const SCENES: Record<SceneId, Scene> = {
 		title: `Software Projects | ${SITE}`,
 		description:
 			'Software and hardware Chulin built, led by Nubsatang, a commerce system for Thai online sellers.',
-		next: 'studio'
+		next: 'studio',
+		pen: 'green'
 	},
 	studio: {
 		id: 'studio',
@@ -45,7 +48,8 @@ export const SCENES: Record<SceneId, Scene> = {
 		tabLabel: 'Experiences',
 		title: `Experiences | ${SITE}`,
 		description: 'Every school, internship and club Chulin has been part of since 2021.',
-		next: 'contact'
+		next: 'contact',
+		pen: 'violet'
 	},
 	contact: {
 		id: 'contact',
@@ -56,7 +60,8 @@ export const SCENES: Record<SceneId, Scene> = {
 		title: `Contact | ${SITE}`,
 		description:
 			'Get in touch with Chulin about data science and AI engineering roles, freelance work and collaborations.',
-		next: 'home'
+		next: 'home',
+		pen: 'orange'
 	}
 };
 
