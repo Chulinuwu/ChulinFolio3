@@ -65,7 +65,7 @@ export function useDeviceIntro() {
 					tiltY: tilt.y,
 					time: (now - start) / 1000
 				});
-				page.style.transform = `translateY(${window.scrollY - distance}px) ${quadMatrix(page.clientWidth, window.innerHeight, quad)}`;
+				page.style.transform = quadMatrix(page.clientWidth, window.innerHeight, quad);
 				el.style.opacity = String(
 					1 - clamp01((eased - INTRO.fade[0]) / (INTRO.fade[1] - INTRO.fade[0]))
 				);

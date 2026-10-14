@@ -48,9 +48,14 @@ export function useHalftoneName() {
 				const tick = (now: number) => {
 					frame.time = (now - start) / 1000;
 					frame.reveal = clamp01(frame.time / HALFTONE.revealS);
-					frame.scatter = clamp01(
-						(window.scrollY - pageOffset(host).top) / (host.offsetHeight * HALFTONE.scatterSpan)
-					);
+					// The intro pins the page and spends the scroll on the camera, so the name holds until it ends.
+					frame.scatter =
+						document.documentElement.dataset.intro === 'on'
+							? 0
+							: clamp01(
+									(window.scrollY - pageOffset(host).top) /
+										(host.offsetHeight * HALFTONE.scatterSpan)
+								);
 					if (frame.active < 0.01) Object.assign(frame, { x: target.x, y: target.y });
 					frame.x += (target.x - frame.x) * HALFTONE.pointerEase;
 					frame.y += (target.y - frame.y) * HALFTONE.pointerEase;
