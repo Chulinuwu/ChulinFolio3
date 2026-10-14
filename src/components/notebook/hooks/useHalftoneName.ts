@@ -26,7 +26,7 @@ export function useHalftoneName() {
 			import('../lib/halftoneName/sample'),
 			document.fonts.ready
 		])
-			.then(([{ createHalftoneName }, { sampleCoverage }]) => {
+			.then(([{ createHalftoneName }, { sampleCoverage, pageOffset }]) => {
 				if (disposed) return;
 				const scene = createHalftoneName(el);
 				const target = { x: -9999, y: -9999, on: 0 };
@@ -36,9 +36,8 @@ export function useHalftoneName() {
 				let visible = true;
 
 				const layout = () => {
-					const box = host.getBoundingClientRect();
-					const { cells, covers, cell } = sampleCoverage(title, box);
-					scene.layout(box.width, box.height, cells, covers, cell);
+					const { cells, covers, cell } = sampleCoverage(title);
+					scene.layout(host.offsetWidth, host.offsetHeight, cells, covers, cell);
 				};
 				const move = (e: PointerEvent) => {
 					if (e.pointerType !== 'mouse') return;
@@ -47,10 +46,11 @@ export function useHalftoneName() {
 				};
 				const leave = () => (target.on = 0);
 				const tick = (now: number) => {
-					const box = host.getBoundingClientRect();
 					frame.time = (now - start) / 1000;
 					frame.reveal = clamp01(frame.time / HALFTONE.revealS);
-					frame.scatter = clamp01(-box.top / (box.height * HALFTONE.scatterSpan));
+					frame.scatter = clamp01(
+						(window.scrollY - pageOffset(host).top) / (host.offsetHeight * HALFTONE.scatterSpan)
+					);
 					if (frame.active < 0.01) Object.assign(frame, { x: target.x, y: target.y });
 					frame.x += (target.x - frame.x) * HALFTONE.pointerEase;
 					frame.y += (target.y - frame.y) * HALFTONE.pointerEase;

@@ -252,3 +252,17 @@ export interface DeckCardProps {
 	index: number;
 	total: number;
 }
+
+export interface Point2 {
+	x: number;
+	y: number;
+}
+
+export type Quad = [Point2, Point2, Point2, Point2];
+
+export interface DevicePose {
+	progress: number;
+	tiltX: number;
+	tiltY: number;
+	time: number;
+}

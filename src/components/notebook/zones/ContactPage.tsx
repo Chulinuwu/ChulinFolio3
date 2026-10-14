@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 import { contacts } from '@/lib/data';
 import { AVATAR, AVATAR_OUTLINE } from '../config/assets';
 import { ZONE_COPY } from '../config/copy';
+import { INTRO_COPY } from '../config/intro';
 import { SCENES } from '../config/scenes';
 import { contactEntries } from '../lib/contacts';
 import MarkerLink from '../ui/MarkerLink';
@@ -43,6 +44,16 @@ export default function ContactPage() {
 					/>
 				</div>
 			</div>
+			<p className="text-pink mt-16 text-[0.78rem]">
+				<a
+					href={INTRO_COPY.creditHref}
+					target="_blank"
+					rel="noreferrer"
+					className="decoration-pink/40 hover:text-pink-deep underline underline-offset-2"
+				>
+					{INTRO_COPY.credit}
+				</a>
+			</p>
 		</ZoneSpread>
 	);
 }

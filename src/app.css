@@ -266,3 +266,49 @@ a {
 		translate: 0 3.5%;
 	}
 }
+
+/* MacBook intro on home: a WebGL MacBook (ui in hooks/useDeviceIntro) with the live page mapped onto
+   its screen. Before JS runs the page sits roughly where the screen will be. */
+.intro-spacer,
+.device-canvas {
+	display: none;
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+	html:not([data-intro='done']) {
+		.intro-spacer {
+			display: block;
+			height: var(--intro-d, 150svh);
+		}
+
+		.device-canvas {
+			display: block;
+			position: fixed;
+			inset: 0;
+			z-index: 0;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+		}
+
+		.device-screen {
+			position: relative;
+			z-index: 1;
+			transform-origin: 0 0;
+			transform: translateY(calc(0px - var(--intro-d, 150svh))) translate(24vw, 16svh) scale(0.5);
+			clip-path: inset(0 0 calc(100% - 100svh) 0);
+			background-color: var(--color-page);
+			background-image: radial-gradient(
+				circle at 1px 1px,
+				var(--color-grid) 1.1px,
+				transparent 1.4px
+			);
+			background-size: 24px 24px;
+		}
+	}
+
+	html[data-intro='on'] .index-tabs {
+		opacity: 0;
+		pointer-events: none;
+	}
+}

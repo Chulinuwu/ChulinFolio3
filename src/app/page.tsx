@@ -1,10 +1,13 @@
+import DeviceIntro from '@/components/notebook/home/DeviceIntro';
 import HomePage from '@/components/notebook/home/HomePage';
 import PageTurn from '@/components/notebook/ui/PageTurn';
 
 export default function Home() {
 	return (
 		<PageTurn>
-			<HomePage />
+			<DeviceIntro>
+				<HomePage />
+			</DeviceIntro>
 		</PageTurn>
 	);
 }

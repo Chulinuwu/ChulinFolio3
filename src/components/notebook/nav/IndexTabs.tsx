@@ -12,7 +12,7 @@ export default function IndexTabs() {
 		<nav
 			aria-label="Notebook tabs"
 			style={{ viewTransitionName: 'index-tabs' }}
-			className="fixed top-3 right-0 z-50 md:top-5"
+			className="index-tabs fixed top-3 right-0 z-50 transition-opacity duration-(--duration-slow) md:top-5"
 		>
 			<ul className="flex flex-col items-end gap-[clamp(0.25rem,0.8vh,0.5rem)]">
 				{TAB_SCENES.map((id) => (
