@@ -18,7 +18,7 @@ export default function NowPanel() {
 					<li key={e.role}>
 						<p className="text-ink text-[0.95rem] leading-snug font-medium">{e.role}</p>
 						<p className="text-ink-muted text-[0.85rem]">
-							{e.short} / since {e.year.replace(/ - now$/, '')}
+							{e.org} / since {e.since}
 						</p>
 					</li>
 				))}

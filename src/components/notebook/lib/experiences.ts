@@ -1,6 +1,7 @@
 import { experiences } from '@/lib/data';
 import { EXPERIENCE_GROUPS } from '../config/experience';
-import type { ExperienceCard, ExperienceGroup } from '../types/notebook.types';
+import { NOW_ONLY_ROLES } from '../config/now';
+import type { ExperienceCard, ExperienceGroup, NowRole } from '../types/notebook.types';
 import { startKey } from './dates';
 
 // Newest first; roles at the same organisation in a group share one card.
@@ -25,5 +26,9 @@ export const experienceGroups = (): ExperienceGroup[] =>
 		return { id, title, cards: [...cards.values()] };
 	});
 
-export const currentRoles = () =>
-	experiences.filter((e) => e.type !== 'academic' && / - now$/.test(e.year));
+export const currentRoles = (): NowRole[] => [
+	...NOW_ONLY_ROLES,
+	...experiences
+		.filter((e) => e.type !== 'academic' && / - now$/.test(e.year))
+		.map((e) => ({ role: e.role, org: e.short, since: e.year.replace(/ - now$/, '') }))
+];

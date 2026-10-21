@@ -8,6 +8,12 @@ export type SceneId = 'home' | ZoneId | 'contact';
 
 export type Pen = (typeof PENS)[number];
 
+export interface NowRole {
+	role: string;
+	org: string;
+	since: string;
+}
+
 export type TurnDirection = 'turn-forward' | 'turn-back';
 
 export interface Scene {
